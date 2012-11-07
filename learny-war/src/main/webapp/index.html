@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="js/navigation.js"></script>
+
+<title>Learny</title>
+
+<script>
+ajaxContent = "#ajax-content"
+
+
+$(document).ready(function() {
+    $("#nav li a").click(function(e) {
+
+        <!-- $("#ajax-content").empty().append("<div id='loading'><img src='images/loading.gif' alt='Loading' /></div>"); -->
+        
+        <!-- Update selected menu -->
+        $("#nav li").removeClass('active');
+        $(this).parent().addClass('active');
+        
+        var url = $(this).attr('href');
+        if (false && history.pushState) { // disabled history based navigation
+            setPage(url);
+        } else {
+            $(ajaxContent).load(url);
+        }
+        e.preventDefault();
+        return false;
+    });
+    
+    $(ajaxContent).load('html/about.html'); 
+});
+</script>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <!--Sidebar content-->
+                <div class="well sidebar-nav">
+                    <ul id="nav" class="nav nav-list">
+                        <li class="active"><a href="html/about.html">About</a></li>
+                        <li><a href="html/news.html">News</a></li>
+                        <li><a href="html/translate.html">Translate</a></li>
+                        <li><a href="html/settings.html">Settings</a></li>
+                        <li><a href="html/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="span10">
+                <!--Body content-->
+                <div id="ajax-content">This is default text, which will be replaced</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

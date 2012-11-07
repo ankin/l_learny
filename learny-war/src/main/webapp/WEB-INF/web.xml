@@ -1,5 +1,10 @@
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
 	<!-- Set this if you want Resteasy to scan for JAX-RS classes -->
 	<context-param>
 		<param-name>resteasy.scan</param-name>
