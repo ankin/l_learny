@@ -3,7 +3,7 @@ package com.learny.persistence.entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Word {
+public class Word extends Id {
 
 	private String source;
 
