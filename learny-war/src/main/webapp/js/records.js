@@ -1,19 +1,21 @@
-var load = function(id) {
+var Records = {};
+
+Records.load = function(id) {
     $.getJSON("services/translate/name", function(data) {
 	$.each(data, function(recordKey, record) {
 	    var recordDivId = "record" + recordKey;
 	    $(id).append("<div id=\"" + recordDivId + "\"></div>");
 	    $("#" + recordDivId).load("html/record.html", function() {
-		appendWords(record.words, recordDivId);
-		appendRules(record.rules, recordDivId);
+		Records.appendDateCreated(record.dateCreated, recordDivId);
+		Records.appendWords(record.words, recordDivId);
+		Records.appendRules(record.rules, recordDivId);
 	    });
 
 	});
     });
 };
 
-var appendWords = function(words, recordDivId) {
-    // Words
+Records.appendWords = function(words, recordDivId) {
     $.each(words, function(wordKey, word) {
 
 	$("#" + recordDivId + " .translations").append(
@@ -22,10 +24,13 @@ var appendWords = function(words, recordDivId) {
     });
 };
 
-var appendRules = function(rules, recordDivId) {
-    // Rules
+Records.appendRules = function(rules, recordDivId) {
     $.each(rules, function(ruleKey, rule) {
 	$("#" + recordDivId + " .rules").append(
 		"<div class=\"well\">" + rule.text + "</div>");
     });
+};
+
+Records.appendDateCreated = function(dateCreated, recordDivId) {
+    $("#" + recordDivId + " .dateCreated").append(dateCreated);
 };
