@@ -96,7 +96,7 @@ public class LearningLineBean implements LearningLineLocal {
         user.setFirstName("Peter");
         user.setLastName("Atewar");
         comment.setUser(user);
-        comment.setText("Sorry, i didn't get last rule? Could somebody please explain it?");
+        comment.setText("Sorry, i didn't get last rule. Could somebody please explain it?");
         comment.setDateCreated(new Date());
         mockComments.add(comment);
         comment = new Comment();

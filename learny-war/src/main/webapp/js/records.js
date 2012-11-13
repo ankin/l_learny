@@ -38,6 +38,8 @@ Records.appendComments = function(comments, recordSelector) {
 	var commentSelector = recordSelector + " #" + commentDivId;
 	$(recordSelector + " .comments").append("<div id=\"" + commentDivId + "\"></div>");
 	$(commentSelector).load("html/records/comment.html", function() {
+	    var formattedDate = $.format.date(comment.dateCreated, "dd/MM/yyyy hh:mm:ss");
+	    $(commentSelector + " .dateCreated").append(formattedDate);
 	    $(commentSelector + " .author").append(comment.user.displayName);
 	    $(commentSelector + " .text").append(comment.text);
 	});
@@ -45,5 +47,6 @@ Records.appendComments = function(comments, recordSelector) {
 };
 
 Records.appendDateCreated = function(dateCreated, recordSelector) {
-    $(recordSelector + " .dateCreated").append(dateCreated);
+    var formattedDate = $.format.date(dateCreated, "dd/MM/yyyy hh:mm:ss");
+    $(recordSelector + " .dateCreated").append(formattedDate);
 };
