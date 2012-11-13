@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Record extends Id {
 
+    private User user;
+
     private List<Word> words;
 
     private List<Rule> rules;
@@ -15,6 +17,14 @@ public class Record extends Id {
     private List<Comment> comments;
 
     private Date dateCreated;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Word> getWords() {
         return words;

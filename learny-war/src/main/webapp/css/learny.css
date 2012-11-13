@@ -1,0 +1,10 @@
+.record {
+	padding: 5px 5px;
+}
+
+.record-component {
+	border: 1px solid #DDDDDD;
+	border-radius: 4px 4px 4px 4px;
+	padding: 20px 20px;
+	margin: 20px 0;
+}
