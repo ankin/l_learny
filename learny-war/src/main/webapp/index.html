@@ -4,38 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/learny.css" rel="stylesheet">
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
-<script type="text/javascript" src="js/jquery.dateFormat-1.0.js"></script>
-<script type="text/javascript" src="js/navigation.js"></script>
-<script type="text/javascript" src="js/records.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.dateFormat-1.0.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.i18n.properties-min-1.0.9.js"></script>
+<script type="text/javascript" src="js/learny/utils.js"></script>
+<script type="text/javascript" src="js/learny/navigation.js"></script>
+<script type="text/javascript" src="js/learny/records.js"></script>
 
 <title>Learny</title>
 
 <script>
-ajaxContent = "#ajax-content"
-
+ajaxContent = "#ajax-content";
 
 $(document).ready(function() {
-    $("#nav li a").click(function(e) {
-
-        <!-- $("#ajax-content").empty().append("<div id='loading'><img src='images/loading.gif' alt='Loading' /></div>"); -->
-        
-        <!-- Update selected menu -->
-        $("#nav li").removeClass('active');
-        $(this).parent().addClass('active');
-        
-        var url = $(this).attr('href');
-        if (false && history.pushState) { // disabled history based navigation
-            setPage(url);
-        } else {
-            $(ajaxContent).load(url);
-        }
-        e.preventDefault();
-        return false;
-    });
-    
-    $(ajaxContent).load('html/about.html'); 
+   Main.init();
 });
 </script>
 
@@ -48,11 +31,11 @@ $(document).ready(function() {
                 <!--Sidebar content-->
                 <div class="well sidebar-nav">
                     <ul id="nav" class="nav nav-list">
-                        <li class="active"><a href="html/about.html">About</a></li>
-                        <li><a href="html/news.html">News</a></li>
-                        <li><a href="html/records.html">Translate</a></li>
-                        <li><a href="html/settings.html">Settings</a></li>
-                        <li><a href="html/contact.html">Contact</a></li>
+                        <li class="active"><a href="html/about.html" i18n="About"></a></li>
+                        <li><a href="html/news.html" i18n="News"></a></li>
+                        <li><a href="html/records.html" i18n="LearningLine"></a></li>
+                        <li><a href="html/settings.html" i18n="Settings"></a></li>
+                        <li><a href="html/contact.html" i18n="Contact"></a></li>
                     </ul>
                 </div>
 
