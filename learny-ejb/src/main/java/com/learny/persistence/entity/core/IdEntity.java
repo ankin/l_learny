@@ -1,9 +1,12 @@
-package com.learny.persistence.entity;
+package com.learny.persistence.entity.core;
 
 import java.util.UUID;
 
-public class Id {
+import javax.xml.bind.annotation.XmlTransient;
 
+public class IdEntity {
+
+    @XmlTransient
 	private Long id;
 
 	private final String uuid = UUID.randomUUID().toString();

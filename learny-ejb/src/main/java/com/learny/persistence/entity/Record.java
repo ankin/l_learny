@@ -1,12 +1,13 @@
 package com.learny.persistence.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.learny.persistence.entity.core.ModificationDateEntity;
+
 @XmlRootElement
-public class Record extends Id {
+public class Record extends ModificationDateEntity {
 
     private User user;
 
@@ -15,8 +16,6 @@ public class Record extends Id {
     private List<Rule> rules;
 
     private List<Comment> comments;
-
-    private Date dateCreated;
 
     public User getUser() {
         return user;
@@ -48,14 +47,6 @@ public class Record extends Id {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
 }

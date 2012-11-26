@@ -2,8 +2,10 @@ package com.learny.persistence.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.learny.persistence.entity.core.IdEntity;
+
 @XmlRootElement
-public class Word extends Id {
+public class Word extends IdEntity {
 
 	private String source;
 

@@ -2,8 +2,10 @@ package com.learny.persistence.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.learny.persistence.entity.core.IdEntity;
+
 @XmlRootElement
-public class User extends Id {
+public class User extends IdEntity {
 
     private String email;
 
@@ -18,6 +20,8 @@ public class User extends Id {
     private String address;
 
     private Long plz;
+
+    private Group group;
 
     public String getEmail() {
         return email;
@@ -73,6 +77,14 @@ public class User extends Id {
 
     public void setPlz(Long plz) {
         this.plz = plz;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public String getDisplayName() {

@@ -1,7 +1,7 @@
 var Records = {};
 
 Records.load = function(id) {
-    $.getJSON('services/translate/name', function(data) {
+    $.getJSON('services/records/current/', function(data) {
 	$.each(data, function(recordKey, record) {
 	    var recordDivId = 'record' + recordKey;
 	    var recordSelector = '#' + recordDivId;
@@ -39,13 +39,29 @@ Records.appendComments = function(comments, recordSelector) {
 	var commentSelector = recordSelector + ' #' + commentDivId;
 	$(recordSelector + ' .comments').append(
 		'<div id="' + commentDivId + '"></div>');
-	$(commentSelector).load('html/records/comment.html', function() {
-	    var formattedDate = Learny_date.formatDateTime(comment.dateCreated);
-	    $(commentSelector + ' .dateCreated').append(formattedDate);
-	    $(commentSelector + ' .author').append(comment.user.displayName);
-	    $(commentSelector + ' .text').append(comment.text);
-	});
+	$(commentSelector).load(
+		'html/records/comment.html',
+		function() {
+		    var formattedDate = Learny_date
+			    .formatDateTime(comment.dateCreated);
+		    $(commentSelector + ' .dateCreated').append(formattedDate);
+		    $(commentSelector + ' .author').append(
+			    comment.user.displayName);
+		    $(commentSelector + ' .text').append(comment.text);
+		});
     });
+
+    $(recordSelector + ' form').submit(function() {
+	$(this).ajaxSubmit({
+	    url : 'services/records/newcomment/',
+	    type : 'post'
+	});
+	return false;
+    });
+};
+
+Records.appendSingleComment = function(comments, recordSelector) {
+    // look for latest comment key and add new comment
 };
 
 Records.appendDateCreated = function(dateCreated, recordSelector) {
