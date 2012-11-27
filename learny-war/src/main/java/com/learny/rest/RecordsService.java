@@ -14,7 +14,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.learny.ejb.local.LearningLineLocal;
+import com.learny.persistence.entity.Comment;
 import com.learny.persistence.entity.Record;
+import com.learny.persistence.entity.User;
 
 @Path("/records")
 @RequestScoped
@@ -42,9 +44,15 @@ public class RecordsService {
 
     @POST
     @Path("/newcomment/")
-    public List<Record> postComment(@FormParam("newComment") String text) {
-        System.out.println(text);
-        throw new RuntimeException();
+    public Comment postComment(@FormParam("newComment") String text) {
+        Comment comment = new Comment();
+        comment.setText(text);
+        comment.setDateCreated(new Date());
+        User user = new User();
+        user.setFirstName("Andrii");
+        user.setLastName("Kinash");
+        comment.setUser(user);
+        return comment;
     }
 
 }

@@ -1,10 +1,19 @@
 .record {
 	padding: 5px 5px;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px 4px 4px 4px;
 }
 
 .record-component {
-	border: 1px solid #DDDDDD;
-	border-radius: 4px 4px 4px 4px;
 	padding: 20px 20px;
 	margin: 20px 0;
+}
+
+.sepatator-top {
+	border-top: 1px solid #EEE;
+}
+
+.comment-body {
+	padding-top: 10px;
+	border-bottom: 1px dashed #EEE;
 }

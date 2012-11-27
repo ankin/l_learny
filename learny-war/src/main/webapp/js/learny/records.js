@@ -20,7 +20,7 @@ Records.load = function(id) {
 
 Records.appendWords = function(words, recordSelector) {
     $.each(words, function(wordKey, word) {
-	$(recordSelector + ' .translations').append(
+	$(recordSelector + ' .id_translations').append(
 		'<tr><td>' + (wordKey + 1) + '</td><td>' + word.source
 			+ '</td><td> ' + word.target + '</td></tr>');
     });
@@ -28,43 +28,46 @@ Records.appendWords = function(words, recordSelector) {
 
 Records.appendRules = function(rules, recordSelector) {
     $.each(rules, function(ruleKey, rule) {
-	$(recordSelector + ' .rules').append(
-		'<p class="text-info">' + rule.text + '</p>');
+	$(recordSelector + ' .id_rules').append(rule.text);
     });
 };
 
-Records.appendComments = function(comments, recordSelector) {
+Records.appendComments = function(comments, parentSelector) {
     $.each(comments, function(commentKey, comment) {
-	var commentDivId = 'comment' + commentKey;
-	var commentSelector = recordSelector + ' #' + commentDivId;
-	$(recordSelector + ' .comments').append(
-		'<div id="' + commentDivId + '"></div>');
-	$(commentSelector).load(
-		'html/records/comment.html',
-		function() {
-		    var formattedDate = Learny_date
-			    .formatDateTime(comment.dateCreated);
-		    $(commentSelector + ' .dateCreated').append(formattedDate);
-		    $(commentSelector + ' .author').append(
-			    comment.user.displayName);
-		    $(commentSelector + ' .text').append(comment.text);
-		});
+	Records.appendSingleComment(comment, parentSelector);
     });
 
-    $(recordSelector + ' form').submit(function() {
-	$(this).ajaxSubmit({
-	    url : 'services/records/newcomment/',
-	    type : 'post'
-	});
-	return false;
+    // attach submit new comment handler to from
+    var newCommentFormSelector = parentSelector + ' .id_comment_form';
+    $(newCommentFormSelector).ajaxForm({
+	url : 'services/records/newcomment/',
+	type : 'post',
+	dataType:  'json',
+	success : function(data){
+	    Records.appendSingleComment(data, parentSelector);
+	    $(newCommentFormSelector).clearForm();
+	}
     });
+
 };
 
-Records.appendSingleComment = function(comments, recordSelector) {
+Records.appendSingleComment = function(comment, parentSelector) {
     // look for latest comment key and add new comment
+    var commentDivId = 'comment' + comment.uuid;
+    var commentSelector = parentSelector + ' #' + commentDivId;
+    $(parentSelector + ' .id_record_comments').append(
+	    '<div id="' + commentDivId + '"></div>');
+    $(commentSelector).load(
+	    'html/records/comment.html',
+	    function() {
+		Records.appendDateCreated(comment.dateCreated, commentSelector);
+		$(commentSelector + ' .id_author').append(
+			comment.user.displayName + ":");
+		$(commentSelector + ' .id_text').append(comment.text);
+	    });
 };
 
-Records.appendDateCreated = function(dateCreated, recordSelector) {
+Records.appendDateCreated = function(dateCreated, parentSelector) {
     var formattedDate = Learny_date.formatDateTime(dateCreated);
-    $(recordSelector + ' .dateCreated').append(formattedDate);
+    $(parentSelector + ' .id_dateCreated').append(formattedDate);
 };

@@ -21,28 +21,31 @@ public class MockLearningLineBean implements LearningLineLocal {
     @Override
     public List<Record> getRecords(Integer startCount) {
         List<Record> records = new ArrayList<Record>();
+        try {
+            Record record = new Record();
+            User user = new User();
+            user.setFirstName("Karim");
+            user.setLastName("Jones");
+            record.setUser(user);
+            record.setDateCreated(new Date());
+            record.setWords(getMockWords());
+            record.setRules(getMockRules());
+            record.setComments(getMockComments());
+            records.add(record);
 
-        Record record = new Record();
-        User user = new User();
-        user.setFirstName("Karim");
-        user.setLastName("Jones");
-        record.setUser(user);
-        record.setDateCreated(new Date());
-        record.setWords(getMockWords());
-        record.setRules(getMockRules());
-        record.setComments(getMockComments());
-        records.add(record);
-
-        user = new User();
-        user.setFirstName("Shilla");
-        user.setLastName("Razimer");
-        record.setUser(user);
-        record.setDateCreated(new Date());
-        record.setWords(getMockWords());
-        record.setRules(getMockRules());
-        record.setComments(getMockComments());
-        records.add(record);
-
+            user = new User();
+            user.setFirstName("Shilla");
+            user.setLastName("Razimer");
+            record.setUser(user);
+            record.setDateCreated(new Date());
+            record.setWords(getMockWords());
+            record.setRules(getMockRules());
+            record.setComments(getMockComments());
+            records.add(record);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         return records;
     }
 
@@ -57,7 +60,7 @@ public class MockLearningLineBean implements LearningLineLocal {
         word.setTarget("идти");
         mockWords.add(word);
         word = new Word();
-        word.setSource("der House");
+        word.setSource("das House");
         word.setTarget("дом");
         mockWords.add(word);
         word = new Word();
@@ -81,7 +84,7 @@ public class MockLearningLineBean implements LearningLineLocal {
         return mockRules;
     }
 
-    private List<Comment> getMockComments() {
+    private List<Comment> getMockComments() throws InterruptedException {
         List<Comment> mockComments = new ArrayList<Comment>();
         Comment comment = new Comment();
         User user = new User();
@@ -90,6 +93,7 @@ public class MockLearningLineBean implements LearningLineLocal {
         comment.setUser(user);
         comment.setText("This is cool! Thanks!");
         comment.setDateCreated(new Date());
+        Thread.sleep(1000);
         mockComments.add(comment);
         comment = new Comment();
         user = new User();
@@ -98,6 +102,7 @@ public class MockLearningLineBean implements LearningLineLocal {
         comment.setUser(user);
         comment.setText("Sorry, i didn't get last rule. Could somebody please explain it?");
         comment.setDateCreated(new Date());
+        Thread.sleep(1000);
         mockComments.add(comment);
         comment = new Comment();
         user = new User();
