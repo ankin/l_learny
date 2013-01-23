@@ -7,7 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 
-import com.learny.ejb.local.LearningLineLocal;
+import com.learny.ejb.local.RecordLocal;
 import com.learny.persistence.entity.Comment;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.Rule;
@@ -15,8 +15,8 @@ import com.learny.persistence.entity.User;
 import com.learny.persistence.entity.Word;
 
 @Stateless
-@Named("mockLearningLineBean")
-public class MockLearningLineBean implements LearningLineLocal {
+@Named("mockRecordBean")
+public class MockRecordBean implements RecordLocal {
 
     @Override
     public List<Record> getRecords(Integer startCount) {

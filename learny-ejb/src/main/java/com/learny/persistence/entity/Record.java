@@ -5,9 +5,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.learny.persistence.entity.core.ModificationDateEntity;
+import com.learny.persistence.interfaces.Commentable;
 
 @XmlRootElement
-public class Record extends ModificationDateEntity {
+public class Record extends ModificationDateEntity implements Commentable {
 
     private User user;
 
@@ -47,6 +48,11 @@ public class Record extends ModificationDateEntity {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    @Override
+    public String getObjectType() {
+        return "RECORD";
     }
 
 }

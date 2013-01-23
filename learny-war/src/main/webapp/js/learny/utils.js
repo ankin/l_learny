@@ -1,11 +1,14 @@
 var Main = {};
 
+ajaxContent = '#ajax-content';
+tmpSelector = "#tmpSector";
+
 /**
  * Method called once index page was loaded
  */
 Main.init = function() {
 
-    ajaxContent = '#ajax-content';
+
 
     // init i18n
     Learny_i18n.init('en');
@@ -25,7 +28,7 @@ Main.init = function() {
 	if (false && history.pushState) {
 	    setPage(url);
 	} else {
-	    Learny_nav.loadAndTranslate(ajaxContent, url);
+	    Learny_nav.loadAndTranslate(tmpSelector, url);
 	}
 	e.preventDefault();
 	return false;
@@ -73,7 +76,13 @@ Learny_nav.loadAndTranslate = function(selector, page, complete) {
 	    complete();
 	}
 	Learny_i18n.translate(selector);
+
     });
+};
+
+Learny_nav.copyContent = function() {
+    $(ajaxContent).html($(tmpSelector).html());
+    $(tmpSelector).innerHTML = '';
 };
 
 /**

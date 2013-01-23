@@ -7,7 +7,7 @@ import javax.ejb.Local;
 import com.learny.persistence.entity.Record;
 
 @Local
-public interface LearningLineLocal {
+public interface RecordLocal {
 
     List<Record> getRecords(Integer startCount);
 
