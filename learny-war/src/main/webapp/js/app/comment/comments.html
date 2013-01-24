@@ -1,0 +1,27 @@
+<div class="record-component sepatator-top">
+    <h4><%= $.i18n.prop('Comments') %></h4>
+    <% _.forEach(comments, function(comment, index) { %>
+    <div class="comment-body">
+        <small class="mutted pull-right"> <%= util.formatDateTime(comment.dateCreated) %> </small>
+        <p>
+            <small><%= comment.user.displayName %>:</small>
+        </p>
+        <p><%= comment.text %></p>
+    </div>
+    <% }); %>
+
+</div>
+<form class="form-horizontal id_new_comment_form">
+    <div class="control-group">
+        <label class="control-label" for="inputEmail"><%= $.i18n.prop('NewComment') %></label>
+        <div class="controls">
+            <textarea name="commentText" rows="3" cols="150" style="width: 350px;"></textarea>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn newcomment"><%= $.i18n.prop('Send') %></button>
+        </div>
+    </div>
+</form>

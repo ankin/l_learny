@@ -6,110 +6,14 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/learny.css" rel="stylesheet">
 
-<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="js/jquery/jquery-1.8.2.js"></script>
-<script type="text/javascript" src="js/jquery/jquery.dateFormat-1.0.js"></script>
-<script type="text/javascript" src="js/jquery/jquery.i18n.properties-min-1.0.9.js"></script>
-<script type="text/javascript" src="js/jquery/jquery.form.js"></script>
-
-<script type="text/javascript" src="js/backbone/lodash.js"></script>
-<script type="text/javascript" src="js/backbone/backbone.js"></script>
-
-<script type="text/javascript" src="js/learny/utils.js"></script>
+<script data-main="js/app/app.js" src="js/lib/require-2.1.4.js"></script>
 
 
 
 <title>Learny</title>
 
 <script>
-$(document).ready(function() {
-    Learny_i18n.init('en_EN');
-    
-    var CommentCollection = Backbone.Collection.extend({
-       url: 'services/comment/getall'
-    });
 
-    var CommentCollectionView = Backbone.View.extend({
-    	_template: _.template($('#comment-template').html()),
-        model : new CommentCollection(),
-        events: {
-            'submit form.id_new_comment_form': 'newComment'
-          },
-        render: function() {
-            var self = this;
-            this.model.fetch({
-            	data: $.param({ objectType: self.options.objectType, objectId: self.options.objectId}),
-                success: function(){
-                            self.$el.html(self._template({comments : self.model.toJSON()}));
-                         }
-            });
-            return this;
-        },
-
-        newComment: function(){
-            var self = this;
-            var formSelector = 'form.id_new_comment_form';
-            $(formSelector).ajaxSubmit({
-            	url : 'services/comment/new/'+ self.options.objectType +'/'+ self.options.objectId +'/',
-            	type : 'post',
-            	dataType : 'json',
-            	success : function(data) {
-            	   $(formSelector).clearForm();
-                   self.render();
-            	}
-            });
-            return false;
-        }
-    });
-
-    var RecordModel = Backbone.Model.extend({
-           url : 'services/record/get/'
-         });
-    
-	var RecordsView = Backbone.View.extend({
-		_template: _.template($('#record-template').html()),
-		model: new RecordModel(),
-		initialize: function() {
-			//this.render();
-		},
-
-		render: function() {
-            self = this;
-            self.model.fetch({success: function(){
-                var recordJson = self.model.toJSON();
-			    self.$el.html(self._template(recordJson));
-			    self.$el.find('.id_comments').html(new CommentCollectionView({objectType : recordJson.objectType, objectId : recordJson.uuid}).render().el);// add comments
-		    }});
-			return this;
-		}
-	});
-
-
-
-   
-
-    var App = Backbone.View.extend({
-        initialize: function() {
-            this.render();
-        },
-
-        render: function() {
-            
-            var recordView = new RecordsView();
-            this.$el.append(recordView.render().$el);
-            
-            return this;
-        }
-    });
-
-    var app = new App({el: $('#ajax-content')});
-
-   
-	//window.myView = new MyView({router: appRouter});
-
-	//Backbone.history.start();
-});
 </script>
 
 
@@ -137,78 +41,6 @@ $(document).ready(function() {
             </div>
         </div>
     </div>
-
-
-    <script type="text/template" id="record-template">
-
-<div class="record">
-<small class="pull-right"><%= Learny_date.formatDateTime(dateCreated) %></small>
-<div class="record-component">
-    <h4><%=  jQuery.i18n.prop('Vocabulary')  %></h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th><%=  jQuery.i18n.prop('Original')  %></th>
-                <th><%=  jQuery.i18n.prop('Translated')  %></th>
-            </tr>
-        </thead>
-
-        <tbody>
-			<% _.forEach(words, function(word, index) { %>
-				<tr>
-				<td><%= (index + 1) %></td>
-                <td><%= word.source %></td>
-                <td><%= word.target %></td>
-				</tr>
-			<% }); %>
-        </tbody>
-    </table>
-</div>
-<div class="record-component sepatator-top">
-    <h4><%=  jQuery.i18n.prop('Rules')  %></h4>
-			<% _.forEach(rules, function(rule, index) { %>
-				<div><%= (index + 1) %></div>
-                <div><%= rule.text %></div>
-			<% }); %>
-</div>
-<div class="id_comments"> <div>
-</div>
-
-</script>
-
-    <script type="text/template" id="comment-template">
-<div class="record-component sepatator-top">
-    <h4><%=  jQuery.i18n.prop('Comments')  %></h4>
-
-<% _.forEach(comments, function(comment, index) { %>
-<div class="comment-body">
-    <small class="mutted pull-right">
-		<%= Learny_date.formatDateTime(comment.dateCreated) %>
-	</small>
-    <p>
-        <small><%= comment.user.displayName %>:</small>
-    </p>
-    <p><%= comment.text %></p>
-</div>
-<% }); %>
-
-</div>
-<form class="form-horizontal id_new_comment_form">
-    <div class="control-group">
-        <label class="control-label" for="inputEmail"><%=  jQuery.i18n.prop('NewComment')  %></label>
-        <div class="controls">
-            <textarea name="commentText" rows="3" cols="150" style="width: 350px;"></textarea>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <div class="controls">
-            <button type="submit" class="btn newcomment"><%=  jQuery.i18n.prop('Send')  %></button>
-        </div>
-    </div>
-</form>
-</script>
 
 </body>
 

@@ -1,6 +1,6 @@
 /*!
  * jQuery Form Plugin
- * version: 3.20 (20-NOV-2012)
+ * version: 3.25.0-2013.01.18
  * @requires jQuery v1.5 or later
  *
  * Examples and documentation at: http://malsup.com/jquery/form/
@@ -225,6 +225,8 @@ $.fn.ajaxSubmit = function(options) {
         var result = {};
         var i, part;
         for (i=0; i < len; i++) {
+            // #252; undo param space replacement
+            serialized[i] = serialized[i].replace(/\+/g,' ');
             part = serialized[i].split('=');
             result[decodeURIComponent(part[0])] = decodeURIComponent(part[1]);
         }
@@ -340,12 +342,14 @@ $.fn.ajaxSubmit = function(options) {
                 var e = (status === 'timeout' ? 'timeout' : 'aborted');
                 log('aborting upload... ' + e);
                 this.aborted = 1;
-                // #214
-                if (io.contentWindow.document.execCommand) {
-                    try { // #214
+
+                try { // #214, #257
+                    if (io.contentWindow.document.execCommand) {
                         io.contentWindow.document.execCommand('Stop');
-                    } catch(ignore) {}
-                }
+                    }
+                } 
+                catch(ignore) {}
+
                 $io.attr('src', s.iframeSrc); // abort op in progress
                 xhr.error = e;
                 if (s.error)
@@ -461,11 +465,11 @@ $.fn.ajaxSubmit = function(options) {
                            // if using the $.param format that allows for multiple values with the same name
                            if($.isPlainObject(s.extraData[n]) && s.extraData[n].hasOwnProperty('name') && s.extraData[n].hasOwnProperty('value')) {
                                extraInputs.push(
-                               $('<input type="hidden" name="'+s.extraData[n].name+'">').attr('value',s.extraData[n].value)
+                               $('<input type="hidden" name="'+s.extraData[n].name+'">').val(s.extraData[n].value)
                                    .appendTo(form)[0]);
                            } else {
                                extraInputs.push(
-                               $('<input type="hidden" name="'+n+'">').attr('value',s.extraData[n])
+                               $('<input type="hidden" name="'+n+'">').val(s.extraData[n])
                                    .appendTo(form)[0]);
                            }
                         }
@@ -1041,6 +1045,13 @@ $.fn.clearFields = $.fn.clearInputs = function(includeHidden) {
         else if (tag == 'select') {
             this.selectedIndex = -1;
         }
+		else if (t == "file") {
+			if (/MSIE/.test(navigator.userAgent)) {
+				$(this).replaceWith($(this).clone());
+			} else {
+				$(this).val('');
+			}
+		}
         else if (includeHidden) {
             // includeHidden can be the value true, or it can be a selector string
             // indicating a special test; for example:

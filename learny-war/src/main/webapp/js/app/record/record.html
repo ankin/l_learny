@@ -1,0 +1,34 @@
+<div class="record">
+<small class="pull-right"><%= util.formatDateTime(record.dateCreated) %></small>
+<div class="record-component">
+    <h4><%=  $.i18n.prop('Vocabulary')  %></h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th><%=  $.i18n.prop('Original')  %></th>
+                <th><%=  $.i18n.prop('Translated')  %></th>
+            </tr>
+        </thead>
+
+        <tbody>
+			<% _.forEach(record.words, function(word, index) { %>
+				<tr>
+				<td><%= (index + 1) %></td>
+                <td><%= word.source %></td>
+                <td><%= word.target %></td>
+				</tr>
+			<% }); %>
+        </tbody>
+    </table>
+</div>
+<div class="record-component sepatator-top">
+    <h4><%=  $.i18n.prop('Rules')  %></h4>
+			<% _.forEach(record.rules, function(rule, index) { %>
+				<div><%= (index + 1) %></div>
+                <div><%= rule.text %></div>
+			<% }); %>
+</div>
+<div class="id_comments"> 
+</div>
+</div>
