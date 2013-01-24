@@ -29,25 +29,27 @@ requirejs.config({
 });
 
 // Start the main app logic.
-requirejs([ 'jquery', 'backbone', 'util/util', 'record/recordView' ], function($, Backbone, util, RecordView) {
+requirejs([ 'jquery', 'backbone', 'util/util', 'menu/menuRouter' ], function($, Backbone, util, MenuRouter) {
 
     util.initLanguage('en_EN');
 
-    var App = Backbone.View.extend({
-	initialize : function() {
-	    this.render();
-	},
-
-	render : function() {
-	    var recordView = new RecordView();
-	    this.$el.html(recordView.render().$el);
-
-	    return this;
-	}
-    });
-
-    var app = new App({
-	el : $('#ajax-content')
-    });
+    this.router = new MenuRouter();
+    Backbone.history.start();
+    // var App = Backbone.View.extend({
+    // initialize : function() {
+    // this.render();
+    // },
+    //
+    // render : function() {
+    // var recordView = new RecordView();
+    // this.$el.html(recordView.render().$el);
+    //
+    // return this;
+    // }
+    // });
+    //
+    // var app = new App({
+    // el : $('#ajax-content')
+    // });
 
 });
