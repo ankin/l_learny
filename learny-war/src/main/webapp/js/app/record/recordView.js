@@ -3,6 +3,7 @@ define(
 	function($, Backbone, util, recordTpl, RecordModel, CommentColView) {
 
 	    var recordView = Backbone.View.extend({
+		className : 'record',
 		_template : _.template(recordTpl),
 		model : new RecordModel(),
 		initialize : function() {

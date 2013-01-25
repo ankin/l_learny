@@ -1,7 +1,13 @@
+body {
+	padding-bottom: 40px;
+	padding-top: 20px;
+}
+
 .record {
-	padding: 5px 5px;
-	border: 1px solid #DDDDDD;
-	border-radius: 4px 4px 4px 4px;
+	padding-right: 10px;
+    padding-top: 5px;
+	border-right: 1px solid #DDDDDD;
+	/*! border-radius: 4px 4px 4px 4px; */
 }
 
 .record-component {
@@ -16,4 +22,12 @@
 .comment-body {
 	padding-top: 10px;
 	border-bottom: 1px dashed #EEE;
+}
+
+/*! Overriding Bootstrap classes*/
+
+.tabs-left > .nav-tabs {
+    border-right: 1px solid #DDDDDD;
+    float: left;
+    margin-right: 0px;
 }

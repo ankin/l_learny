@@ -1,11 +1,4 @@
 requirejs.config({
-    // By default load any module IDs from js/lib
-    // baseUrl: 'js/lib',
-    // except, if the module ID starts with "app",
-    // load it from the js/app directory. paths
-    // config is relative to the baseUrl, and
-    // never includes a ".js" extension since
-    // the paths config could be for a directory.
 
     paths : {
 	jquery : "../lib/jquery-1.9.0",
@@ -28,28 +21,11 @@ requirejs.config({
     }
 });
 
-// Start the main app logic.
 requirejs([ 'jquery', 'backbone', 'util/util', 'menu/menuRouter' ], function($, Backbone, util, MenuRouter) {
 
     util.initLanguage('en_EN');
 
     this.router = new MenuRouter();
     Backbone.history.start();
-    // var App = Backbone.View.extend({
-    // initialize : function() {
-    // this.render();
-    // },
-    //
-    // render : function() {
-    // var recordView = new RecordView();
-    // this.$el.html(recordView.render().$el);
-    //
-    // return this;
-    // }
-    // });
-    //
-    // var app = new App({
-    // el : $('#ajax-content')
-    // });
 
 });

@@ -14,7 +14,7 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView' ], function(
 	},
 
 	loadMenu : function() {
-	    this.header = $('#mainMenu').html(new MenuView().render().el);
+	    this.header = $('#mainMenu').prepend(new MenuView().render().el);
 	},
 
 	loadRecord : function() {
