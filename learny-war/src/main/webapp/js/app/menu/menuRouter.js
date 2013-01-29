@@ -8,7 +8,7 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView' ], function(
 	    'news' : 'loadNews',
 	    'settings' : 'loadSettings',
 	    'contact' : 'loadContact'
-	    
+
 	},
 
 	initialize : function() {
@@ -20,51 +20,58 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView' ], function(
 	},
 
 	loadRecord : function() {
-	    this.updateActiveSelection();
-	    $('#ajax-content').html(new RecordView().render().el);
-	    if( !$('.id_record').hasClass('active')) {
-		$('.id_record').addClass('active');
-	    }
+	    this.removeActiveSelection();
+	    this.changeSelection('.id_record');
+	    this.changeView(RecordView);
+
 	},
 
 	loadAbout : function() {
-	    this.updateActiveSelection();
-	    $('#ajax-content').html('loadAbout');
-	    if( !$('.id_about').hasClass('active')) {
-		$('.id_about').addClass('active');
-	    }
+	    this.removeActiveSelection();
+	    this.changeSelection('.id_about');
+	    $('#ajax-content').html('About page content...<div style="height:300px;"></div>');
 	},
 
 	loadNews : function() {
-	    this.updateActiveSelection();
-	    $('#ajax-content').html('loadNews');
-	    if( !$('.id_news').hasClass('active')) {
-		$('.id_news').addClass('active');
-	    }
+	    this.removeActiveSelection();
+	    this.changeSelection('.id_news');
+	    $('#ajax-content').html('News page content...<div style="height:300px;"></div>');
 	},
 
 	loadSettings : function() {
-	    this.updateActiveSelection();
-	    $('#ajax-content').html('loadSettings');
-	    if( !$('.id_settings').hasClass('active')) {
-		$('.id_settings').addClass('active');
-	    }
+	    this.removeActiveSelection();
+	    this.changeSelection('.id_settings');
+	    $('#ajax-content').html('Settings page content...<div style="height:300px;"></div>');
 	},
-	
+
 	loadContact : function() {
-	    this.updateActiveSelection();
-	    $('#ajax-content').html('loalContact');
-	    if( !$('.id_contact').hasClass('active')) {
-		$('.id_contact').addClass('active');
+	    this.removeActiveSelection();
+	    this.changeSelection('.id_contact');
+	    $('#ajax-content').html('Contact page content...<div style="height:300px;"></div>');
+	},
+
+	removeActiveSelection : function() {
+	    _.forEach($('#mainMenu').find('li'), function(liEl) {
+		if ($(liEl).hasClass('active')) {
+		    $(liEl).removeClass('active');
+		}
+	    });
+	},
+
+	changeSelection : function(menuItemSltr) {
+	    if (!$(menuItemSltr).hasClass('active')) {
+		$(menuItemSltr).addClass('active');
 	    }
 	},
 
-	updateActiveSelection : function() {
-	    _.forEach($('#mainMenu').find('li'), function(liEl){
-		if($(liEl).hasClass('active')) {
-		    $(liEl).removeClass( 'active' );
-		}
+	changeView : function(View) {
+	    $('#ajax-content').trigger('showSpinner');
+	    var view = new View();
+	    $.when(view.rendered).done(function() {
+		$('#ajax-content').html(view.el);
+		$('#ajax-content').trigger('hideSpinner');
 	    });
+	    view.render();
 	}
 
     });

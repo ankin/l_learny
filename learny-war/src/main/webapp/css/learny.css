@@ -3,6 +3,14 @@ body {
 	padding-top: 20px;
 }
 
+html, body {
+  height: 100%;
+}
+
+.height100percent {
+	height: 80%;
+}
+
 .record {
 	padding-right: 10px;
     padding-top: 5px;
@@ -24,10 +32,14 @@ body {
 	border-bottom: 1px dashed #EEE;
 }
 
+.spinner {
+	opacity: 1;
+	background: url( ../img/ajax-loader.gif ) no-repeat center center;
+	display: block;
+}
+
 /*! Overriding Bootstrap classes*/
 
 .tabs-left > .nav-tabs {
-    border-right: 1px solid #DDDDDD;
-    float: left;
     margin-right: 0px;
 }

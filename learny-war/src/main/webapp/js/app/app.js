@@ -28,4 +28,13 @@ requirejs([ 'jquery', 'backbone', 'util/util', 'menu/menuRouter' ], function($, 
     this.router = new MenuRouter();
     Backbone.history.start();
 
+    $('#ajax-content').on('showSpinner', function() {
+	if (!$('#ajax-content').hasClass('spinner')) {
+	    $('#ajax-content').addClass('spinner');
+	}
+    });
+    $('#ajax-content').on('hideSpinner', function() {
+	$('#ajax-content').removeClass('spinner');
+    });
+
 });

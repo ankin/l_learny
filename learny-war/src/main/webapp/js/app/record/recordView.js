@@ -7,7 +7,7 @@ define(
 		_template : _.template(recordTpl),
 		model : new RecordModel(),
 		initialize : function() {
-		    // this.render();
+		    this.rendered = $.Deferred();
 		},
 
 		render : function() {
@@ -19,10 +19,16 @@ define(
 				record : recordJson,
 				util : util
 			    }));
-			    self.$el.find('.id_comments').html(new CommentColView({
+			    // add comments
+			    var commentColView = new CommentColView({
 				objectType : recordJson.objectType,
 				objectId : recordJson.uuid
-			    }).render().el);// add comments
+			    });
+			    $.when(commentColView.rendered).done(function() {
+				self.$el.find('.id_comments').html(commentColView.el);
+				self.rendered.resolve('rendered');
+			    });
+			    commentColView.render();
 			}
 		    });
 		    return this;

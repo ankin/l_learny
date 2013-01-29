@@ -4,6 +4,9 @@ define([ 'jquery', 'backbone', 'jqueryForm', 'util/util', 'text!comment/comments
 	    var commentCollectionView = Backbone.View.extend({
 		_template : _.template(commentsTpl),
 		model : new CommentCol(),
+		initialize : function() {
+		    this.rendered = $.Deferred();
+		},
 		events : {
 		    'submit form.id_new_comment_form' : 'newComment'
 		},
@@ -19,6 +22,7 @@ define([ 'jquery', 'backbone', 'jqueryForm', 'util/util', 'text!comment/comments
 				comments : self.model.toJSON(),
 				util : util
 			    }));
+			    self.rendered.resolve( 'rendered' );
 			}
 		    });
 		    return this;
