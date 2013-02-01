@@ -93,7 +93,6 @@ public class MockRecordBean implements RecordLocal {
         comment.setUser(user);
         comment.setText("This is cool! Thanks!");
         comment.setDateCreated(new Date());
-        Thread.sleep(1000);
         mockComments.add(comment);
         comment = new Comment();
         user = new User();
@@ -102,7 +101,7 @@ public class MockRecordBean implements RecordLocal {
         comment.setUser(user);
         comment.setText("Sorry, i didn't get last rule. Could somebody please explain it?");
         comment.setDateCreated(new Date());
-        Thread.sleep(1000);
+        Thread.sleep(500);
         mockComments.add(comment);
         comment = new Comment();
         user = new User();

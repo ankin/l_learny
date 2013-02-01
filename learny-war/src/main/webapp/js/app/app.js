@@ -23,11 +23,6 @@ requirejs.config({
 
 requirejs([ 'jquery', 'backbone', 'util/util', 'menu/menuRouter' ], function($, Backbone, util, MenuRouter) {
 
-    util.initLanguage('en_EN');
-
-    this.router = new MenuRouter();
-    Backbone.history.start();
-
     $('#ajax-content').on('showSpinner', function() {
         if (!$('#ajax-content').hasClass('spinner')) {
             $('#ajax-content').addClass('spinner');
@@ -36,5 +31,10 @@ requirejs([ 'jquery', 'backbone', 'util/util', 'menu/menuRouter' ], function($, 
     $('#ajax-content').on('hideSpinner', function() {
         $('#ajax-content').removeClass('spinner');
     });
+
+    util.initLanguage('en_EN');
+
+    this.router = new MenuRouter();
+    Backbone.history.start();
 
 });
