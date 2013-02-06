@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+  <datasource
+    jndi-name="java:/LearnyDS"
+    pool-name="LearnyDS"
+    enabled="true"
+    use-ccm="false"
+    jta="true">
+    <connection-url>jdbc:mysql://localhost:3306/learny</connection-url>
+    <driver>com.mysql</driver>
+    <security>
+      <user-name>root</user-name>
+      <password>blahblah</password>
+    </security>
+    <validation>
+          <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+    </validation>
+    </datasource>
+</datasources>
