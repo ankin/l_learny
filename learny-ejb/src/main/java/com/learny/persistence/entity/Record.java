@@ -2,20 +2,33 @@ package com.learny.persistence.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.learny.persistence.entity.core.ModificationDateEntity;
 import com.learny.persistence.interfaces.Commentable;
 
 @XmlRootElement
+@Entity
+@Table(name = "RECORD")
 public class Record extends ModificationDateEntity implements Commentable {
 
+    @Id
+    private Long id;
+
+    @Transient
     private User user;
 
+    @Transient
     private List<Word> words;
 
+    @Transient
     private List<Rule> rules;
 
+    @Transient
     private List<Comment> comments;
 
     public User getUser() {
