@@ -19,16 +19,18 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
             while (currentDate.getDay() != 6) {
                 isAnotherMonth = currentMonth != currentDate.getMonth(); // change style from non-current month dates
                 this.$el.append(new DayView({
-                    date : currentDate,
-                    isAnotherMonth : isAnotherMonth
+                    date : new Date(currentDate.getTime()),
+                    isAnotherMonth : isAnotherMonth,
+                    isLink : true
                 }).el);
                 currentDate.setDate(currentDate.getDate() + 1);
             }
             // add last day in week
             isAnotherMonth = currentMonth != currentDate.getMonth();
             this.$el.append(new DayView({
-                date : currentDate,
-                isAnotherMonth : isAnotherMonth
+                date : new Date(currentDate.getTime()),
+                isAnotherMonth : isAnotherMonth,
+                isLink : true
             }).el);
             return this;
         }
