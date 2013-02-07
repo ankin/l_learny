@@ -1,26 +1,45 @@
 package com.learny.persistence.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.learny.persistence.entity.core.IdEntity;
 
 @XmlRootElement
+@Entity
+@Table(name = User.TABLE_NAME)
 public class User extends IdEntity {
 
+    public final static String TABLE_NAME = "USER";
+
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
+    @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
+    @Column(name = "PHONE")
     private String phone;
 
+    @Column(name = "COUNTRY")
     private String country;
 
+    @Column(name = "CITY")
+    private String city;
+
+    @Column(name = "ADDRESS")
     private String address;
 
-    private Long plz;
+    @Column(name = "ZIP_CODE")
+    private Long zipCode;
 
+    @Transient
     private Group group;
 
     public String getEmail() {
@@ -71,12 +90,20 @@ public class User extends IdEntity {
         this.address = address;
     }
 
-    public Long getPlz() {
-        return plz;
+    public String getCity() {
+        return city;
     }
 
-    public void setPlz(Long plz) {
-        this.plz = plz;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Long getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(Long zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Group getGroup() {

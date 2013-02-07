@@ -3,7 +3,11 @@ package com.learny.persistence.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,13 +17,13 @@ import com.learny.persistence.interfaces.Commentable;
 
 @XmlRootElement
 @Entity
-@Table(name = "RECORD")
+@Table(name = Record.TABLE_NAME)
 public class Record extends ModificationDateEntity implements Commentable {
 
-    @Id
-    private Long id;
+    public final static String TABLE_NAME = "RECORD";
 
-    @Transient
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)
     private User user;
 
     @Transient
@@ -28,7 +32,9 @@ public class Record extends ModificationDateEntity implements Commentable {
     @Transient
     private List<Rule> rules;
 
-    @Transient
+    @ManyToMany(targetEntity = Comment.class, fetch = FetchType.LAZY)
+    @JoinTable(name = Comment.TABLE_NAME + UNDERSCORE + TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
+            + UNDERSCORE + ID) }, inverseJoinColumns = { @JoinColumn(name = Comment.TABLE_NAME + UNDERSCORE + ID) })
     private List<Comment> comments;
 
     public User getUser() {
