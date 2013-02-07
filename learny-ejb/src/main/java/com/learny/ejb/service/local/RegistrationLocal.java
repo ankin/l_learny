@@ -1,4 +1,4 @@
-package com.learny.ejb.local;
+package com.learny.ejb.service.local;
 
 import javax.ejb.Local;
 

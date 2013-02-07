@@ -14,8 +14,7 @@ define([ 'jquery', 'backbone', 'jqueryForm', 'util/util', 'text!comment/comments
                     var self = this;
                     this.model.fetch({
                         data : $.param({
-                            objectType : self.options.objectType,
-                            objectId : self.options.objectId
+                            recordUuid : self.options.recordUuid
                         }),
                         success : function() {
                             self.$el.html(self._template({

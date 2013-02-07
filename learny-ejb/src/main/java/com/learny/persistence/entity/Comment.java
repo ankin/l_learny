@@ -17,7 +17,7 @@ public class Comment extends ModificationDateEntity {
 
     public final static String TABLE_NAME = "COMMENT";
 
-    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)
     private User user;
 

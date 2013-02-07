@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import com.learny.ejb.local.RecordLocal;
+import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.Comment;
 
 @Path("/comment")
@@ -21,17 +21,15 @@ import com.learny.persistence.entity.Comment;
 public class CommentService {
 
     @Inject
-    @Named("mockRecordBean")
-    private RecordLocal recordBean;
+    @Named("commentBean")
+    private CommentLocal commentBean;
 
     @GET
     @Path("/getall")
     @Produces("application/json")
-    public List<Comment> getComments(@QueryParam("objectType") String objectType,
-            @QueryParam("objectId") String objectId) {
-        System.out.println("objectType: " + objectType);
-        System.out.println("objectId: " + objectId);
-        return recordBean.getRecords(0).get(0).getComments();
+    public List<Comment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
+        System.out.println("recordUuid: " + recordUuid); // TODO: add logging instead
+        return commentBean.findCommentsByRecordUuid(recordUuid);
     }
 
     @POST

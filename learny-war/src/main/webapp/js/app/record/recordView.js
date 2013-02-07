@@ -26,8 +26,7 @@ define([ 'jquery', 'backbone', 'util/util', 'text!record/record.html', 'record/r
                     self.$el.find('#record-calendar').append(new CalendarView().el);
                     // add comments
                     var commentColView = new CommentColView({
-                        objectType : recordJson.objectType,
-                        objectId : recordJson.uuid
+                        recordUuid : recordJson.uuid
                     });
                     $.when(commentColView.rendered).done(function() {
                         self.$el.find('.id_comments').html(commentColView.el);

@@ -7,7 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import com.learny.ejb.local.RecordLocal;
+import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
 
 @Path("/record")
@@ -21,8 +21,8 @@ public class RecordService {
     @GET
     @Path("/get/")
     @Produces("application/json")
-    public Record getRecords() {
-        return recordBean.getRecords(0).get(0);
+    public Record getCurrentRecord() {
+        return recordBean.getCurrentRecordByUserUuid("");
     }
 
     //    @GET
