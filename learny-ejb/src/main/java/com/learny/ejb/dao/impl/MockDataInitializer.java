@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 
 import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
@@ -19,13 +19,13 @@ import com.learny.persistence.entity.User;
 @Startup
 public class MockDataInitializer {
 
-    @EJB
+    @Inject
     private UserDaoLocal userDao;
 
-    @EJB
+    @Inject
     private RecordDaoLocal recordDao;
 
-    @EJB
+    @Inject
     private CommentDaoLocal commentDao;
 
     @PostConstruct

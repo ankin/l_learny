@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -27,7 +26,6 @@ public class CommentService {
     private final static Logger LOGGER = LogManager.getLogger(CommentService.class);
 
     @Inject
-    @Named("commentBean")
     private CommentLocal commentBean;
 
     @GET

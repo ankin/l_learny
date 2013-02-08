@@ -1,7 +1,7 @@
 package com.learny.ejb.service.impl;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.learny.ejb.dao.local.RecordDaoLocal;
@@ -12,7 +12,7 @@ import com.learny.persistence.entity.Record;
 @Named("recordBean")
 public class RecordBean implements RecordLocal {
 
-    @EJB
+    @Inject
     private RecordDaoLocal recordDao;
 
 

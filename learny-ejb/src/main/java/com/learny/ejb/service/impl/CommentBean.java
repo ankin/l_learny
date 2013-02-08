@@ -3,19 +3,17 @@ package com.learny.ejb.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Named;
+import javax.inject.Inject;
 
 import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.Comment;
 
 @Stateless
-@Named("commentBean")
 public class CommentBean implements CommentLocal {
 
-    @EJB
+    @Inject
     private RecordDaoLocal recordDao;
 
     @Override
