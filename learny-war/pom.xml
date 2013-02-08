@@ -7,18 +7,24 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<resteasy.version>2.3.4.Final</resteasy.version>
 		<maven.war.plugin.version>2.2</maven.war.plugin.version>
+		<maven.compiler.plugin.version>2.5.1</maven.compiler.plugin.version>
+		<maven.compiler.java.version>1.7</maven.compiler.java.version>
+		<resteasy.version>2.3.4.Final</resteasy.version>
+		<javaee-api.version>6.0</javaee-api.version>
+		<org.jboss.weld.servlet.version>1.1.9.Final</org.jboss.weld.servlet.version>
+		<log4j.version>1.2.17</log4j.version>
+		<learny.ejb.version>0.0.1-SNAPSHOT</learny.ejb.version>
 	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>${maven.compiler.plugin.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>${maven.compiler.java.version}</source>
+					<target>${maven.compiler.java.version}</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -28,8 +34,8 @@
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<archive>
-						<manifestEntries>
-							<Dependencies>org.jboss.resteasy.resteasy-jaxrs, org.jboss.resteasy.resteasy-cdi</Dependencies>
+						<manifestEntries> <!-- WARNING: next line should not be formatted -->
+							<Dependencies>org.jboss.resteasy.resteasy-jaxrs,org.jboss.resteasy.resteasy-cdi</Dependencies>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -43,21 +49,21 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>6.0</version>
+			<version>${javaee-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.learny</groupId>
 			<artifactId>learny-ejb</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${learny.ejb.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
-			<version>1.1.9.Final</version>
+			<version>${org.jboss.weld.servlet.version}</version>
 		</dependency>
 
 		<dependency>
@@ -72,6 +78,12 @@
 			<artifactId>resteasy-cdi</artifactId>
 			<version>${resteasy.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 	</dependencies>
 </project>

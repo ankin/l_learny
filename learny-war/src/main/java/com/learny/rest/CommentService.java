@@ -1,5 +1,6 @@
 package com.learny.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -13,12 +14,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.Comment;
 
 @Path("/comment")
 @RequestScoped
 public class CommentService {
+
+    private final static Logger LOGGER = LogManager.getLogger(CommentService.class);
 
     @Inject
     @Named("commentBean")
@@ -28,7 +34,7 @@ public class CommentService {
     @Path("/getall")
     @Produces("application/json")
     public List<Comment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
-        System.out.println("recordUuid: " + recordUuid); // TODO: add logging instead
+        LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
         return commentBean.findCommentsByRecordUuid(recordUuid);
     }
 
@@ -39,6 +45,7 @@ public class CommentService {
             @FormParam("commentText") String text) {
         System.out.println("objectType: " + objectType);
         System.out.println("objectId: " + objectId);
+        List<Comment> comments = new ArrayList<>();
         //throw new RuntimeException();
     }
 

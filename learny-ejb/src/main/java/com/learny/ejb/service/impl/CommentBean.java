@@ -21,7 +21,7 @@ public class CommentBean implements CommentLocal {
     @Override
     public List<Comment> findCommentsByRecordUuid(String uuid) {
         //TODO: find better way to init comments
-        List<Comment> comments = new ArrayList<Comment>();
+        List<Comment> comments = new ArrayList<>();
         comments.addAll(recordDao.findByUuid(uuid).getComments());
         return comments;
     }
