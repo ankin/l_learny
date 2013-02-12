@@ -1,5 +1,6 @@
 package com.learny.persistence.entity.core;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -10,7 +11,9 @@ import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlTransient;
 
 @MappedSuperclass
-public class IdEntity {
+public class IdEntity implements Serializable {
+
+    private static final long serialVersionUID = 5218711029922418065L;
 
     public final static String ID = "ID";
 

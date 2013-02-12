@@ -1,13 +1,12 @@
 package com.learny.persistence.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.learny.persistence.entity.core.IdEntity;
 
-@XmlRootElement
 public class Word extends IdEntity {
 
-	private String source;
+    private static final long serialVersionUID = 9064223559376466447L;
+
+    private String source;
 
 	private String target;
 

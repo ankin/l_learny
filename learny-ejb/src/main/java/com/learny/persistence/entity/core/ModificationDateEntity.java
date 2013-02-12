@@ -10,6 +10,8 @@ import javax.persistence.PreUpdate;
 @MappedSuperclass
 public class ModificationDateEntity extends CreationDateEntity {
 
+    private static final long serialVersionUID = -5201438846164893051L;
+
     @Column(name = "DATE_MODIFIED", nullable = false)
     private Date dateModified;
 

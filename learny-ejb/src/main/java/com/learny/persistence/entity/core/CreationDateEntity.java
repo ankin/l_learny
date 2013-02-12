@@ -9,6 +9,8 @@ import javax.persistence.PrePersist;
 @MappedSuperclass
 public class CreationDateEntity extends IdEntity {
 
+    private static final long serialVersionUID = 1590421882485107240L;
+
     @Column(name = "DATE_CREATED", nullable = false)
     private Date dateCreated;
 

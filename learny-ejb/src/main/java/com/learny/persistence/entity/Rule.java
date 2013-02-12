@@ -1,11 +1,10 @@
 package com.learny.persistence.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.learny.persistence.entity.core.IdEntity;
 
-@XmlRootElement
 public class Rule extends IdEntity {
+
+    private static final long serialVersionUID = 799240082172805374L;
 
     private String text;
 

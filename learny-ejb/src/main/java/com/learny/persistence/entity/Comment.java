@@ -6,14 +6,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.learny.persistence.entity.core.ModificationDateEntity;
 
-@XmlRootElement
 @Entity
 @Table(name = Comment.TABLE_NAME)
 public class Comment extends ModificationDateEntity {
+
+    private static final long serialVersionUID = 8683537506574789085L;
 
     public final static String TABLE_NAME = "COMMENT";
 

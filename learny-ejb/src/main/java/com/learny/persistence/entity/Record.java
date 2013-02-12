@@ -12,20 +12,19 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.learny.persistence.entity.core.ModificationDateEntity;
 import com.learny.persistence.interfaces.Commentable;
 
-@XmlRootElement
 @Entity
 @Table(name = Record.TABLE_NAME)
 @NamedQueries(value = { @NamedQuery(name = Record.QUERY_BY_USER_UUID,
-                                    query = "select o from Record o where o.user.uuid =:"
-        + Record.PARAM_USER_ID) })
+                                    query = "select o from Record o where o.user.uuid =:" + Record.PARAM_USER_ID) })
 public class Record extends ModificationDateEntity implements Commentable {
+
+    private static final long serialVersionUID = 5861441534010949510L;
 
     public final static String TABLE_NAME = "RECORD";
 
@@ -71,7 +70,6 @@ public class Record extends ModificationDateEntity implements Commentable {
     public void setRules(List<Rule> rules) {
         this.rules = rules;
     }
-
 
     public List<Comment> getComments() {
         return comments;

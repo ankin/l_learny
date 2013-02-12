@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.learny.core.AbstractService;
 import com.learny.persistence.entity.User;
 import com.learny.rest.AuthenticationService;
 import com.learny.rest.LearnyApplication;
@@ -55,7 +56,7 @@ public class AuthenticationFilter implements Filter {
             return;
         }
 
-        User user = (User) httpSession.getAttribute(AuthenticationService.LOGGED_IN_USER);
+        User user = (User) httpSession.getAttribute(AbstractService.LOGGED_IN_USER);
         if (user == null && isLoginAction(httpRequest)) { // no user is session and login action
             filterChain.doFilter(request, response);
         } else if (user == null) {
