@@ -1,15 +1,9 @@
-define([ 'backbone' ], function(Backbone) {
+define([ 'backbone', 'common/baseModel' ], function(Backbone, BaseModel) {
 
-    var recordModel = Backbone.Model.extend({
+    var recordModel = BaseModel.extend({
         initialize : function() {
-            this.on('error', function(model, xhr, options) {
-                var redirectTo = xhr.getResponseHeader('redirectTo');
-                if (redirectTo) {
-                    window.location.href = redirectTo;
-                }
-            });
+            BaseModel.prototype.initialize.apply(this, arguments);
         },
-
         url : 'services/record/get/'
     });
     return recordModel;
