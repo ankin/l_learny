@@ -30,9 +30,9 @@ public class MockDataInitializer {
 
     @PostConstruct
     public void init() {
-        User user1 = createUser("akinash@gmail.com", "Andrii", "Kinash");
-        User user2 = createUser("ivan.bolvan@gmail.com", "Ivan", "Bolvan");
-        User user3 = createUser("jsummer@gmail.com", "John", "Summer");
+        User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond");
+        User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan");
+        User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer");
 
         Comment comment1 = createComment(user2, "Very interesting!");
         Comment comment2 = createComment(user3, "What #2 means?");
@@ -45,9 +45,10 @@ public class MockDataInitializer {
         recordDao.saveOrUpdate(record1);
     }
 
-    private User createUser(String email, String firstName, String lastName) {
+    private User createUser(String email, String password, String firstName, String lastName) {
         User user = new User();
         user.setEmail(email);
+        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return userDao.saveOrUpdate(user);

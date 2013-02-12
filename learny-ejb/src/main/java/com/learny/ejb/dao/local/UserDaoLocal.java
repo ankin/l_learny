@@ -8,4 +8,6 @@ import com.learny.persistence.entity.User;
 @Local
 public interface UserDaoLocal extends Dao<User> {
 
+    User findUserByEmailAndPassword(String email, String password);
+
 }

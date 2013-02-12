@@ -19,9 +19,11 @@ import org.apache.log4j.Logger;
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.Comment;
 
-@Path("/comment")
+@Path(CommentService.PATH)
 @RequestScoped
 public class CommentService {
+
+    public final static String PATH = "/comment";
 
     private final static Logger LOGGER = LogManager.getLogger(CommentService.class);
 

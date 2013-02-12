@@ -2,21 +2,35 @@ package com.learny.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.learny.persistence.entity.core.IdEntity;
 
 @XmlRootElement
 @Entity
 @Table(name = User.TABLE_NAME)
+@NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL_AND_PASSWORD, query = "select u from User u where u.email=:"
+        + User.PARAM_EMAIL + " and u.password=:" + User.PARAM_PASSWORD))
 public class User extends IdEntity {
 
     public final static String TABLE_NAME = "USER";
 
+    public final static String QUERY_BY_EMAIL_AND_PASSWORD = "User.queryByEmailAndPassword";
+    public final static String PARAM_EMAIL = "email";
+    public final static String PARAM_PASSWORD = "password";
+
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
+
+    @JsonIgnore
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
 
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
@@ -48,6 +62,14 @@ public class User extends IdEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

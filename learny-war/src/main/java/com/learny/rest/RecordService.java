@@ -10,9 +10,11 @@ import javax.ws.rs.Produces;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
 
-@Path("/record")
+@Path(RecordService.PATH)
 @RequestScoped
 public class RecordService {
+
+    public final static String PATH = "/record";
 
     @Inject
     @Named("mockRecordBean")
@@ -32,6 +34,5 @@ public class RecordService {
     //        System.out.println(new Date(dateInMilis));
     //        throw new RuntimeException();
     //    }
-
 
 }
