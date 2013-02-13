@@ -4,9 +4,9 @@
     <div class="comment-body">
         <small class="mutted pull-right"> <%= util.formatDateTime(comment.dateCreated) %> </small>
         <p>
-            <small><%= comment.user.displayName %>:</small>
+            <small><%- comment.user.displayName %>:</small>
         </p>
-        <p><%= comment.text %></p>
+        <p><%- comment.text %></p>
     </div>
     <% }); %>
 

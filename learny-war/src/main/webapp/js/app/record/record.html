@@ -15,8 +15,8 @@
                 <% _.forEach(record.words, function(word, index) { %>
                 <tr>
                     <td><%= (index + 1) %></td>
-                    <td><%= word.source %></td>
-                    <td><%= word.target %></td>
+                    <td><%- word.source %></td>
+                    <td><%- word.target %></td>
                 </tr>
                 <% }); %>
             </tbody>
