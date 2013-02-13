@@ -7,7 +7,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
+import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.Rule;
@@ -20,9 +22,15 @@ public class MockRecordBean implements RecordLocal {
     @Inject
     private RecordDaoLocal recordDao;
 
+    @Inject
+    private UserDaoLocal userDao;
+
+    @Inject
+    private CommentDaoLocal commentDao;
+
     @Override
     public Record getCurrentRecordByUserUuid(String userUuid) {
-        Record record = recordDao.findAll().get(0);
+        Record record = recordDao.findRecordsByUserUuid(userUuid).get(0);
         record.setWords(getMockWords());
         record.setRules(getMockRules());
         return record;
@@ -98,4 +106,6 @@ public class MockRecordBean implements RecordLocal {
         assert false : "Not implemented!";
         return null;
     }
+
+
 }

@@ -13,7 +13,7 @@ import com.learny.persistence.entity.Record;
 public class RecordDaoBean extends AbstractDao<Record> implements RecordDaoLocal {
 
     @Override
-    public List<Record> getRecordsByUserUuid(String userUuid) {
+    public List<Record> findRecordsByUserUuid(String userUuid) {
         Query query = getEntityManager().createNamedQuery(Record.QUERY_BY_USER_UUID);
         query.setParameter(Record.PARAM_USER_ID, userUuid);
         return query.getResultList();

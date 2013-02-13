@@ -5,11 +5,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,10 +41,8 @@ public class Record extends ModificationDateEntity implements Commentable {
     private List<Rule> rules;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Comment.class, fetch = FetchType.LAZY)
-    @JoinTable(name = Comment.TABLE_NAME + UNDERSCORE + TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
-            + UNDERSCORE + ID) }, inverseJoinColumns = { @JoinColumn(name = Comment.TABLE_NAME + UNDERSCORE + ID) })
-    private List<Comment> comments;
+    @OneToMany(targetEntity = RecordComment.class, mappedBy = "record", fetch = FetchType.LAZY)
+    private List<RecordComment> comments;
 
     public User getUser() {
         return user;
@@ -71,11 +68,11 @@ public class Record extends ModificationDateEntity implements Commentable {
         this.rules = rules;
     }
 
-    public List<Comment> getComments() {
+    public List<RecordComment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<RecordComment> comments) {
         this.comments = comments;
     }
 

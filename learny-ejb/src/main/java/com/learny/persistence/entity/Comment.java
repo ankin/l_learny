@@ -1,8 +1,12 @@
 package com.learny.persistence.entity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,6 +15,8 @@ import com.learny.persistence.entity.core.ModificationDateEntity;
 
 @Entity
 @Table(name = Comment.TABLE_NAME)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 public class Comment extends ModificationDateEntity {
 
     private static final long serialVersionUID = 8683537506574789085L;

@@ -4,7 +4,7 @@ define([ 'backbone' , 'common/baseCol'], function(Backbone, BaseCollection) {
         initialize : function() {
             BaseCollection.prototype.initialize.apply(this, arguments);
         },
-        url : 'services/comment/getall'
+        url : 'services/comment/record/getall'
     });
     return commentCollection;
 });

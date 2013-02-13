@@ -7,12 +7,19 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.learny.core.AbstractService;
+import com.learny.ejb.service.local.CommentLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
 
 @Path(RecordService.PATH)
 @RequestScoped
-public class RecordService {
+public class RecordService extends AbstractService {
+
+    private final static Logger LOGGER = LogManager.getLogger(RecordService.class);
 
     public final static String PATH = "/record";
 
@@ -20,19 +27,16 @@ public class RecordService {
     @Named("mockRecordBean")
     private RecordLocal recordBean;
 
+    @Inject
+    private CommentLocal commentBean;
+
     @GET
     @Path("/get/")
     @Produces("application/json")
     public Record getCurrentRecord() {
-        return recordBean.getCurrentRecordByUserUuid("");
+        LOGGER.info("getCurrentRecord() method invocked");
+        String userUuid = getSessionUser().getUuid();
+        return recordBean.getCurrentRecordByUserUuid(userUuid);
     }
-
-    //    @GET
-    //    @Path("/current/{date}")
-    //    @Produces("application/json")
-    //    public List<Record> getRecords(@PathParam("date") Long dateInMilis) {
-    //        System.out.println(new Date(dateInMilis));
-    //        throw new RuntimeException();
-    //    }
 
 }

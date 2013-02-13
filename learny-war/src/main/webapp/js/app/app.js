@@ -1,7 +1,7 @@
 requirejs.config({
 
     paths : {
-        jquery : "../lib/jquery-1.9.0",
+        jquery : "../lib/jquery-1.9.1",
         lodash : "../lib/lodash-1.0.0-rc.3",
         backbone : "../lib/backbone-0.9.10",
         jqueryDateFormat : "../lib/jquery.dateFormat-1.0",

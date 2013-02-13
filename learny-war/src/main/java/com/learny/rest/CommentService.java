@@ -1,6 +1,5 @@
 package com.learny.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,12 +15,13 @@ import javax.ws.rs.QueryParam;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.learny.core.AbstractService;
 import com.learny.ejb.service.local.CommentLocal;
-import com.learny.persistence.entity.Comment;
+import com.learny.persistence.entity.RecordComment;
 
 @Path(CommentService.PATH)
 @RequestScoped
-public class CommentService {
+public class CommentService extends AbstractService {
 
     public final static String PATH = "/comment";
 
@@ -31,22 +31,20 @@ public class CommentService {
     private CommentLocal commentBean;
 
     @GET
-    @Path("/getall")
+    @Path("record/getall")
     @Produces("application/json")
-    public List<Comment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
+    public List<RecordComment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
         LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
-        return commentBean.findCommentsByRecordUuid(recordUuid);
+        return commentBean.findRecordCommentsByRecordUuid(recordUuid);
     }
 
     @POST
-    @Path("/new/{objectType}/{objectId}/")
+    @Path("/record/new/{recordUuid}/")
     @Produces("application/json")
-    public void newComment(@PathParam("objectType") String objectType, @PathParam("objectId") String objectId,
-            @FormParam("commentText") String text) {
-        System.out.println("objectType: " + objectType);
-        System.out.println("objectId: " + objectId);
-        List<Comment> comments = new ArrayList<>();
-        //throw new RuntimeException();
+    public void newComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
+        LOGGER.info("newComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
+        String userUuid = getSessionUser().getUuid();
+        commentBean.createRecordComment(userUuid, recordUuid, commentText);
     }
 
 }

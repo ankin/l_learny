@@ -31,7 +31,7 @@ define([ 'jquery', 'backbone', 'jqueryForm', 'util/util', 'text!comment/comments
                     var self = this;
                     var formSelector = 'form.id_new_comment_form';
                     $(formSelector).ajaxSubmit({
-                        url : 'services/comment/new/' + self.options.objectType + '/' + self.options.objectId + '/',
+                        url : 'services/comment/record/new/' + self.options.recordUuid + '/',
                         type : 'post',
                         dataType : 'json',
                         success : function(data) {
