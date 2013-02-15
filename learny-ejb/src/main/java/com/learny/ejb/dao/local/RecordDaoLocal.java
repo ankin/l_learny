@@ -10,6 +10,6 @@ import com.learny.persistence.entity.Record;
 @Local
 public interface RecordDaoLocal extends Dao<Record> {
 
-    List<Record> findRecordsByUserUuid(String userUuid);
+    List<Record> findRecordsByUserEmail(String userUuid);
 
 }

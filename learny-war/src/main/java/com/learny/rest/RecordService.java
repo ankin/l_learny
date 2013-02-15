@@ -1,5 +1,6 @@
 package com.learny.rest;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,10 +11,10 @@ import javax.ws.rs.Produces;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.learny.core.AbstractService;
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
+import com.learny.rest.core.AbstractService;
 
 @Path(RecordService.PATH)
 @RequestScoped
@@ -33,10 +34,10 @@ public class RecordService extends AbstractService {
     @GET
     @Path("/get/")
     @Produces("application/json")
+    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public Record getCurrentRecord() {
         LOGGER.info("getCurrentRecord() method invocked");
-        String userUuid = getSessionUser().getUuid();
-        return recordBean.getCurrentRecordByUserUuid(userUuid);
+        return recordBean.getCurrentRecordByUserEmail(getCurrentUserEmail());
     }
 
 }

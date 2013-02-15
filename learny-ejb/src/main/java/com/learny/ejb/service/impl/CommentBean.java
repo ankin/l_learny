@@ -21,7 +21,7 @@ public class CommentBean implements CommentLocal {
 
     @Inject
     private CommentDaoLocal commentDao;
-    
+
     @Inject
     private UserDaoLocal userDao;
 
@@ -31,9 +31,9 @@ public class CommentBean implements CommentLocal {
     }
 
     @Override
-    public void createRecordComment(String userUuid, String recordUuid, String commentText) {
+    public void createRecordComment(String emailUuid, String recordUuid, String commentText) {
         Record record = recordDao.findByUuid(recordUuid);
-        User user = userDao.findByUuid(userUuid);
+        User user = userDao.findByEmail(emailUuid);
         RecordComment comment = new RecordComment();
         comment.setUser(user);
         comment.setText(commentText);

@@ -11,10 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.learny.core.AbstractService;
-import com.learny.persistence.entity.User;
 import com.learny.rest.AuthenticationService;
 import com.learny.rest.LearnyApplication;
 
@@ -28,6 +25,8 @@ public class AuthenticationFilter implements Filter {
 
     private static final String LOGIN_SERVICE = LearnyApplication.PATH + AuthenticationService.PATH
             + AuthenticationService.LOGIN_PATH;
+    private static final String LOGOUT_SERVICE = LearnyApplication.PATH + AuthenticationService.PATH
+            + AuthenticationService.LOGOUT_PATH;
 
     @Override
     public void destroy() {
@@ -40,49 +39,14 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if (httpRequest.getServletPath().endsWith(".css")) { // TODO: make it better
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        HttpSession httpSession = httpRequest.getSession(false);
-
-        if (httpSession == null) {
-            if (isLoginAction(httpRequest)) {
-                filterChain.doFilter(request, response);
-            } else {
-                redirectToLoginPage(httpRequest, httpResponse);
+        String uri = httpRequest.getRequestURI();
+        if (uri != null && uri.equals("/learny/")) {
+            if (httpRequest.getUserPrincipal() == null) {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + LOGIN_PAGE_FULL);
+                return;
             }
-            return;
         }
-
-        User user = (User) httpSession.getAttribute(AbstractService.LOGGED_IN_USER);
-        if (user == null && isLoginAction(httpRequest)) { // no user is session and login action
-            filterChain.doFilter(request, response);
-        } else if (user == null) {
-            redirectToLoginPage(httpRequest, httpResponse); // no user in session, but not login action
-        } else {
-            filterChain.doFilter(request, response); // there is user in session and not login action
-        }
-    }
-
-    private void redirectToLoginPage(HttpServletRequest httpRequest, HttpServletResponse httpResponse)
-            throws IOException {
-        String requestUri = httpRequest.getRequestURI();
-        if (requestUri.contains(LearnyApplication.PATH)) {// Used as a tip for JS to redirect when AJAX request is submitted
-            httpResponse.setHeader(REDIRECT_TO_HEADER_KEY, LOGIN_PAGE);
-        } else {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + LOGIN_PAGE_FULL);
-        }
-    }
-
-    private boolean isLoginAction(HttpServletRequest httpRequest) {
-        String path = httpRequest.getServletPath();
-        String requestUri = httpRequest.getRequestURI();
-        if (LOGIN_PAGE_FULL.equals(path) || requestUri.endsWith(LOGIN_SERVICE)) {
-            return true;
-        }
-        return false;
+        filterChain.doFilter(httpRequest, httpResponse);
     }
 
     @Override

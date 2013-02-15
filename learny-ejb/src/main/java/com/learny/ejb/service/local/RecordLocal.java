@@ -7,7 +7,7 @@ import com.learny.persistence.entity.Record;
 @Local
 public interface RecordLocal {
 
-    Record getCurrentRecordByUserUuid(String userUuid);
+    Record getCurrentRecordByUserEmail(String userUuid);
 
     Record saveOrUpdate(Record record);
 

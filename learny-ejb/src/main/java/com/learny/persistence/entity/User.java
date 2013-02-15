@@ -2,6 +2,8 @@ package com.learny.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,16 +19,15 @@ import com.learny.persistence.entity.core.IdEntity;
 @Entity
 @Table(name = User.TABLE_NAME)
 @NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL_AND_PASSWORD, query = "select u from User u where u.email=:"
-        + User.PARAM_EMAIL + " and u.password=:" + User.PARAM_PASSWORD))
+        + User.PARAM_EMAIL))
 public class User extends IdEntity {
 
     private static final long serialVersionUID = 1652908666766597691L;
 
     public final static String TABLE_NAME = "USER";
 
-    public final static String QUERY_BY_EMAIL_AND_PASSWORD = "User.queryByEmailAndPassword";
+    public final static String QUERY_BY_EMAIL_AND_PASSWORD = "User.queryByEmail";
     public final static String PARAM_EMAIL = "email";
-    public final static String PARAM_PASSWORD = "password";
 
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
@@ -45,6 +46,11 @@ public class User extends IdEntity {
     @ManyToOne(targetEntity = Address.class, fetch = FetchType.LAZY)
     @JoinColumn(name = Address.TABLE_NAME + UNDERSCORE + ID, nullable = true)
     private Address address;
+
+    @JsonIgnore
+    @Column(name = "ROLE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Transient
     private Group group;
@@ -91,6 +97,22 @@ public class User extends IdEntity {
 
     public String getDisplayName() {
         return firstName + " " + lastName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 }

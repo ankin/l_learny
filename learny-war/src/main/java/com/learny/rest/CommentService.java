@@ -2,6 +2,7 @@ package com.learny.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.FormParam;
@@ -15,9 +16,9 @@ import javax.ws.rs.QueryParam;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.learny.core.AbstractService;
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.RecordComment;
+import com.learny.rest.core.AbstractService;
 
 @Path(CommentService.PATH)
 @RequestScoped
@@ -33,6 +34,7 @@ public class CommentService extends AbstractService {
     @GET
     @Path("record/getall")
     @Produces("application/json")
+    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public List<RecordComment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
         LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
         return commentBean.findRecordCommentsByRecordUuid(recordUuid);
@@ -41,10 +43,10 @@ public class CommentService extends AbstractService {
     @POST
     @Path("/record/new/{recordUuid}/")
     @Produces("application/json")
+    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public void newComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
         LOGGER.info("newComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
-        String userUuid = getSessionUser().getUuid();
-        commentBean.createRecordComment(userUuid, recordUuid, commentText);
+        commentBean.createRecordComment(getCurrentUserEmail(), recordUuid, commentText);
     }
 
 }

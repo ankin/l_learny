@@ -29,8 +29,8 @@ public class MockRecordBean implements RecordLocal {
     private CommentDaoLocal commentDao;
 
     @Override
-    public Record getCurrentRecordByUserUuid(String userUuid) {
-        Record record = recordDao.findRecordsByUserUuid(userUuid).get(0);
+    public Record getCurrentRecordByUserEmail(String userUuid) {
+        Record record = recordDao.findRecordsByUserEmail(userUuid).get(0);
         record.setWords(getMockWords());
         record.setRules(getMockRules());
         return record;

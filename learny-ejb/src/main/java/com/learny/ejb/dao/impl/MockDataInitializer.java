@@ -11,6 +11,7 @@ import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.persistence.entity.Comment;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.RecordComment;
+import com.learny.persistence.entity.Role;
 import com.learny.persistence.entity.User;
 
 @Singleton
@@ -28,21 +29,23 @@ public class MockDataInitializer {
 
     @PostConstruct
     public void init() {
-        User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond");
-        User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan");
-        User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer");
+        User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond", Role.STUDENT);
+        
+        User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT);
+        User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer", Role.NONE);
 
         Record record1 = createRecord(user1);
         createRecordComment(record1, user2, "Very interesting!");
         createRecordComment(record1, user3, "What #2 means?");
     }
 
-    private User createUser(String email, String password, String firstName, String lastName) {
+    private User createUser(String email, String password, String firstName, String lastName, Role role) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setRole(role);
         return userDao.saveOrUpdate(user);
     }
 

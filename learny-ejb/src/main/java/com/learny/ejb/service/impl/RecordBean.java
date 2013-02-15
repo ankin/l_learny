@@ -29,8 +29,8 @@ public class RecordBean implements RecordLocal {
     }
 
     @Override
-    public Record getCurrentRecordByUserUuid(String userUuid) {
-        return recordDao.findRecordsByUserUuid(userUuid).get(0);
+    public Record getCurrentRecordByUserEmail(String userEmail) {
+        return recordDao.findRecordsByUserEmail(userEmail).get(0);
     }
 
 

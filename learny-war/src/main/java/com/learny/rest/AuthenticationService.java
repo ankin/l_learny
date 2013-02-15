@@ -2,38 +2,60 @@ package com.learny.rest;
 
 import java.io.IOException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 
-import com.learny.core.AbstractService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.learny.ejb.service.exception.LoginException;
-import com.learny.ejb.service.local.UserBeanLocal;
-import com.learny.persistence.entity.User;
 
 @Path(AuthenticationService.PATH)
 @RequestScoped
-public class AuthenticationService extends AbstractService {
+public class AuthenticationService {
+
+    private final static Logger LOGGER = LogManager.getLogger(AuthenticationService.class);
 
     public final static String PATH = "/authentication";
 
     public final static String LOGIN_PATH = "/login";
 
-    @Inject
-    private UserBeanLocal userBean;
+    public final static String LOGOUT_PATH = "/logout";
 
-    @Path(LOGIN_PATH)
-    @POST
-    public void login(@FormParam("email") String email, @FormParam("password") String password) throws LoginException {
-        User user = userBean.login(email, password);
-        setSessionUser(user);
+    @Context
+    private HttpServletRequest httpRequest;
+
+    @Context
+    private HttpServletResponse httpResponse;
+
+    @GET
+    @Path(LOGOUT_PATH)
+    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
+    public void logout() throws LoginException {
         try {
+            httpRequest.logout();
             redirectToRoot();
         } catch (IOException e) {
-            throw new LoginException();
+            throw new LoginException(); //TODO:something else should be thrown
+        } catch (ServletException e) {
+            throw new LoginException(); //TODO:something else should be thrown
         }
     }
 
+    protected void redirectToRoot() throws IOException {
+        try {
+            httpResponse.sendRedirect(httpRequest.getContextPath());
+        } catch (IOException e) {
+            String errorMsg = "Failed to redired to " + httpRequest.getContextPath();
+            LOGGER.error(errorMsg, e);
+            throw e;
+
+        }
+    }
 }

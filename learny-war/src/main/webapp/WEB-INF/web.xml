@@ -19,6 +19,59 @@
 		</resource-env-ref-type>
 	</resource-env-ref>
 
+	<!-- Security config start -->
+
+	<context-param>
+		<param-name>resteasy.role.based.security</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+		</listener-class>
+	</listener>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>resources</web-resource-name>
+			<url-pattern>/css/*</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>root</web-resource-name>
+			<url-pattern>/</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>STUDENT</role-name>
+			<role-name>DOCENT</role-name>
+			<role-name>MANAGER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.html</form-login-page>
+			<form-error-page>/error.html</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<!-- <login-config> <auth-method>FORM</auth-method> <realm-name>LearnyAuthRealm</realm-name> 
+		</login-config> -->
+
+	<security-role>
+		<role-name>STUDENT</role-name>
+	</security-role>
+	<security-role>
+		<role-name>DOCENT</role-name>
+	</security-role>
+	<security-role>
+		<role-name>MANAGER</role-name>
+	</security-role>
+
+	<!-- Security config end -->
 
 
 	<!-- set this if you map the Resteasy servlet to something other than /* 

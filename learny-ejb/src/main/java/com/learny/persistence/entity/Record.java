@@ -19,16 +19,16 @@ import com.learny.persistence.interfaces.Commentable;
 
 @Entity
 @Table(name = Record.TABLE_NAME)
-@NamedQueries(value = { @NamedQuery(name = Record.QUERY_BY_USER_UUID,
-                                    query = "select o from Record o where o.user.uuid =:" + Record.PARAM_USER_ID) })
+@NamedQueries(value = { @NamedQuery(name = Record.QUERY_BY_USER_EMAIL,
+                                    query = "select o from Record o where o.user.email =:" + Record.PARAM_USER_EMAIL) })
 public class Record extends ModificationDateEntity implements Commentable {
 
     private static final long serialVersionUID = 5861441534010949510L;
 
     public final static String TABLE_NAME = "RECORD";
 
-    public final static String QUERY_BY_USER_UUID = "Record.queryByUserUuid";
-    public final static String PARAM_USER_ID = "userId";
+    public final static String QUERY_BY_USER_EMAIL = "Record.queryByUserUuid";
+    public final static String PARAM_USER_EMAIL = "userEmail";
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)
