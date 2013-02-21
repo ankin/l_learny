@@ -1,14 +1,12 @@
 define([ 'backbone' ], function(Backbone) {
-    return {
+	return {
 
-        attachErrorHandler : function(obj) {
-            obj.on('error', function(model, xhr, options) {
-                var redirectTo = xhr.getResponseHeader('redirectTo');
-                if (redirectTo) {
-                    window.location.href = redirectTo;
-                }
-            });
-        }
+		attachErrorHandler : function(obj) {
+			obj.on('error', function(model, xhr, options) {
+				//show some kind of message to user before redirect
+				window.location.href = '/learny/';
+			});
+		}
 
-    };
+	};
 });

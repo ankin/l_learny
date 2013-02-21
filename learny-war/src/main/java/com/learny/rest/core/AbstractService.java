@@ -1,17 +1,14 @@
 package com.learny.rest.core;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
+import org.apache.shiro.SecurityUtils;
 
 public abstract class AbstractService {
 
-    @Context
-    private HttpServletRequest httpRequest;
 
     protected String getCurrentUserEmail(){
-        if (httpRequest.getUserPrincipal() == null) {
+        if (SecurityUtils.getSubject() == null) {
             return null;
         }
-        return httpRequest.getUserPrincipal().getName();
+        return (String) SecurityUtils.getSubject().getSession().getAttribute("email");
     }
 }
