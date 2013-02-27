@@ -1,4 +1,4 @@
-define([ 'jquery', 'backbone', 'util/util', 'text!record/record.html', 'record/recordModel', 'comment/commentsColView',
+define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/recordModel', 'comment/commentsColView',
         'calendar/calendarView' ], function($, Backbone, util, recordTpl, RecordModel, CommentColView, CalendarView) {
 
     var recordView = Backbone.View.extend({

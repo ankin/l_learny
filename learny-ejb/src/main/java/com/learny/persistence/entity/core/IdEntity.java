@@ -22,10 +22,10 @@ public class IdEntity implements Serializable {
     @XmlTransient
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = ID, nullable = false)
+    @Column(name = ID, nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "UUID", nullable = false)
+    @Column(name = "UUID", nullable = false, unique = true)
     private final String uuid;
 
     public IdEntity() {
@@ -38,6 +38,17 @@ public class IdEntity implements Serializable {
 
     public String getUuid() {
         return uuid;
+    }
+
+    @Override
+    public final boolean equals(Object obj) {
+        IdEntity otherObj = (IdEntity) obj;
+        return this.getUuid().equals(otherObj.getUuid());
+    }
+    
+    @Override
+    public final int hashCode() {
+        return getUuid().hashCode();
     }
 
 }

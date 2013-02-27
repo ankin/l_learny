@@ -1,4 +1,4 @@
-define([ 'jquery', 'backbone', 'jqueryForm', 'util/util', 'text!comment/comments.html', 'comment/commentsCol' ],
+define([ 'jquery', 'backbone', 'jqueryForm', 'util', 'text!comment/comments.html', 'comment/commentsCol' ],
         function($, Backbone, jqueryForm, util, commentsTpl, CommentCol) {
 
             var commentCollectionView = Backbone.View.extend({

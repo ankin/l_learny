@@ -2,7 +2,7 @@
     <h4><%= $.i18n.prop('Comments') %></h4>
     <% _.forEach(comments, function(comment, index) { %>
     <div class="comment-body">
-        <small class="mutted pull-right"> <%= util.formatDateTime(comment.dateCreated) %> </small>
+        <small class="mutted pull-right"> <%= comment.dateCreated %> </small>
         <p>
             <small><%- comment.user.displayName %>:</small>
         </p>

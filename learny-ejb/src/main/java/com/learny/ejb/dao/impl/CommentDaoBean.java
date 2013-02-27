@@ -17,7 +17,7 @@ public class CommentDaoBean extends AbstractDao<Comment> implements CommentDaoLo
     public List<RecordComment> findRecordCommentsByRecordUuid(String recordUuid) {
         Query query = getEntityManager().createNamedQuery(RecordComment.QUERY_BY_RECORD_UUID);
         query.setParameter(RecordComment.PARAM_RECORD_ID, recordUuid);
-        return (List<RecordComment>) query.getResultList();
+        return query.getResultList();
     }
 
 }

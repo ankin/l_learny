@@ -8,6 +8,7 @@ import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.ejb.service.local.RecordLocal;
+import com.learny.ejb.service.local.TranslatorLocal;
 import com.learny.persistence.entity.Record;
 
 @Stateless
@@ -23,6 +24,9 @@ public class RecordBean implements RecordLocal {
     @Inject
     private UserDaoLocal userDao;
 
+    @Inject
+    private TranslatorLocal translator;
+
     @Override
     public Record saveOrUpdate(Record record) {
         return recordDao.saveOrUpdate(record);
@@ -30,8 +34,9 @@ public class RecordBean implements RecordLocal {
 
     @Override
     public Record getCurrentRecordByUserEmail(String userEmail) {
-        return recordDao.findRecordsByUserEmail(userEmail).get(0);
+        Record record = recordDao.findRecordsByUserEmail(userEmail).get(0);
+        translator.translate(record.getWords());
+        return record;
     }
-
 
 }

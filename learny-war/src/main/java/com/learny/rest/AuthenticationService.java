@@ -18,10 +18,11 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 
 import com.learny.ejb.service.exception.LoginException;
+import com.learny.rest.core.AbstractService;
 
 @Path(AuthenticationService.PATH)
 @RequestScoped
-public class AuthenticationService {
+public class AuthenticationService extends AbstractService {
 
 	private final static Logger LOGGER = LogManager
 			.getLogger(AuthenticationService.class);
@@ -32,6 +33,8 @@ public class AuthenticationService {
 
 	public final static String LOGOUT_PATH = "/logout";
 
+	public final static String LOGIN_PAGE_PATH = "/login.html";
+
 	@Context
 	private HttpServletRequest httpRequest;
 
@@ -40,36 +43,41 @@ public class AuthenticationService {
 
 	@POST
 	@Path(LOGIN_PATH)
-    public void login(@FormParam("username") String username, @FormParam("password") String password)
-            throws LoginException {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        Subject currentUser = SecurityUtils.getSubject();
-        currentUser.login(token);
-        currentUser.getSession(true).setAttribute("email", username);
-        try {
-            redirectToRoot();
-        } catch (IOException e) {
-            throw new LoginException();
-        }
+	public void login(@FormParam("username") String username,
+			@FormParam("password") String password) throws LoginException {
+		UsernamePasswordToken token = new UsernamePasswordToken(username,
+				password);
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.login(token);
+		currentUser.getSession(true).setAttribute(EMAIL_ATTR_KEY, username);
+		try {
+			String url = httpRequest.getContextPath();
+			redirect(url);
+		} catch (IOException e) {
+			throw new LoginException();
+		}
 	}
 
 	@GET
 	@Path(LOGOUT_PATH)
 	public void logout() throws LoginException {
 		try {
-            SecurityUtils.getSubject().logout();
-			redirectToRoot();
+			SecurityUtils.getSubject().logout();
+			if (httpRequest.getSession() != null) {
+				httpRequest.getSession().invalidate();
+			}
+			String url = httpRequest.getContextPath() + LOGIN_PAGE_PATH;
+			redirect(url);
 		} catch (IOException e) {
 			throw new LoginException(); // TODO:something else should be thrown
 		}
 	}
 
-	protected void redirectToRoot() throws IOException {
+	private void redirect(String url) throws IOException {
 		try {
-			httpResponse.sendRedirect(httpRequest.getContextPath());
+			httpResponse.sendRedirect(url);
 		} catch (IOException e) {
-			String errorMsg = "Failed to redired to "
-					+ httpRequest.getContextPath();
+			String errorMsg = "Failed to redired to " + url;
 			LOGGER.error(errorMsg, e);
 			throw e;
 

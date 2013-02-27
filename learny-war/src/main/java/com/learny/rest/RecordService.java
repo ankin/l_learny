@@ -1,9 +1,7 @@
 package com.learny.rest;
 
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,7 +23,6 @@ public class RecordService extends AbstractService {
     public final static String PATH = "/record";
 
     @Inject
-    @Named("mockRecordBean")
     private RecordLocal recordBean;
 
     @Inject
@@ -34,7 +31,6 @@ public class RecordService extends AbstractService {
     @GET
     @Path("/get/")
     @Produces("application/json")
-    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public Record getCurrentRecord() {
         LOGGER.info("getCurrentRecord() method invocked");
         return recordBean.getCurrentRecordByUserEmail(getCurrentUserEmail());

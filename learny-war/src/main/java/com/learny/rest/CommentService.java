@@ -2,7 +2,6 @@ package com.learny.rest;
 
 import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.FormParam;
@@ -34,7 +33,6 @@ public class CommentService extends AbstractService {
     @GET
     @Path("record/getall")
     @Produces("application/json")
-    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public List<RecordComment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
         LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
         return commentBean.findRecordCommentsByRecordUuid(recordUuid);
@@ -43,7 +41,6 @@ public class CommentService extends AbstractService {
     @POST
     @Path("/record/new/{recordUuid}/")
     @Produces("application/json")
-    @RolesAllowed({ "STUDENT", "DOCENT", "MANAGER" })
     public void newComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
         LOGGER.info("newComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
         commentBean.createRecordComment(getCurrentUserEmail(), recordUuid, commentText);
