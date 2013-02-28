@@ -1,8 +1,8 @@
-define([ 'backbone', 'common/baseCol', 'util'], function(Backbone, BaseCollection, util) {
+define([ 'backbone', 'common/baseCol', 'util'], function(Backbone, BaseCol, util) {
 
-    var commentCollection = BaseCollection.extend({
+    var commentCollection = BaseCol.extend({
         initialize : function() {
-            BaseCollection.prototype.initialize.apply(this, arguments);
+            BaseCol.prototype.initialize.apply(this, arguments);
         },
         url : 'services/comment/record/getall',
         

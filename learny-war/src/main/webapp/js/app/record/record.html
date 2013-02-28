@@ -1,26 +1,6 @@
 <section class="record-section">
     <small class="pull-right"><%= record.dateCreated %></small>
-    <div class="record-component">
-        <h4><%= $.i18n.prop('Vocabulary') %></h4>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th><%= $.i18n.prop('Original') %></th>
-                    <th><%= $.i18n.prop('Translated') %></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <% _.forEach(record.words, function(word, index) { %>
-                <tr>
-                    <td><%= (index + 1) %></td>
-                    <td><%- word.original %></td>
-                    <td><%- word.translated %></td>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
+    <div id="words-table">
     </div>
     <aside class='record-calendar' id="record-calendar">
         <a id="calendar-open-link" class="btn btn-link open-link well"><%= $.i18n.prop('OpenCalendar') %></a>

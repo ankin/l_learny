@@ -1,12 +1,13 @@
-define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/recordModel', 'comment/commentsColView',
-        'calendar/calendarView' ], function($, Backbone, util, recordTpl, RecordModel, CommentColView, CalendarView) {
+define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/recordModel', 'word/wordColView',
+        'comment/commentsColView', 'calendar/calendarView' ], function($, Backbone, util, recordTpl, RecordModel,
+        WordColView, CommentColView, CalendarView) {
 
     var recordView = Backbone.View.extend({
         className : 'record',
         _template : _.template(recordTpl),
         model : new RecordModel(),
 
-        events : {
+         events : {
             'click #calendar-open-link' : 'toggleCalendar'
         },
 
@@ -15,7 +16,7 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
         },
 
         render : function() {
-            self = this;
+            var self = this;
             self.model.fetch({
                 success : function() {
                     var recordJson = self.model.toJSON();
@@ -23,6 +24,10 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
                         record : recordJson,
                         util : util
                     }));
+
+                    self.$el.find('#words-table').html(new WordColView({
+                        data : recordJson.words
+                    }).el);
                     self.$el.find('#record-calendar').append(new CalendarView().el);
                     // add comments
                     var commentColView = new CommentColView({

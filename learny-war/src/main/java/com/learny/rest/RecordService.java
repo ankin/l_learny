@@ -29,7 +29,6 @@ public class RecordService extends AbstractService {
     private CommentLocal commentBean;
 
     @GET
-    @Path("/get/")
     @Produces("application/json")
     public Record getCurrentRecord() {
         LOGGER.info("getCurrentRecord() method invocked");

@@ -4,7 +4,7 @@ define([ 'backbone', 'common/baseModel', 'util' ], function(Backbone, BaseModel,
         initialize : function() {
             BaseModel.prototype.initialize.apply(this, arguments);
         },
-        url : 'services/record/get/',
+        url : 'services/record/',
 
         parse : function(resp, xhr) {
             var model = resp;
