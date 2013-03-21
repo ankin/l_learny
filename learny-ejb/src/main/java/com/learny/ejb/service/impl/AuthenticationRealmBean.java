@@ -54,6 +54,7 @@ public class AuthenticationRealmBean extends AuthorizingRealm implements Athenti
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
             throws AuthenticationException {
+
         UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
 
         User user = userDao.findByEmail(upToken.getUsername());

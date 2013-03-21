@@ -1,15 +1,15 @@
 <section class="record-section">
-    <small class="pull-right"><%= record.dateCreated %></small>
-    <div id="words-table">
-    </div>
-    <aside class='record-calendar' id="record-calendar">
-        <a id="calendar-open-link" class="btn btn-link open-link well"><%= $.i18n.prop('OpenCalendar') %></a>
-    </aside>
-    <div class="record-component sepatator-top">
-        <h4><%= $.i18n.prop('Rules') %></h4>
-        <% _.forEach(record.rules, function(rule, index) { %>
-        <div><%= rule.text %></div>
-        <% }); %>
-    </div>
-    <div class="id_comments"></div>
+	<a id="calendar-open-link" class="btn btn-link open-link well"><%=
+		record.dateCreated %></a>
+	<aside class='record-calendar' id="record-calendar"></aside>
+
+	<div id="words-table"></div>
+
+	<div class="record-component sepatator-top">
+		<h4><%= $.i18n.prop('Rules') %></h4>
+		<% _.forEach(record.rules, function(rule, index) { %>
+		<div><%= rule.text %></div>
+		<% }); %>
+	</div>
+	<div class="id_comments"></div>
 </section>

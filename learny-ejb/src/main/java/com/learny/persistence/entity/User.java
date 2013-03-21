@@ -18,7 +18,7 @@ import com.learny.persistence.entity.core.IdEntity;
 
 @Entity
 @Table(name = User.TABLE_NAME)
-@NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL_AND_PASSWORD, query = "select u from User u where u.email=:"
+@NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL, query = "select u from User u where u.email=:"
         + User.PARAM_EMAIL))
 public class User extends IdEntity {
 
@@ -26,7 +26,7 @@ public class User extends IdEntity {
 
     public final static String TABLE_NAME = "USER";
 
-    public final static String QUERY_BY_EMAIL_AND_PASSWORD = "User.queryByEmail";
+    public final static String QUERY_BY_EMAIL = "User.queryByEmail";
     public final static String PARAM_EMAIL = "email";
 
     @Column(name = "EMAIL", nullable = false, unique = true)

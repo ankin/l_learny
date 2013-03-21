@@ -1,5 +1,8 @@
 package com.learny.ejb.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -7,9 +10,11 @@ import javax.inject.Named;
 import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.dao.local.UserDaoLocal;
+import com.learny.ejb.dao.local.WordDaoLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.ejb.service.local.TranslatorLocal;
 import com.learny.persistence.entity.Record;
+import com.learny.persistence.entity.Word;
 
 @Stateless
 @Named("recordBean")
@@ -19,13 +24,16 @@ public class RecordBean implements RecordLocal {
     private RecordDaoLocal recordDao;
 
     @Inject
+    private WordDaoLocal wordDao;
+
+    @Inject
     private CommentDaoLocal commentDao;
 
     @Inject
     private UserDaoLocal userDao;
 
     @Inject
-    private TranslatorLocal translator;
+    private TranslatorLocal translatorBean;
 
     @Override
     public Record saveOrUpdate(Record record) {
@@ -35,8 +43,30 @@ public class RecordBean implements RecordLocal {
     @Override
     public Record getCurrentRecordByUserEmail(String userEmail) {
         Record record = recordDao.findRecordsByUserEmail(userEmail).get(0);
-        translator.translate(record.getWords());
+        translatorBean.translate(record.getWords());
         return record;
     }
 
+    @Override
+    public List<Word> saveWords(String recordUuid, List<Word> words) {
+        Record record = recordDao.findByUuid(recordUuid);
+        record.clearWords();
+        record.addWords(saveWords(words));
+        recordDao.saveOrUpdate(record);
+        return record.getWords();
+
+    }
+
+    private List<Word> saveWords(List<Word> words) {
+        List<Word> savedWords = new ArrayList<>();
+        for (Word wordOrig : words) {
+            Word word = wordDao.findByOriginal(wordOrig.getOriginal());
+            if (word == null) {
+                word = wordDao.saveOrUpdate(wordOrig);
+            }
+            savedWords.add(word);
+        }
+        translatorBean.translate(savedWords);
+        return savedWords;
+    }
 }

@@ -5,8 +5,9 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
         _template : _.template(calendarTpl),
 
         events : {
-            'click #left_month' : 'prevMonth',
-            'click #right_month' : 'nextMonth'
+            'click a#cal_left_month' : 'prevMonth',
+            'click a#cal_right_month' : 'nextMonth',
+            'click a#cal_close' : 'closeCalendar'
         },
 
         initialize : function() {
@@ -39,6 +40,10 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
             currentDate.setMonth(currentDate.getMonth() + 1);
             this.options.date = currentDate;
             this.render();
+        },
+        
+        closeCalendar : function(){
+            this.trigger('closeCalendar');
         }
 
     });

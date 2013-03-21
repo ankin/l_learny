@@ -26,7 +26,7 @@ public class IdEntity implements Serializable {
     private Long id;
 
     @Column(name = "UUID", nullable = false, unique = true)
-    private final String uuid;
+    private String uuid;
 
     public IdEntity() {
         this.uuid = UUID.randomUUID().toString();

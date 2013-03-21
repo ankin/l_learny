@@ -1,6 +1,9 @@
 package com.learny.persistence.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -40,9 +44,10 @@ public class Record extends ModificationDateEntity {
     private User user;
 
     @ManyToMany(targetEntity = Word.class, fetch = FetchType.LAZY)
+    @OrderColumn(name = "ORDER_INDEX", nullable = false)
     @JoinTable(name = TABLE_NAME + UNDERSCORE + Word.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
             + UNDERSCORE + ID) }, inverseJoinColumns = { @JoinColumn(name = Word.TABLE_NAME + UNDERSCORE + ID) })
-    private Set<Word> words = new HashSet<>();
+    private List<Word> words = new ArrayList<>();
 
     @ManyToMany(targetEntity = Rule.class, fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_NAME + UNDERSCORE + Rule.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
@@ -61,7 +66,7 @@ public class Record extends ModificationDateEntity {
         this.user = user;
     }
 
-    public Set<Word> getWords() {
+    public List<Word> getWords() {
         return words;
     }
 
@@ -73,12 +78,22 @@ public class Record extends ModificationDateEntity {
         }
     }
 
+    public void addWords(Collection<Word> words) {
+        for (Word word : words) {
+            addWord(word);
+        }
+    }
+
     public void removeWord(Word word) {
         assert words.contains(word) : "Word [UUID=" + word.getUuid() + "] doesn't exists in Record [UUID=" + getUuid()
                 + "]";
         if (words.contains(word)) {
             words.remove(word);
         }
+    }
+
+    public void clearWords() {
+        words.clear();
     }
 
     public Set<Rule> getRules() {

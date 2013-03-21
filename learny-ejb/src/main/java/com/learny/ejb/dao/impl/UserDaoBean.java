@@ -12,7 +12,7 @@ public class UserDaoBean extends AbstractDao<User> implements UserDaoLocal {
 
     @Override
     public User findByEmail(String email) {
-        Query query = getEntityManager().createNamedQuery(User.QUERY_BY_EMAIL_AND_PASSWORD);
+        Query query = getEntityManager().createNamedQuery(User.QUERY_BY_EMAIL);
         query.setParameter(User.PARAM_EMAIL, email);
         return (User) query.getSingleResult();
 

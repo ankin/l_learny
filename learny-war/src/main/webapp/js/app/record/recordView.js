@@ -7,8 +7,8 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
         _template : _.template(recordTpl),
         model : new RecordModel(),
 
-         events : {
-            'click #calendar-open-link' : 'toggleCalendar'
+        events : {
+            'click #calendar-open-link' : 'showCalendar'
         },
 
         initialize : function() {
@@ -26,9 +26,14 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
                     }));
 
                     self.$el.find('#words-table').html(new WordColView({
-                        data : recordJson.words
+                        data : recordJson.words,
+                        recordUuid : recordJson.uuid
                     }).el);
-                    self.$el.find('#record-calendar').append(new CalendarView().el);
+                    var calView = new CalendarView();
+                    calView.on('closeCalendar', function() {
+                        self.hideCalendar();
+                    });
+                    self.$el.find('#record-calendar').append(calView.el);
                     // add comments
                     var commentColView = new CommentColView({
                         recordUuid : recordJson.uuid
@@ -43,15 +48,19 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
             return this;
         },
 
-        toggleCalendar : function() {
+        hideCalendar : function() {
             if ($('#record-calendar').hasClass('open')) {
                 $('#record-calendar').removeClass('open');
-                $('#calendar-open-link').html($.i18n.prop('OpenCalendar'));
-            } else {
+            }
+        },
+
+        showCalendar : function() {
+            if (!$('#record-calendar').hasClass('open')) {
                 $('#record-calendar').addClass('open');
-                $('#calendar-open-link').html($.i18n.prop('CloseCalendar'));
+                return false;
             }
         }
+
     });
     return recordView;
 });

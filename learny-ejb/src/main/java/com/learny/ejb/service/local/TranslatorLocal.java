@@ -1,6 +1,6 @@
 package com.learny.ejb.service.local;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -11,6 +11,6 @@ public interface TranslatorLocal {
 
 
 
-    void translate(Set<Word> words);
+    void translate(List<Word> words);
 
 }

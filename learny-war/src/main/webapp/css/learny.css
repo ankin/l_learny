@@ -17,6 +17,14 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 	min-height: 400px;
 }
 
+
+.disabled {
+	opacity: 1;
+	background: rgba( 255, 255, 255, .5 );
+	display: block;
+}
+
+
 /*! Record page styles */
 .record {
 	padding-right: 10px;
@@ -44,6 +52,25 @@ section.record-section {
 	display: block;
 }
 /*! End of record page styles */
+.show-delayed {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+}
+
+.hide-delayed {
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
 
 /*! Calendar widget styles*/
 aside.record-calendar {
@@ -57,13 +84,20 @@ aside.record-calendar {
 	-o-transform: translate(100%);
 	-ms-transform: translate(100%);
 	transform: translate(100%);
-	background: none repeat scroll 0 0 #EEEEEE;
 	position: absolute;
 	right: 0;
 	top: 30px;
-	width: 400px;
+	width: 300px;
 	position: absolute;
 }
+
+aside.record-calendar>div {
+	background: none repeat scroll 0 0 #FCF8EC;
+}
+aside.record-calendar>table {
+	background: none repeat scroll 0 0 #FCF8EC;
+}
+
 
 aside.record-calendar.open {
 	-webkit-transform: translate(-1px);
@@ -73,15 +107,9 @@ aside.record-calendar.open {
 	transform: translate(-1px);
 }
 
-aside.record-calendar>.open-link {
-	background-color: #EEEEEE;
-	border: 1px solid #DDDDDD;
-	border-right: 0px;
-	float: left;
-	margin-left: -73px;
-	padding: 2px;
-	font-size: 10px;
-	float: left;
+section>a.open-link {
+	float: right;
+	font-size: 11px;
 }
 
 aside.record-calendar>div>.table thead tr th {

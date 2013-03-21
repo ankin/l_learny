@@ -8,5 +8,6 @@ import com.learny.persistence.entity.Word;
 @Local
 public interface WordDaoLocal extends Dao<Word> {
 
+    Word findByOriginal(String original);
 
 }

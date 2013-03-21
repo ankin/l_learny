@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -32,7 +33,7 @@ public class CommentService extends AbstractService {
 
     @GET
     @Path("record/getall")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<RecordComment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
         LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
         return commentBean.findRecordCommentsByRecordUuid(recordUuid);
@@ -40,7 +41,7 @@ public class CommentService extends AbstractService {
 
     @POST
     @Path("/record/new/{recordUuid}/")
-    @Produces("application/json")
+    @Produces(MediaType.APPLICATION_JSON)
     public void newComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
         LOGGER.info("newComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
         commentBean.createRecordComment(getCurrentUserEmail(), recordUuid, commentText);

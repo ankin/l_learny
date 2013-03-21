@@ -1,6 +1,6 @@
 package com.learny.ejb.service.impl;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Named;
@@ -13,7 +13,7 @@ import com.learny.persistence.entity.Word;
 public class TranslatorBean implements TranslatorLocal {
 
     @Override
-    public void translate(Set<Word> words) {
+    public void translate(List<Word> words) {
         for (Word word : words) {
             word.setTranslated(word.getOriginal() + "[перевод]");
         }

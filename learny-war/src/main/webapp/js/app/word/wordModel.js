@@ -1,4 +1,4 @@
-define([ 'backbone', 'common/baseModel', 'util' ], function(Backbone, BaseModel, util) {
+define([ 'backbone', 'common/baseModel'], function(Backbone, BaseModel) {
 
     var wordModel = BaseModel.extend({
         initialize : function() {
