@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,6 +17,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.ejb.service.local.AthenticationRealmLocal;
@@ -28,7 +28,7 @@ import com.learny.persistence.entity.User;
 @Stateless
 public class AuthenticationRealmBean extends AuthorizingRealm implements AthenticationRealmLocal {
 
-    private final static Logger LOGGER = LogManager.getLogger(AuthenticationRealmBean.class);
+    private final static Logger logger = LoggerFactory.getLogger(AuthenticationRealmBean.class);
 
     @Inject
     private UserDaoLocal userDao;
@@ -60,11 +60,11 @@ public class AuthenticationRealmBean extends AuthorizingRealm implements Athenti
         User user = userDao.findByEmail(upToken.getUsername());
 
         if (user == null) {
-            LOGGER.info("Not found user with username: " + upToken.getUsername());
+            logger.info("Not found user with username: " + upToken.getUsername());
             throw new AuthenticationException("Login name [" + upToken.getUsername() + "] not found!");
         }
 
-        LOGGER.info("Found user with username: " + upToken.getUsername());
+        logger.info("Found user with username: " + upToken.getUsername());
 
         return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
 

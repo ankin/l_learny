@@ -12,8 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.ejb.service.local.RecordLocal;
@@ -25,7 +25,7 @@ import com.learny.rest.core.AbstractService;
 @RequestScoped
 public class RecordService extends AbstractService {
 
-    private final static Logger LOGGER = LogManager.getLogger(RecordService.class);
+    private final static Logger logger = LoggerFactory.getLogger(RecordService.class);
 
     public final static String PATH = "/record";
 
@@ -38,7 +38,7 @@ public class RecordService extends AbstractService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Record getCurrentRecord() {
-        LOGGER.info("getCurrentRecord() method invocked");
+        logger.info("getCurrentRecord() method invocked");
         return recordBean.getCurrentRecordByUserEmail(getCurrentUserEmail());
     }
 
@@ -47,7 +47,7 @@ public class RecordService extends AbstractService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public List<Word> saveWords(@PathParam("recordUuid") String recordUuid, List<Word> words) {
-        LOGGER.info("getWordsByRecord() was called with param recordUuid: " + recordUuid + ", words: " + words);
+        logger.info("getWordsByRecord() was called with param recordUuid: " + recordUuid + ", words: " + words);
         return recordBean.saveWords(recordUuid, words);
 
     }

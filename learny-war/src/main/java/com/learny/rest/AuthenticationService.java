@@ -11,11 +11,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.learny.ejb.service.exception.LoginException;
 import com.learny.rest.core.AbstractService;
@@ -25,7 +25,7 @@ import com.learny.util.LearnyProperties;
 @RequestScoped
 public class AuthenticationService extends AbstractService {
 
-    private final static Logger LOGGER = LogManager.getLogger(AuthenticationService.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
 
     public final static String PATH = "/authentication";
 

@@ -13,8 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.persistence.entity.RecordComment;
@@ -26,7 +26,7 @@ public class CommentService extends AbstractService {
 
     public final static String PATH = "/comment";
 
-    private final static Logger LOGGER = LogManager.getLogger(CommentService.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
 
     @Inject
     private CommentLocal commentBean;

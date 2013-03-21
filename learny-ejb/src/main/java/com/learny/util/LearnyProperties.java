@@ -2,12 +2,12 @@ package com.learny.util;
 
 import java.util.Properties;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LearnyProperties {
 
-    private final static Logger LOGGER = LogManager.getLogger(LearnyProperties.class);
+    private final static Logger logger = LoggerFactory.getLogger(LearnyProperties.class);
 
     private static final String LOGIN_WITHOUT_CREDENTIALS_ENABLED = "login.without.credentials.enabled";
     private static final String LOGIN_WITHOUT_CREDENTIALS_EMAIL = "login.without.credentials.email";
@@ -22,7 +22,7 @@ public class LearnyProperties {
         try {
             properties.load(this.getClass().getResourceAsStream("/learny.properties"));
         } catch (Exception e) {
-            LOGGER.error("Failed to load properties file!", e);
+            logger.error("Failed to load properties file!", e);
         }
     }
 

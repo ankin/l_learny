@@ -19,3 +19,9 @@ learny-war/.project
 
 learny-ejb/.classpath
 learny-war/.classpath
+
+learny-pom/.settings/org.eclipse.m2e.core.prefs
+
+learny-pom/.settings/org.eclipse.core.resources.prefs
+
+learny-pom/.project
