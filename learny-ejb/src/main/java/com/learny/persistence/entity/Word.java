@@ -1,5 +1,8 @@
 package com.learny.persistence.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -7,6 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.learny.dto.Translation;
 import com.learny.persistence.entity.core.IdEntity;
 
 @Entity
@@ -26,7 +30,7 @@ public class Word extends IdEntity {
     private String original;
 
     @Transient
-    private String translated;
+    private List<Translation> translations = new ArrayList<>();
 
     public String getOriginal() {
         return original;
@@ -36,12 +40,16 @@ public class Word extends IdEntity {
         this.original = original;
     }
 
-    public String getTranslated() {
-        return translated;
+    public List<Translation> getTranslations() {
+        return translations;
     }
 
-    public void setTranslated(String translated) {
-        this.translated = translated;
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    }
+
+    public void addTranslation(Translation translation) {
+        this.translations.add(translation);
     }
 
 }

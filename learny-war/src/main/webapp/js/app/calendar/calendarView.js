@@ -11,19 +11,33 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
         },
 
         initialize : function() {
+            this.model = new this.options.model();
             this.rendered = $.Deferred();
-            this.options.date = new Date();
-            this.render();
         },
 
         render : function() {
-            var currentDate = this.options.date;
-            this.$el.html(this._template({
+            var self = this;
+
+            self.model.fetch({
+                success : function() {
+                    self.createCalendarBody();
+                }
+            });
+
+            return this;
+        },
+
+        createCalendarBody : function() {
+            var self = this;
+            var currentDate = self.options.date;
+            self.$el.html(self._template({
                 currentDate : currentDate,
             }));
-            this.$el.find('table').append(new MonthView({
+            self.$el.find('table').append(new MonthView({
                 date : currentDate
             }).el);
+
+            self.rendered.resolve('rendered');
         },
 
         prevMonth : function(e) {
@@ -31,7 +45,7 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
             var currentDate = this.options.date;
             currentDate.setMonth(currentDate.getMonth() - 1);
             this.options.date = currentDate;
-            this.render();
+            this.createCalendarBody();
         },
 
         nextMonth : function(e) {
@@ -39,11 +53,12 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
             var currentDate = this.options.date;
             currentDate.setMonth(currentDate.getMonth() + 1);
             this.options.date = currentDate;
-            this.render();
+            this.createCalendarBody();
         },
-        
-        closeCalendar : function(){
+
+        closeCalendar : function() {
             this.trigger('closeCalendar');
+            return false; // to not jump to the top of page
         }
 
     });

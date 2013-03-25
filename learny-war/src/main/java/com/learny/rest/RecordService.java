@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.learny.dto.RecordHistory;
 import com.learny.ejb.service.local.CommentLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
@@ -42,14 +44,31 @@ public class RecordService extends AbstractService {
         return recordBean.getCurrentRecordByUserEmail(getCurrentUserEmail());
     }
 
+    @GET
+    @Path("history/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<RecordHistory> getCurrentRecordHistories() {
+        logger.info("getCurrentRecordHistories() method invocked");
+        return recordBean.getRecordHistoriesByUserEmail(getCurrentUserEmail());
+    }
+
     @PUT
     @Path("{recordUuid}/words/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Word> saveWords(@PathParam("recordUuid") String recordUuid, List<Word> words) {
-        logger.info("getWordsByRecord() was called with param recordUuid: " + recordUuid + ", words: " + words);
-        return recordBean.saveWords(recordUuid, words);
+    public List<Word> updateWords(@PathParam("recordUuid") String recordUuid, List<Word> words) {
+        logger.info("updateWords() was called with param recordUuid: " + recordUuid + ", words: " + words);
+        return recordBean.updateWords(recordUuid, words);
 
     }
 
+    @POST
+    @Path("{recordUuid}/words/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Word> saveWords(@PathParam("recordUuid") String recordUuid, List<Word> words) {
+        logger.info("saveWords() was called with param recordUuid: " + recordUuid + ", words: " + words);
+        return recordBean.saveWords(recordUuid, words);
+
+    }
 }

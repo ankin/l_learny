@@ -13,6 +13,14 @@ define([ 'jquery', 'jqueryDateFormat', 'jqueryi18n' ], function($, jqueryDateFor
         // Format and translate date
         formatDateTime : function(date) {
             return $.format.date(date, $.i18n.prop('FotmattedDateTime'));
+        },
+
+        showGlobalSpinner : function() {
+            $('#spinner-container').trigger('showSpinner');
+        },
+
+        hideGlobalSpinner : function() {
+            $('#spinner-container').trigger('hideSpinner');
         }
 
     };

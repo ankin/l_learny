@@ -1,5 +1,7 @@
 package com.learny.ejb.dao.impl;
 
+import java.util.Calendar;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -43,11 +45,19 @@ public class MockDataInitializer {
         User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT);
         User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer", Role.NONE);
 
-        Record record1 = createRecord(user1);
-        createRecordComment(record1, user2, "Very interesting!");
-        createRecordComment(record1, user3, "What #2 means?");
+        Record record = createRecord(user1, "das Auto", "gehen", "das Haus", "das Wasser", "die Zeit", "schreiben");
+        createRecordComment(record, user2, "Very interesting!");
+        createRecordComment(record, user3, "What #2 means?");
 
-
+        record = createRecord(user1, "laufen", "die Schwester", "rauchen", "die Umgebung");
+        createRecordComment(record, user2, "Could you please explain the rule #1?");
+        createRecordComment(record, user3, "No! =)");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2013);
+        calendar.set(Calendar.MONTH, 1);
+        calendar.set(Calendar.DATE, 13);
+        record.setDateCreated(calendar.getTime());
+        recordDao.saveOrUpdate(record);
 
     }
 
@@ -61,15 +71,12 @@ public class MockDataInitializer {
         return userDao.saveOrUpdate(user);
     }
 
-    private Record createRecord(User user) {
+    private Record createRecord(User user, String... words) {
         Record record = new Record();
         record.setUser(user);
-        record.addWord(createWord("das Auto"));
-        record.addWord(createWord("das Haus"));
-        record.addWord(createWord("gehen"));
-        record.addWord(createWord("das Wasser"));
-        record.addWord(createWord("die Zeit"));
-        record.addWord(createWord("schreiben"));
+        for (String word : words) {
+            record.addWord(createWord(word));
+        }
 
         record.addRule(createRule("Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris"
                 + "condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod."

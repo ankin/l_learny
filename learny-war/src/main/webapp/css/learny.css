@@ -11,19 +11,40 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 	opacity: 1;
 	background: url( ../img/ajax-loader.gif ) no-repeat center center;
 	display: block;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -50px;
+	margin-top: -50px;
+	z-index: 21;
+}
+
+.disabled-dark-bg {
+	z-index: 20;
+	background-color: #F0F0F0;
+	filter: alpha(opacity = 50); /* IE */
+	opacity: 0.5; /* Safari, Opera */
+	-moz-opacity: 0.50; /* FireFox */
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }
 
 #ajax-content {
 	min-height: 400px;
 }
 
-
 .disabled {
 	opacity: 1;
-	background: rgba( 255, 255, 255, .5 );
+	background: rgba(255, 255, 255, .5);
 	display: block;
 }
-
 
 /*! Record page styles */
 .record {
@@ -94,10 +115,10 @@ aside.record-calendar {
 aside.record-calendar>div {
 	background: none repeat scroll 0 0 #FCF8EC;
 }
+
 aside.record-calendar>table {
 	background: none repeat scroll 0 0 #FCF8EC;
 }
-
 
 aside.record-calendar.open {
 	-webkit-transform: translate(-1px);

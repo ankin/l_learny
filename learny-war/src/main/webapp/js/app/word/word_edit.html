@@ -1,10 +1,16 @@
 
-		<td style="width: 100px;"><input type="text" class="input-small" value="<%- word.original %>"/>
-		<td>
-			<dl>
-				<dt><%- word.translated %></dt>
-				<dd>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris</dd>
-			</dl>
-		</td>
+<td style="width: 100px;"><input type="text" class="input-small"
+	value="<%- word.original %>" />
+<td><% _.forEach(word.translations, function(translation, index) {
+	%>
+
+	<dl>
+		<dt><%- translation.value %></dt>
+		<dd><%- translation.extended %></dd>
+	</dl> <% }); %>
+</td>
+
+<td><a href="#" id="remove-word"
+	title="<%= $.i18n.prop('Remove') %>"><i class="icon-remove"></i></a></td>
 
 

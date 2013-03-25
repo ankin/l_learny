@@ -8,8 +8,8 @@ requirejs.config({
         jqueryForm : '../lib/jquery.form-3.25.0',
         jqueryi18n : '../lib/jquery.i18n.properties-min-1.0.9',
         text : '../lib/text-2.0.4',
-        
-        // learny 
+
+        // learny
         util : 'util/util'
     },
 
@@ -26,13 +26,22 @@ requirejs.config({
 
 requirejs([ 'jquery', 'backbone', 'util', 'menu/menuRouter' ], function($, Backbone, util, MenuRouter) {
 
-    $('#ajax-content').on('showSpinner', function() {
-        if (!$('#ajax-content').hasClass('spinner')) {
-            $('#ajax-content').addClass('spinner');
+    $('#spinner-container').on('showSpinner', function() {
+        if (!$('#spinner-container').hasClass('spinner')) {
+
+            $('#spinner-container').addClass('spinner');
+            $('#spinner-container').css('display', '');
+
+            $('#disabler-container').addClass('disabled-dark-bg');
+            $('#disabler-container').css('display', '');
         }
     });
-    $('#ajax-content').on('hideSpinner', function() {
-        $('#ajax-content').removeClass('spinner');
+    $('#spinner-container').on('hideSpinner', function() {
+        $('#spinner-container').removeClass('spinner');
+        $('#spinner-container').css('display', 'none');
+
+        $('#disabler-container').removeClass('disabled-dark-bg');
+        $('#disabler-container').css('display', 'none');
     });
 
     util.initLanguage('en_EN');

@@ -1,6 +1,6 @@
 <section class="record-section">
 	<a id="calendar-open-link" class="btn btn-link open-link well"><%=
-		record.dateCreated %></a>
+		record.dateCreatedFormatted %></a>
 	<aside class='record-calendar' id="record-calendar"></aside>
 
 	<div id="words-table"></div>
@@ -11,5 +11,5 @@
 		<div><%= rule.text %></div>
 		<% }); %>
 	</div>
-	<div class="id_comments"></div>
+	<div id="record-comments"></div>
 </section>

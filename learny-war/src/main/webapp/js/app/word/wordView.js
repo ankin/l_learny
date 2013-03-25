@@ -7,9 +7,10 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
         model : WordModel,
 
         events : {
-            'change input' : 'originalChange'
+            'change input' : 'originalChange',
+            'click a#remove-word' : 'removeWord'
         },
-        
+
         initialize : function() {
             this.rendered = $.Deferred();
         },
@@ -29,10 +30,17 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
 
             return this;
         },
-        
+
         originalChange : function(e) {
             var target = $(e.currentTarget);
             this.model.set('original', target.val());
+        },
+
+        removeWord : function() {
+            this.model.isDeleted = true;
+            $(this.el).removeData().unbind();
+            this.remove();
+            return false;
         }
 
     });

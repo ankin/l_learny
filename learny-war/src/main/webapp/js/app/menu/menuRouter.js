@@ -1,4 +1,5 @@
-define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView' ], function($, Backbone, MenuView, RecordView) {
+define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'util' ], function($, Backbone, MenuView,
+        RecordView, util) {
 
     var menuRouter = Backbone.Router.extend({
 
@@ -65,11 +66,11 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView' ], function(
         },
 
         changeView : function(View) {
-            $('#ajax-content').trigger('showSpinner');
+            util.showGlobalSpinner();
             var view = new View();
             $.when(view.rendered).done(function() {
                 $('#ajax-content').html(view.el);
-                $('#ajax-content').trigger('hideSpinner');
+                util.hideGlobalSpinner();
             });
             view.render();
         }

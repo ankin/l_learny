@@ -8,7 +8,7 @@ define([ 'backbone', 'common/baseModel', 'util' ], function(Backbone, BaseModel,
 
         parse : function(resp, xhr) {
             var model = resp;
-            model.dateCreated = util.formatDateTime(model.dateCreated);
+            model.dateCreatedFormatted = util.formatDateTime(model.dateCreated);
             return model;
         }
     });

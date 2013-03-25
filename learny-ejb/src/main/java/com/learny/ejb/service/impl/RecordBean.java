@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.learny.dto.RecordHistory;
 import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.dao.local.UserDaoLocal;
@@ -48,13 +49,32 @@ public class RecordBean implements RecordLocal {
     }
 
     @Override
-    public List<Word> saveWords(String recordUuid, List<Word> words) {
+    public List<RecordHistory> getRecordHistoriesByUserEmail(String userEmail) {
+        List<Record> records = recordDao.findRecordsByUserEmail(userEmail);
+        List<RecordHistory> recordHistories = new ArrayList<>();
+        for (Record record : records) {
+            recordHistories.add(new RecordHistory(record.getUuid(), record.getDateCreated()));
+        }
+        return recordHistories;
+    }
+
+    @Override
+    public List<Word> updateWords(String recordUuid, List<Word> words) {
         Record record = recordDao.findByUuid(recordUuid);
         record.clearWords();
         record.addWords(saveWords(words));
         recordDao.saveOrUpdate(record);
+        translatorBean.translate(record.getWords());
         return record.getWords();
+    }
 
+    @Override
+    public List<Word> saveWords(String recordUuid, List<Word> words) {
+        Record record = recordDao.findByUuid(recordUuid);
+        record.addWords(saveWords(words));
+        recordDao.saveOrUpdate(record);
+        translatorBean.translate(record.getWords());
+        return record.getWords();
     }
 
     private List<Word> saveWords(List<Word> words) {
@@ -66,7 +86,6 @@ public class RecordBean implements RecordLocal {
             }
             savedWords.add(word);
         }
-        translatorBean.translate(savedWords);
         return savedWords;
     }
 }
