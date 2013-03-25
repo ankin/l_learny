@@ -24,7 +24,7 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 .disabled-dark-bg {
 	z-index: 20;
 	background-color: #F0F0F0;
-	filter: alpha(opacity = 50); /* IE */
+	filter: alpha(opacity =     50); /* IE */
 	opacity: 0.5; /* Safari, Opera */
 	-moz-opacity: 0.50; /* FireFox */
 	background-repeat: no-repeat;
@@ -143,6 +143,12 @@ aside.record-calendar>div>.table tbody tr td {
 
 aside.record-calendar>div>.table tbody tr td.today {
 	border: 3px solid #DDDDDD;
+}
+
+aside.record-calendar>div>.table tbody tr td.record {
+	background-color: #DDDDDD;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,
+		255, 255, .5) 2px, rgba(255, 255, 255, .5) 4px);
 }
 
 aside.record-calendar>div>.table tbody tr td.another-month {

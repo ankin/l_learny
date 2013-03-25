@@ -54,7 +54,7 @@ public class MockDataInitializer {
         createRecordComment(record, user3, "No! =)");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2013);
-        calendar.set(Calendar.MONTH, 1);
+        calendar.set(Calendar.MONTH, 2);
         calendar.set(Calendar.DATE, 13);
         record.setDateCreated(calendar.getTime());
         recordDao.saveOrUpdate(record);

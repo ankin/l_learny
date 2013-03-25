@@ -9,15 +9,18 @@ define([ 'jquery', 'backbone', 'calendar/weekView' ], function($, Backbone, Week
         },
 
         render : function() {
+            var self = this;
+
             var currentDate = new Date(this.options.date.getTime());
             var currentMonth = this.options.date.getMonth();
 
             // render first week
             currentDate.setDate(1);
             var weekView = new WeekView({
-                date : currentDate
+                date : currentDate,
+                history : self.options.history
             });
-            this.$el.append(weekView.el);
+            self.$el.append(weekView.el);
 
             // in case if first day is Sunday
             currentDate.setDate(currentDate.getDate() + 1);
@@ -29,8 +32,9 @@ define([ 'jquery', 'backbone', 'calendar/weekView' ], function($, Backbone, Week
                 if (currentMonth != currentDate.getMonth()) {
                     break; // next month is reached
                 }
-                this.$el.append(new WeekView({
-                    date : currentDate
+                self.$el.append(new WeekView({
+                    date : currentDate,
+                    history : self.options.history
                 }).el);
                 currentDate.setDate(currentDate.getDate() + 1);
             }

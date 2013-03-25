@@ -33,8 +33,10 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
             self.$el.html(self._template({
                 currentDate : currentDate,
             }));
+            
             self.$el.find('table').append(new MonthView({
-                date : currentDate
+                date : currentDate,
+                history : self.findHistoryByMonth(currentDate.getMonth())
             }).el);
 
             self.rendered.resolve('rendered');
@@ -59,6 +61,15 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
         closeCalendar : function() {
             this.trigger('closeCalendar');
             return false; // to not jump to the top of page
+        },
+
+        /**
+         * Find and return history entries only relevant for specified month
+         */
+        findHistoryByMonth : function(month) {
+            return this.model.filter(function(histItem) {
+                return new Date(histItem.get('dateCreated')).getMonth() == month;
+            });
         }
 
     });

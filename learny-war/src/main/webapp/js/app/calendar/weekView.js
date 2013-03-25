@@ -8,6 +8,7 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
         },
 
         render : function() {
+            var self = this;
             var currentDate = new Date(this.options.date.getTime());
             var currentMonth = this.options.date.getMonth();
             if (currentDate.getDate() == 1) {
@@ -21,7 +22,7 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
                 this.$el.append(new DayView({
                     date : new Date(currentDate.getTime()),
                     isAnotherMonth : isAnotherMonth,
-                    isLink : true
+                    isLink : self.isLink(currentDate)
                 }).el);
                 currentDate.setDate(currentDate.getDate() + 1);
             }
@@ -30,9 +31,28 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
             this.$el.append(new DayView({
                 date : new Date(currentDate.getTime()),
                 isAnotherMonth : isAnotherMonth,
-                isLink : true
+                isLink : self.isLink(currentDate)
             }).el);
             return this;
+        },
+
+        isLink : function(currentDate) {
+            var result = this.options.history
+                    .filter(function(histItem) {
+                        var histDate = new Date(histItem.get('dateCreated'));
+                        return histDate.getFullYear() == currentDate.getFullYear()
+                                && histDate.getMonth() == currentDate.getMonth()
+                                && histDate.getDate() == currentDate.getDate();
+                    });
+            if (result && result.length > 0) {
+                if (result.length == 1) {
+                    return true;
+                } else {
+                    console.error('Found more than one record for day: ' + new Date(time));
+                    return false;
+                }
+            }
+            return false;
         }
     });
     return weekView;

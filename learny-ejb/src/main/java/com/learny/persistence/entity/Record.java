@@ -25,7 +25,7 @@ import com.learny.persistence.entity.core.ModificationDateEntity;
 @Entity
 @Table(name = Record.TABLE_NAME)
 @NamedQueries(value = { @NamedQuery(name = Record.QUERY_BY_USER_EMAIL, //
-query = "select o from Record o" //
+query = "select distinct o from Record o" //
         + " left join fetch o.words" //
         + " left join fetch o.rules" //
         + " where o.user.email =:" + Record.PARAM_USER_EMAIL // 

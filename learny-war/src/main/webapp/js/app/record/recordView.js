@@ -1,6 +1,6 @@
-define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/recordModel', 'record/recordHistoryModel',
+define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/recordModel', 'record/recordHistoryCol',
         'word/wordColView', 'comment/commentsColView', 'calendar/calendarView' ], function($, Backbone, util,
-        recordTpl, RecordModel, RecordHistoryModel, WordColView, CommentColView, CalendarView) {
+        recordTpl, RecordModel, RecordHistoryCol, WordColView, CommentColView, CalendarView) {
 
     var recordView = Backbone.View.extend({
         className : 'record',
@@ -34,7 +34,7 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
                     // add calendar widget
                     self.calView = new CalendarView({
                         date : new Date(recordJson.dateCreated),
-                        model : RecordHistoryModel
+                        model : RecordHistoryCol
                     });
                     self.calView.on('closeCalendar', function() {
                         self.hideCalendar();
