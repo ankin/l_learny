@@ -17,8 +17,10 @@ public interface RecordLocal {
 
     List<Word> updateWords(String recordUuid, List<Word> words);
 
-    Record getCurrentRecordByUserEmail(String userUuid);
+    Record findRecordByUuidFullyInitialized(String uuid);
 
-    List<RecordHistory> getRecordHistoriesByUserEmail(String userEmail);
+    Record findCurrentRecordByUserEmail(String userUuid);
+
+    List<RecordHistory> findRecordHistoriesByUserEmail(String userEmail);
 
 }

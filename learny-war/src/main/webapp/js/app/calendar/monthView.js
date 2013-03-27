@@ -18,7 +18,8 @@ define([ 'jquery', 'backbone', 'calendar/weekView' ], function($, Backbone, Week
             currentDate.setDate(1);
             var weekView = new WeekView({
                 date : currentDate,
-                history : self.options.history
+                history : self.options.history,
+                dateClickHandler : this.options.dateClickHandler
             });
             self.$el.append(weekView.el);
 
@@ -34,7 +35,8 @@ define([ 'jquery', 'backbone', 'calendar/weekView' ], function($, Backbone, Week
                 }
                 self.$el.append(new WeekView({
                     date : currentDate,
-                    history : self.options.history
+                    history : self.options.history,
+                    dateClickHandler : this.options.dateClickHandler
                 }).el);
                 currentDate.setDate(currentDate.getDate() + 1);
             }

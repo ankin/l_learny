@@ -42,14 +42,21 @@ public class RecordBean implements RecordLocal {
     }
 
     @Override
-    public Record getCurrentRecordByUserEmail(String userEmail) {
+    public Record findCurrentRecordByUserEmail(String userEmail) {
         Record record = recordDao.findRecordsByUserEmail(userEmail).get(0);
         translatorBean.translate(record.getWords());
         return record;
     }
 
     @Override
-    public List<RecordHistory> getRecordHistoriesByUserEmail(String userEmail) {
+    public Record findRecordByUuidFullyInitialized(String uuid) {
+        Record record = recordDao.findRecordByUuidFullyInitialized(uuid);
+        translatorBean.translate(record.getWords());
+        return record;
+    }
+
+    @Override
+    public List<RecordHistory> findRecordHistoriesByUserEmail(String userEmail) {
         List<Record> records = recordDao.findRecordsByUserEmail(userEmail);
         List<RecordHistory> recordHistories = new ArrayList<>();
         for (Record record : records) {

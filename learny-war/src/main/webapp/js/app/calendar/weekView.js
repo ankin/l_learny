@@ -22,7 +22,8 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
                 this.$el.append(new DayView({
                     date : new Date(currentDate.getTime()),
                     isAnotherMonth : isAnotherMonth,
-                    isLink : self.isLink(currentDate)
+                    recordUuid : self.getRecordUuid(currentDate),
+                    dateClickHandler : this.options.dateClickHandler
                 }).el);
                 currentDate.setDate(currentDate.getDate() + 1);
             }
@@ -31,12 +32,13 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
             this.$el.append(new DayView({
                 date : new Date(currentDate.getTime()),
                 isAnotherMonth : isAnotherMonth,
-                isLink : self.isLink(currentDate)
+                recordUuid : self.getRecordUuid(currentDate),
+                dateClickHandler : this.options.dateClickHandler
             }).el);
             return this;
         },
 
-        isLink : function(currentDate) {
+        getRecordUuid : function(currentDate) {
             var result = this.options.history
                     .filter(function(histItem) {
                         var histDate = new Date(histItem.get('dateCreated'));
@@ -46,13 +48,13 @@ define([ 'jquery', 'backbone', 'calendar/dayView' ], function($, Backbone, DayVi
                     });
             if (result && result.length > 0) {
                 if (result.length == 1) {
-                    return true;
+                    return result[0].toJSON().recordUuid;
                 } else {
                     console.error('Found more than one record for day: ' + new Date(time));
-                    return false;
+                    return null;
                 }
             }
-            return false;
+            return null;
         }
     });
     return weekView;

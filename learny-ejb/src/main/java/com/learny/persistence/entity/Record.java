@@ -29,15 +29,22 @@ query = "select distinct o from Record o" //
         + " left join fetch o.words" //
         + " left join fetch o.rules" //
         + " where o.user.email =:" + Record.PARAM_USER_EMAIL // 
-        + " order by o.dateCreated desc") })
+        + " order by o.dateCreated desc"), //
+        @NamedQuery(name = Record.QUERY_BY_UUID_FULLY_INITIALIZED, //
+        query = "select distinct o from Record o" //
+                + " left join fetch o.words" //
+                + " left join fetch o.rules" //
+                + " where o.uuid =:" + Record.PARAM_UUID) })
 public class Record extends ModificationDateEntity {
 
     private static final long serialVersionUID = 5861441534010949510L;
 
     public final static String TABLE_NAME = "RECORD";
 
-    public final static String QUERY_BY_USER_EMAIL = "Record.queryByUserUuid";
-    public final static String PARAM_USER_EMAIL = "userEmail";
+    public final static String QUERY_BY_USER_EMAIL = "Record.queryByUserEmail";
+    public final static String QUERY_BY_UUID_FULLY_INITIALIZED = "Record.queryByUuidFullyLoaded";
+    public final static String PARAM_USER_EMAIL = "paramUserEmail";
+    public final static String PARAM_UUID = "paramUuid";
 
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)

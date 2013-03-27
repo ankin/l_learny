@@ -24,9 +24,9 @@ import com.learny.rest.core.AbstractService;
 @RequestScoped
 public class CommentService extends AbstractService {
 
-    public final static String PATH = "/comment";
+    public static final String PATH = "/comment";
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(CommentService.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommentService.class);
 
     @Inject
     private CommentLocal commentBean;
@@ -34,16 +34,16 @@ public class CommentService extends AbstractService {
     @GET
     @Path("record/getall")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<RecordComment> getCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
-        LOGGER.info("getCommentsByRecordId() was called with param recordUuid: " + recordUuid);
+    public List<RecordComment> findCommentsByRecordId(@QueryParam("recordUuid") String recordUuid) {
+        logger.info("findCommentsByRecordId() was called with param recordUuid: " + recordUuid);
         return commentBean.findRecordCommentsByRecordUuid(recordUuid);
     }
 
     @POST
     @Path("/record/new/{recordUuid}/")
     @Produces(MediaType.APPLICATION_JSON)
-    public void newComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
-        LOGGER.info("newComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
+    public void createComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
+        logger.info("createComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
         commentBean.createRecordComment(getCurrentUserEmail(), recordUuid, commentText);
     }
 

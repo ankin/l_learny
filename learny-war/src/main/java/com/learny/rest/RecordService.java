@@ -27,9 +27,9 @@ import com.learny.rest.core.AbstractService;
 @RequestScoped
 public class RecordService extends AbstractService {
 
-    private final static Logger logger = LoggerFactory.getLogger(RecordService.class);
+    private static final Logger logger = LoggerFactory.getLogger(RecordService.class);
 
-    public final static String PATH = "/record";
+    public static final String PATH = "/record";
 
     @Inject
     private RecordLocal recordBean;
@@ -41,15 +41,23 @@ public class RecordService extends AbstractService {
     @Produces(MediaType.APPLICATION_JSON)
     public Record getCurrentRecord() {
         logger.info("getCurrentRecord() method invocked");
-        return recordBean.getCurrentRecordByUserEmail(getCurrentUserEmail());
+        return recordBean.findCurrentRecordByUserEmail(getCurrentUserEmail());
+    }
+
+    @GET
+    @Path("{recordUuid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Record findRecordByUuid(@PathParam("recordUuid") String recordUuid) {
+        logger.info("findRecordByUuid() method invocked");
+        return recordBean.findRecordByUuidFullyInitialized(recordUuid);
     }
 
     @GET
     @Path("history/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<RecordHistory> getCurrentRecordHistories() {
-        logger.info("getCurrentRecordHistories() method invocked");
-        return recordBean.getRecordHistoriesByUserEmail(getCurrentUserEmail());
+    public List<RecordHistory> findCurrentRecordHistories() {
+        logger.info("findCurrentRecordHistories() method invocked");
+        return recordBean.findRecordHistoriesByUserEmail(getCurrentUserEmail());
     }
 
     @PUT

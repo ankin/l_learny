@@ -25,15 +25,15 @@ import com.learny.util.LearnyProperties;
 @RequestScoped
 public class AuthenticationService extends AbstractService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
 
-    public final static String PATH = "/authentication";
+    public static final String PATH = "/authentication";
 
-    public final static String LOGIN_PATH = "/login";
+    public static final String LOGIN_PATH = "/login";
 
-    public final static String LOGOUT_PATH = "/logout";
+    public static final String LOGOUT_PATH = "/logout";
 
-    public final static String LOGIN_PAGE_PATH = "/login.html";
+    public static final String LOGIN_PAGE_PATH = "/login.html";
 
     @Context
     private HttpServletRequest httpRequest;
@@ -84,7 +84,7 @@ public class AuthenticationService extends AbstractService {
             httpResponse.sendRedirect(url);
         } catch (IOException e) {
             String errorMsg = "Failed to redired to " + url;
-            LOGGER.error(errorMsg, e);
+            logger.error(errorMsg, e);
             throw e;
 
         }

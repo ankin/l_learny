@@ -19,4 +19,11 @@ public class RecordDaoBean extends AbstractDao<Record> implements RecordDaoLocal
         return query.getResultList();
     }
 
+    @Override
+    public Record findRecordByUuidFullyInitialized(String uuid) {
+        Query query = getEntityManager().createNamedQuery(Record.QUERY_BY_UUID_FULLY_INITIALIZED);
+        query.setParameter(Record.PARAM_UUID, uuid);
+        return (Record) query.getSingleResult();
+    }
+
 }

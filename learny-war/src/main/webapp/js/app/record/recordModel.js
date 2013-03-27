@@ -4,7 +4,16 @@ define([ 'backbone', 'common/baseModel', 'util' ], function(Backbone, BaseModel,
         initialize : function() {
             BaseModel.prototype.initialize.apply(this, arguments);
         },
-        url : 'services/record/',
+
+        recordUuid : null,
+
+        url : function() {
+            if (this.recordUuid) {
+                return 'services/record/' + this.recordUuid;
+            } else {
+                return 'services/record/';
+            }
+        },
 
         parse : function(resp, xhr) {
             var model = resp;

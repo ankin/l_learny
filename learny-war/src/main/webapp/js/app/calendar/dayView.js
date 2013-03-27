@@ -16,7 +16,7 @@ define([ 'jquery', 'backbone' ], function($, Backbone) {
                 render : function() {
                     var currentDate = new Date(this.options.date.getTime());
 
-                    if (this.options.isLink && !this.options.isAnotherMonth) {
+                    if (this.options.recordUuid != null && !this.options.isAnotherMonth) {
                         this.$el.html('<a href="#">' + currentDate.getDate() + '</a>');
                         this.$el.addClass('record');
                     } else {
@@ -36,9 +36,9 @@ define([ 'jquery', 'backbone' ], function($, Backbone) {
                     return this;
                 },
 
-                dateClicked : function(e) {
-                    e.preventDefault();
-                    alert(this.options.date.toString());
+                dateClicked : function() {
+                    this.options.dateClickHandler.handleDateClick(this.options.recordUuid);
+                    return false;
                 }
             });
     return dayView;

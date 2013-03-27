@@ -42,6 +42,9 @@ public class IdEntity implements Serializable {
 
     @Override
     public final boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
         IdEntity otherObj = (IdEntity) obj;
         return this.getUuid().equals(otherObj.getUuid());
     }

@@ -34,7 +34,8 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
                     // add calendar widget
                     self.calView = new CalendarView({
                         date : new Date(recordJson.dateCreated),
-                        model : RecordHistoryCol
+                        model : RecordHistoryCol,
+                        dateClickHandler : self
                     });
                     self.calView.on('closeCalendar', function() {
                         self.hideCalendar();
@@ -49,6 +50,7 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
                     $.when(commentColView.rendered).done(function() {
                         self.$el.find('#record-comments').html(commentColView.el);
                         self.rendered.resolve('rendered');
+                        self.rendered = $.Deferred();
                     });
                     commentColView.render();
                 }
@@ -76,6 +78,19 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
 
                 return false;
             }
+        },
+
+        handleDateClick : function(recordUuid){
+            var self = this;
+            self.hideCalendar();
+            util.showGlobalSpinner();
+            self.model = new RecordModel();
+            self.model.recordUuid = recordUuid;
+            self.render();
+            $.when(this.rendered).done(function() {
+                util.hideGlobalSpinner();
+                self.rendered = $.Deferred();
+            });
         }
 
     });

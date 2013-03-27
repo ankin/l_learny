@@ -12,4 +12,7 @@ public interface RecordDaoLocal extends Dao<Record> {
 
     List<Record> findRecordsByUserEmail(String userUuid);
 
+    Record findRecordByUuidFullyInitialized(String uuid);
+
+
 }

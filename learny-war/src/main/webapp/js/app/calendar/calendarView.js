@@ -33,10 +33,11 @@ define([ 'jquery', 'backbone', 'calendar/monthView', 'text!calendar/calendar.htm
             self.$el.html(self._template({
                 currentDate : currentDate,
             }));
-            
+
             self.$el.find('table').append(new MonthView({
                 date : currentDate,
-                history : self.findHistoryByMonth(currentDate.getMonth())
+                history : self.findHistoryByMonth(currentDate.getMonth()),
+                dateClickHandler : this.options.dateClickHandler
             }).el);
 
             self.rendered.resolve('rendered');

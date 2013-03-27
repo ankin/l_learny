@@ -59,6 +59,24 @@ public class MockDataInitializer {
         record.setDateCreated(calendar.getTime());
         recordDao.saveOrUpdate(record);
 
+        record = createRecord(user1, "schlagen", "essen", "die Bedienung");
+        createRecordComment(record, user2, "Nice word list! So many of them!");
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2013);
+        calendar.set(Calendar.MONTH, 1);
+        calendar.set(Calendar.DATE, 4);
+        record.setDateCreated(calendar.getTime());
+        recordDao.saveOrUpdate(record);
+
+        record = createRecord(user1, "verhindern", "abwenden", "der Zugriff", "trennen", "brauchen");
+        createRecordComment(record, user3, "Does anybody can write ane example with word 'abwenden'?");
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2012);
+        calendar.set(Calendar.MONTH, 11);
+        calendar.set(Calendar.DATE, 16);
+        record.setDateCreated(calendar.getTime());
+        recordDao.saveOrUpdate(record);
+
     }
 
     private User createUser(String email, String password, String firstName, String lastName, Role role) {
