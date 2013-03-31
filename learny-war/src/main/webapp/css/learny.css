@@ -24,7 +24,7 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 .disabled-dark-bg {
 	z-index: 20;
 	background-color: #F0F0F0;
-	filter: alpha(opacity =     50); /* IE */
+	filter: alpha(opacity =        50); /* IE */
 	opacity: 0.5; /* Safari, Opera */
 	-moz-opacity: 0.50; /* FireFox */
 	background-repeat: no-repeat;
@@ -44,6 +44,19 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 	opacity: 1;
 	background: rgba(255, 255, 255, .5);
 	display: block;
+}
+
+a.icon-ctrl-link {
+	opacity: 0.5;
+}
+
+a.icon-ctrl-link:hover {
+	opacity: 1;
+	-webkit-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
 }
 
 /*! Record page styles */
@@ -72,6 +85,11 @@ section.record-section {
 	position: relative;
 	display: block;
 }
+
+.record-component>.table tbody tr td.rmv-ctrl {
+	padding-right: 0px;
+}
+
 /*! End of record page styles */
 .show-delayed {
 	visibility: visible;
@@ -110,6 +128,7 @@ aside.record-calendar {
 	top: 30px;
 	width: 300px;
 	position: absolute;
+	 z-index: 20;
 }
 
 aside.record-calendar>div {
@@ -129,7 +148,7 @@ aside.record-calendar.open {
 }
 
 section>a.open-link {
-	float: right;
+	padding-right: 20px;
 	font-size: 11px;
 }
 

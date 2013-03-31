@@ -40,6 +40,7 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
             this.model.isDeleted = true;
             $(this.el).removeData().unbind();
             this.remove();
+            this.trigger('removeWord');
             return false;
         }
 
