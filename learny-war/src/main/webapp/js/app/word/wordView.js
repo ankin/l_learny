@@ -1,5 +1,5 @@
-define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_edit.html', 'word/wordModel' ], function(
-        $, Backbone, util, wordTpl, wordEditTpl, WordModel) {
+define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'word/wordModel', 'word/addWordModalView' ], function($,
+        Backbone, util, wordTpl, WordModel, AddWordModalView) {
 
     var wordView = Backbone.View.extend({
         tagName : 'tr',
@@ -7,8 +7,8 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
         model : WordModel,
 
         events : {
-            'change input' : 'originalChange',
-            'click a#remove-word' : 'removeWord'
+            'click a#remove-word' : 'removeWord',
+            'click a#edit-word' : 'editWord'
         },
 
         initialize : function() {
@@ -17,11 +17,10 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
 
         render : function() {
             var self = this;
-            if (this.options.editMode) {
-                this._template = _.template(wordEditTpl);
-            } else {
-                this._template = _.template(wordTpl);
-            }
+            self.model.on('sync', function() {
+                this.render();
+            }, this);
+            this._template = _.template(wordTpl);
             var wordJson = self.model.toJSON();
             self.$el.html(self._template({
                 word : wordJson
@@ -31,16 +30,24 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'text!word/word_ed
             return this;
         },
 
-        originalChange : function(e) {
-            var target = $(e.currentTarget);
-            this.model.set('original', target.val());
+        removeWord : function() {
+            // TODO add spinner
+            var self = this;
+            this.model.destroy(function() {
+                $(self.el).removeData().unbind();
+                self.remove();
+            });
+
+            return false;
         },
 
-        removeWord : function() {
-            this.model.isDeleted = true;
-            $(this.el).removeData().unbind();
-            this.remove();
-            this.trigger('removeWord');
+        editWord : function() {
+            var self = this;
+            self.modal = new AddWordModalView({
+                model : self.model
+            });
+            self.modal.show();
+
             return false;
         }
 

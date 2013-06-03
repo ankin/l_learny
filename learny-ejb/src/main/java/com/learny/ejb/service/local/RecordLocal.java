@@ -23,4 +23,8 @@ public interface RecordLocal {
 
     List<RecordHistory> findRecordHistoriesByUserEmail(String userEmail);
 
+    Word saveOrUpdateWord(String recordUuid, Word word);
+
+    void removeWordFromRecord(String recordUuid, String wordUuid);
+
 }

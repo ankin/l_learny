@@ -1,10 +1,10 @@
-define([ 'backbone', 'common/baseModel'], function(Backbone, BaseModel) {
+define([ 'backbone', 'common/baseModel' ], function(Backbone, BaseModel) {
 
     var wordModel = BaseModel.extend({
-        initialize : function() {
+        initialize : function(options) {
             BaseModel.prototype.initialize.apply(this, arguments);
         },
-        url : 'services/record/word/'
+
     });
     return wordModel;
 });

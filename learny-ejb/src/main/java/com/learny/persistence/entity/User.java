@@ -14,13 +14,12 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.learny.persistence.entity.core.IdEntity;
+import com.learny.persistence.entity.core.UuidEntity;
 
 @Entity
 @Table(name = User.TABLE_NAME)
-@NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL, query = "select u from User u where u.email=:"
-        + User.PARAM_EMAIL))
-public class User extends IdEntity {
+@NamedQueries(@NamedQuery(name = User.QUERY_BY_EMAIL, query = "select u from User u where u.email=:" + User.PARAM_EMAIL))
+public class User extends UuidEntity {
 
     private static final long serialVersionUID = 1652908666766597691L;
 
@@ -41,6 +40,10 @@ public class User extends IdEntity {
 
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
+
+    @Column(name = "LANG", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
     @JsonIgnore
     @ManyToOne(targetEntity = Address.class, fetch = FetchType.LAZY)
@@ -113,6 +116,14 @@ public class User extends IdEntity {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
 }

@@ -1,13 +1,13 @@
 requirejs.config({
 
     paths : {
-        jquery : '../lib/jquery-1.9.1',
-        lodash : '../lib/lodash-1.0.1',
+        jquery : '../lib/jquery-1.10.1',
+        lodash : '../lib/lodash-1.2.1',
         backbone : '../lib/backbone-1.0.0',
         jqueryDateFormat : '../lib/jquery.dateFormat-1.0',
         jqueryForm : '../lib/jquery.form-3.25.0',
         jqueryi18n : '../lib/jquery.i18n.properties-min-1.0.9',
-        text : '../lib/text-2.0.4',
+        text : '../lib/text-2.0.6',
 
         // learny
         util : 'util/util'

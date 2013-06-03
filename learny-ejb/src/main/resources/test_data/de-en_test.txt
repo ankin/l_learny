@@ -1,0 +1,45 @@
+abgeschwächt	extenuated	adj past-p
+abgeschwächt	mitigated	adj past-p
+abgeschwächt	understated	adj past-p
+abgeschwächt	weakened	adj past-p
+abgeschwächt [Muskel, Reflex]	sluggish	adj
+abgeschrägt	oblique [slanted]	adj
+abgeschrägt	sideling	adj
+abgeschrägt	slanted	adj
+abgeschrägt	sloped	adj
+abgreifen	to caliper	verb
+abgreifen	to pick off	verb
+abgreifen	to pickup	verb
+abgreifen	to tap	verb
+abgrenzen	to circumscribe	verb
+abgrenzen	to define	verb
+abgrenzen	to delimitate	verb
+abgrenzen	to delimit	verb
+abgrenzen	to delineate	verb
+		to demarcate	verb
+abgrenzen	to eight-bound	verb
+abgrenzen	to isolate	verb
+abgrenzen	to mark-off	verb
+abgrenzen	to mark down	verb
+abgrenzen	to mark out	verb
+Abschnitt {m} <Abschn.>	chapter <ch.>	noun
+Abschnitt {m} <Abschn.>	section <sect.>	noun
+Abschnitt {m}	apron	noun
+Abschnitt {m}	article	noun
+Abschnitt {m}	break	noun
+Abschnitt {m}	counterfoil	noun
+Abschnitt {m}	coupon	noun
+Abschnitt {m} der Lauffläche	tread section	noun
+Abschnitt {m} eines Buches	section of a book	noun
+Abschnitt {m}	episode	noun
+Abschnitt {m}	paragraph	noun
+Abschnitt {m}	part	noun
+Abschnitt {m}	passage	noun
+Abschnitt {m}	period	noun
+Abschnitt {m}	phase	noun
+Abschnitt {m}	reach	noun
+Abschnitt {m}	sector	noun
+Abschnitt {m}	segment	noun
+Abschnitt {m}	stadium	noun
+Abschnitt {m}	stage	noun
+Abschnitt {m}	stub [of a cheque book]	noun

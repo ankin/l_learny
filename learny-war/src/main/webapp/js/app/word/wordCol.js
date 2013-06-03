@@ -1,4 +1,4 @@
-define([ 'backbone', 'common/baseCol', 'util' ], function(Backbone, BaseCol, util) {
+define([ 'backbone', 'common/baseCol', 'util', 'word/wordModel' ], function(Backbone, BaseCol, util, WordModel) {
 
     var wordCol = BaseCol.extend({
         initialize : function(models, options) {
@@ -7,6 +7,13 @@ define([ 'backbone', 'common/baseCol', 'util' ], function(Backbone, BaseCol, uti
         },
         url : function() {
             return 'services/record/' + this.recordUuid + '/words/';
+        },
+
+        model : function(attrs, options) {
+            return new WordModel(attrs, {
+                url : 'services/record/' + options.recordUuid + '/word/' + attrs.uuid
+            });
+
         }
     });
     return wordCol;

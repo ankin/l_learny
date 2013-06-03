@@ -1,4 +1,4 @@
-package com.learny.ejb.dao.impl;
+package com.learny.startup;
 
 import java.util.Calendar;
 
@@ -12,6 +12,7 @@ import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.dao.local.RuleDaoLocal;
 import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.ejb.dao.local.WordDaoLocal;
+import com.learny.persistence.entity.Language;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.RecordComment;
 import com.learny.persistence.entity.Role;
@@ -40,10 +41,10 @@ public class MockDataInitializer {
 
     @PostConstruct
     public void init() {
-        User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond", Role.STUDENT);
+        User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond", Role.STUDENT, Language.ENG);
 
-        User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT);
-        User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer", Role.NONE);
+        User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT, Language.RUS);
+        User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer", Role.NONE, Language.ENG);
 
         Record record = createRecord(user1, "das Auto", "gehen", "das Haus", "das Wasser", "die Zeit", "schreiben");
         createRecordComment(record, user2, "Very interesting!");
@@ -79,13 +80,15 @@ public class MockDataInitializer {
 
     }
 
-    private User createUser(String email, String password, String firstName, String lastName, Role role) {
+    private User createUser(String email, String password, String firstName, String lastName, Role role,
+            Language language) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setRole(role);
+        user.setLanguage(language);
         return userDao.saveOrUpdate(user);
     }
 

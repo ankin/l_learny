@@ -1,7 +1,6 @@
 package com.learny.persistence.entity.core;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @MappedSuperclass
 public class IdEntity implements Serializable {
 
-    private static final long serialVersionUID = 5218711029922418065L;
+    private static final long serialVersionUID = 2166631470723029483L;
 
     public final static String ID = "ID";
 
@@ -25,33 +24,8 @@ public class IdEntity implements Serializable {
     @Column(name = ID, nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "UUID", nullable = false, unique = true)
-    private String uuid;
-
-    public IdEntity() {
-        this.uuid = UUID.randomUUID().toString();
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    @Override
-    public final boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        IdEntity otherObj = (IdEntity) obj;
-        return this.getUuid().equals(otherObj.getUuid());
-    }
-    
-    @Override
-    public final int hashCode() {
-        return getUuid().hashCode();
     }
 
 }

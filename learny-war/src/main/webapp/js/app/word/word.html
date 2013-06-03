@@ -1,13 +1,33 @@
-<td class="id_original" style="width: 100px;"><b><%-
-		word.original %></b></td>
-<td><% _.forEach(word.translations, function(translation, index) {
-	%>
+<td class="id_original" style="width: 100px;">
+	<b><%- word.original %></b>
+</td>
+<td>
+	<% _.forEach(word.translations, function(translation, index) { %>
 
-	<dl>
-		<dt><%- translation.value %></dt>
-		<dd><%- translation.extended %></dd>
-	</dl> <% }); %>
 
+<ul class="unstyled">
+  <li><%- translation.value %>
+  <% if (translation.extended) { %>
+  	<em>(<%- translation.extended %>)</em>
+  <% } %>
+  </li>
+</ul>
+	<% }); %>
 </td>
 
+
+<td>
+	<a href="#" id="remove-word" class="icon-ctrl-link"
+		title="<%= $.i18n.prop('Remove') %>">
+		<i class="icon-remove"></i>
+	</a>
+	<a href="#" id="edit-word" class="icon-ctrl-link"
+		title="<%= $.i18n.prop('Edit') %>">
+		<i class="icon-edit "></i>
+	</a>
+</td>
+
+
+
+`
 

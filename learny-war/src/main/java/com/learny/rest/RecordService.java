@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -77,6 +78,35 @@ public class RecordService extends AbstractService {
     public List<Word> saveWords(@PathParam("recordUuid") String recordUuid, List<Word> words) {
         logger.info("saveWords() was called with param recordUuid: " + recordUuid + ", words: " + words);
         return recordBean.saveWords(recordUuid, words);
+
+    }
+
+    @PUT
+    @Path("{recordUuid}/word/{wordUuid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Word updateWord(@PathParam("recordUuid") String recordUuid, Word word) {
+        logger.info("updateWord() was called with param recordUuid: " + recordUuid + ", word: " + word);
+        return recordBean.saveOrUpdateWord(recordUuid, word);
+
+    }
+
+    @POST
+    @Path("{recordUuid}/word/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Word saveWord(@PathParam("recordUuid") String recordUuid, Word word) {
+        logger.info("saveWord() was called with param recordUuid: " + recordUuid + ", word: " + word);
+        return recordBean.saveOrUpdateWord(recordUuid, word);
+
+    }
+
+    @DELETE
+    @Path("{recordUuid}/word/{wordUuid}")
+    public void removeWordFromRecord(@PathParam("recordUuid") String recordUuid, @PathParam("wordUuid") String wordUuid) {
+        logger.info("removeWordFromRecord() was called with param recordUuid: " + recordUuid + ", word uuid: "
+                + wordUuid);
+        recordBean.removeWordFromRecord(recordUuid, wordUuid);
 
     }
 }

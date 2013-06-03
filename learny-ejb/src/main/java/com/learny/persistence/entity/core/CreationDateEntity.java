@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
 @MappedSuperclass
-public class CreationDateEntity extends IdEntity {
+public class CreationDateEntity extends UuidEntity {
 
     private static final long serialVersionUID = 1590421882485107240L;
 

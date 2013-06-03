@@ -1,3 +1,5 @@
+@import url(modal.css);
+
 body {
 	padding-bottom: 40px;
 	padding-top: 20px;
@@ -24,7 +26,7 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 .disabled-dark-bg {
 	z-index: 20;
 	background-color: #F0F0F0;
-	filter: alpha(opacity =        50); /* IE */
+	filter: alpha(opacity =         50); /* IE */
 	opacity: 0.5; /* Safari, Opera */
 	-moz-opacity: 0.50; /* FireFox */
 	background-repeat: no-repeat;
@@ -34,6 +36,23 @@ a:active,a:focus { /*! Fixed dotted border  issue in FF and IE */
 	position: absolute;
 	top: 0px;
 	left: 0px;
+}
+
+#modal-container {
+	display: none;
+	position: fixed;
+	opacity: 0;
+	background: rgba(0, 0, 0, .5);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 5;
+}
+
+#modal-container.show {
+	display: block;
+	opacity: 1;
 }
 
 #ajax-content {
@@ -86,8 +105,8 @@ section.record-section {
 	display: block;
 }
 
-.record-component>.table tbody tr td.rmv-ctrl {
-	padding-right: 0px;
+.record-component>.table tbody tr td a.icon-ctrl-link {
+	float: right;
 }
 
 /*! End of record page styles */
@@ -128,7 +147,7 @@ aside.record-calendar {
 	top: 30px;
 	width: 300px;
 	position: absolute;
-	 z-index: 20;
+	z-index: 20;
 }
 
 aside.record-calendar>div {

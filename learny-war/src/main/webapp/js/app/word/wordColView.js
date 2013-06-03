@@ -1,17 +1,13 @@
-define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'text!word/words_edit.html',
-        'text!word/words_save.html', 'text!word/words_add.html', 'word/wordCol', 'word/wordModel', 'word/wordView' ],
-        function($, Backbone, util, wordsTpl, wordsEditCtrlsTpl, wordsSaveCtrlsTpl, addWordCtrlsTpl, WordCol,
-                WordModel, WordView) {
+define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', 'word/wordModel', 'word/wordView',
+        'word/addWordModalView' ],
+        function($, Backbone, util, wordsTpl, WordCol, WordModel, WordView, AddWordModalView) {
 
             var wordColView = Backbone.View.extend({
                 className : 'record-component',
                 _template : _.template(wordsTpl),
 
                 events : {
-                    'click #edit-words' : 'triggerEdit',
-                    'click #cancel-edit-words' : 'triggerCancelEdit',
-                    'click #add-word' : 'triggerAdd',
-                    'click #save-words' : 'saveOrUpdateWords'
+                    'click #add-word' : 'triggerAdd'
                 },
 
                 initialize : function() {
@@ -28,15 +24,14 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'text!word/words_
 
                     self.$el.html(self._template());
 
-                    if (!self.editMode) {
-                        self.$el.find('#words-controls').html(_.template(wordsEditCtrlsTpl));
-                    }
-
                     self.model.each(function(wordModel) {
                         var wordView = new WordView({
-                            model : wordModel,
-                            editMode : self.editMode
+                            model : wordModel
                         });
+                        wordModel.on('destroy', function() {
+                            self.model.remove(wordModel);
+                            self.render();
+                        }, self);
                         self.$el.find("tbody").prepend(wordView.render().el);
                     });
 
@@ -48,60 +43,24 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'text!word/words_
                 triggerAdd : function() {
                     var self = this;
 
-                    var newWordModel = new WordModel();
-
+                    var newWordModel = new WordModel(null, {
+                        url : 'services/record/' + self.model.recordUuid + '/word/'
+                    });
                     self.model.add(newWordModel);
+                    newWordModel.on('sync', function() {
+                        var wordView = new WordView({
+                            model : newWordModel
+                        });
+                        this.$el.find("tbody").prepend(wordView.render().el);
+                    }, this);
 
-                    var wordView = new WordView({
-                        model : newWordModel,
-                        editMode : true
-                    });
-                    self.$el.find("tbody").prepend(wordView.render().el);
-
-                    return false;
-                },
-
-                triggerEdit : function() {
-                    var self = this;
-
-                    self.editMode = true;
-
-                    self.render();
-
-                    self.$el.find('#words-controls').html(_.template(wordsSaveCtrlsTpl));
-                    self.$el.find('#words-controls').append(_.template(addWordCtrlsTpl));
-                    return false;
-                },
-
-                triggerCancelEdit : function() {
-                    var self = this;
-                    self.newWordCol = null;
-                    self.off();
-
-                    self.editMode = false;
-
-                    self.render();
-                    return false;
-                },
-
-                saveOrUpdateWords : function() {
-                    var self = this;
-
-                    self.model.each(function(wordModel) {
-                        if (wordModel.isDeleted) {
-                            self.model.remove(wordModel);
-                        }
-
-                        wordModel.set('translations', null); // don't send translations
+                    self.modal = new AddWordModalView({
+                        model : newWordModel
                     });
 
-                    Backbone.sync('update', this.model, {
-                        success : function(data, textResponse, jqXHR) {
-                            self.triggerCancelEdit();
-                            self.model.set(data);
-                            self.render();
-                        }
-                    });
+                    self.modal.show();
+
+                    return false;
                 }
 
             });

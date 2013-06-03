@@ -11,13 +11,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.learny.dto.Translation;
-import com.learny.persistence.entity.core.IdEntity;
+import com.learny.persistence.entity.core.UuidEntity;
 
 @Entity
 @Table(name = Word.TABLE_NAME)
 @NamedQueries(@NamedQuery(name = Word.QUERY_BY_ORIGINAL, query = "select o from Word o where o.original=:"
         + Word.PARAM_ORIGINAL))
-public class Word extends IdEntity {
+public class Word extends UuidEntity {
 
     private static final long serialVersionUID = 9064223559376466447L;
 
