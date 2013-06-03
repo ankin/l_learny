@@ -28,20 +28,18 @@ requirejs([ 'jquery', 'backbone', 'util', 'menu/menuRouter' ], function($, Backb
 
     $('#spinner-container').on('showSpinner', function() {
         if (!$('#spinner-container').hasClass('spinner')) {
-
             $('#spinner-container').addClass('spinner');
             $('#spinner-container').css('display', '');
 
-            $('#disabler-container').addClass('disabled-dark-bg');
-            $('#disabler-container').css('display', '');
+            $('#disabler-container').addClass('disable');
+            
         }
     });
     $('#spinner-container').on('hideSpinner', function() {
         $('#spinner-container').removeClass('spinner');
         $('#spinner-container').css('display', 'none');
 
-        $('#disabler-container').removeClass('disabled-dark-bg');
-        $('#disabler-container').css('display', 'none');
+        $('#disabler-container').removeClass('disable');
     });
 
     util.initLanguage('en_EN');

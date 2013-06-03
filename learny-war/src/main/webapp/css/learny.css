@@ -1,4 +1,5 @@
-@import url(modal.css);
+@import url(learny/modal.css);
+@import url(learny/record.css);
 
 body {
 	padding-bottom: 40px;
@@ -80,38 +81,7 @@ a.icon-ctrl-link:hover {
 	transition: all .5s ease-in-out;
 }
 
-/*! Record page styles */
-.record {
-	padding-right: 10px;
-	padding-top: 5px;
-	border-right: 1px solid #DDDDDD;
-}
 
-.record-component {
-	padding: 20px 20px;
-	margin: 20px 0;
-}
-
-.sepatator-top {
-	border-top: 1px solid #EEE;
-}
-
-.comment-body {
-	padding-top: 10px;
-	border-bottom: 1px dashed #EEE;
-}
-
-section.record-section {
-	overflow: hidden;
-	position: relative;
-	display: block;
-}
-
-.record-component>.table tbody tr td a.icon-ctrl-link {
-	float: right;
-}
-
-/*! End of record page styles */
 .show-delayed {
 	visibility: visible;
 	opacity: 1;
@@ -131,76 +101,6 @@ section.record-section {
 	-ms-transition: all .3s ease-in-out;
 	transition: all .3s ease-in-out;
 }
-
-/*! Calendar widget styles*/
-aside.record-calendar {
-	-webkit-transition: all .5s ease-out;
-	-moz-transition: all .5s ease-out;
-	-o-transition: all .5s ease-out;
-	-ms-transition: all .5s ease-out;
-	transition: all .5s ease-out;
-	-webkit-transform: translate(100%);
-	-moz-transform: translate(100%);
-	-o-transform: translate(100%);
-	-ms-transform: translate(100%);
-	transform: translate(100%);
-	position: absolute;
-	right: 0;
-	top: 30px;
-	width: 300px;
-	position: absolute;
-	z-index: 20;
-}
-
-aside.record-calendar>div {
-	background: none repeat scroll 0 0 #FCF8EC;
-}
-
-aside.record-calendar>table {
-	background: none repeat scroll 0 0 #FCF8EC;
-}
-
-aside.record-calendar.open {
-	-webkit-transform: translate(-1px);
-	-moz-transform: translate(-1px);
-	-o-transform: translate(-1px);
-	-ms-transform: translate(-1px);
-	transform: translate(-1px);
-}
-
-section>a.open-link {
-	padding-right: 20px;
-	font-size: 11px;
-}
-
-aside.record-calendar>div>.table thead tr th {
-	text-align: center;
-}
-
-aside.record-calendar>div>.table tbody tr td {
-	text-align: center;
-}
-
-aside.record-calendar>div>.table tbody tr td.today {
-	border: 3px solid #DDDDDD;
-}
-
-aside.record-calendar>div>.table tbody tr td.record {
-	background-color: #DDDDDD;
-	background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,
-		255, 255, .5) 2px, rgba(255, 255, 255, .5) 4px);
-}
-
-aside.record-calendar>div>.table tbody tr td.another-month {
-	color: #DDDDDD;
-}
-/*! 
-.table tbody tr td.success {
-	background-color: #DFF0D8;
-}
-*/
-
-/*! End of calendar widget styles*/
 
 /*! Overriding Bootstrap classes*/
 .tabs-left>.nav-tabs.margin-right-0 {

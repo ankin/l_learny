@@ -46,7 +46,7 @@ define([ 'jquery', 'backbone'], function($, Backbone) {
             } else {
                 this.render();
             }
-            this.$bg.addClass("show");
+            this.$bg.addClass("disable");
         },
 
         hideModal : function() {
@@ -54,7 +54,7 @@ define([ 'jquery', 'backbone'], function($, Backbone) {
             this.view.remove();
             this.unbind();
             this.remove(); // remove the modal from the DOM
-            this.$bg.removeClass("show");
+            this.$bg.removeClass("disable");
             // this.close();
         },
 
