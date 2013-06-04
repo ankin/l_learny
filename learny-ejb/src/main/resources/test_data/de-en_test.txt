@@ -43,3 +43,133 @@ Abschnitt {m}	segment	noun
 Abschnitt {m}	stadium	noun
 Abschnitt {m}	stage	noun
 Abschnitt {m}	stub [of a cheque book]	noun
+gehen [in eine bestimmte Richtung]	to head [go]	verb
+gehen [ugs.] [durchführbar sein]	to be feasible	verb
+gehen [ugs.] [funktionieren]	to work [function]	verb
+gehen [weggehen]	to leave [go away]
+Gehen {n}	going	noun
+Gehen {n}	walking	noun
+Gehen {n} [Abschied]	leaving	noun
+Gehen {n} [Fortbewegungsart]	ambulation	noun
+Gehen {n} [Leichtathletik]	heel-and-toe walking	noun
+Geld überweisen	to remit money	verb
+Geld überweisen	to transfer money	verb
+Geld überweisen	to wire money	verb
+Geldautomat {m}	automated teller (machine) <ATM> [Am.] [Aus.] [Ind.]	noun
+Geldautomat {m}	automated teller machine <ATM>	noun
+Geldautomat {m}	automatic teller machine <ATM>	noun
+Geldautomat {m}	automatic teller	noun
+Geldautomat {m}	autoteller	noun
+Geldautomat {m}	bancomat	noun
+Geldautomat {m}	cash dispenser [Br.]	noun
+Geldautomat {m}	cash dispensing machine	noun
+Geldautomat {m}	cash machine	noun
+Geldautomat {m}	cash point machine [Br.]	noun
+Geldautomat {m}	cashpoint [Br.]	noun
+Geldautomat {m}	cash terminal	noun
+Geldautomat {m}	hole-in-the-wall [Br.] [coll.]	noun
+Geldautomat {m} [außen an einer Bank]	hole in the wall [Br.] [coll.]	noun
+Geldautomat {m} [Bankautomat]	Any Time Money <ATM> [Ind.] [coll.]	noun
+Geldautomat {m} [Bankautomat]	automatic banking machine <ABM>	noun
+gemütlich	comfortable	adj
+gemütlich	comfy  [coll.]	adj
+gemütlich	cordial	adj
+gemütlich	cosily  [Br.]	adv
+gemütlich	cosy  [Br.]	adj
+gemütlich	cozily  [Am.]	adv
+gemütlich	cozy  [Am.]	adj
+Knochenrinde {f}	bone cortex	noun
+Knochenrinde {f}	bony cortex	noun
+Knopf {m} aus Bein	bone button	noun
+Knopf {m}	boss	noun
+Knopf {m}	button	noun
+Knopf {m}	nub	noun
+Knopf {m}	stud [button]	noun
+Knopf {m} [österr.] [schweiz.] [südd.] [Knoten]	knot	noun
+Knopf {m} [südd.] [österr.] [schweiz.] [Knospe]	bud	noun
+Knopf {m} [ugs.] [Kerl]	chap [esp. Br.]	noun
+Knopf {m} [ugs.] [Knauf]	knob	noun
+knospen	to be in bud	verb
+knospen	to bud	verb
+knospen	to burgeon	verb
+knospen	to put forth buds	verb
+Kokosmatte {f}	coconut mat	noun
+Kokosmatte {f}	coconut matting	noun
+Kokosmatte {f}	coir mat	noun
+Kokosmilch {f}	coconut milk	noun
+Kokosnüsse {pl}	coconuts	noun
+Koksausbeute {f}	coke yield	noun
+Koksbrenner {m}	coke burner	noun
+koksen [ugs.]	to do a line of coke [coll.]	verb
+koksen [ugs.]	to do lines [coll.]	verb
+koksen [ugs.] [Kokain nehmen]	to do coke [coll.]	verb
+koksen [ugs.] [Kokain nehmen]	to take coke [coll.]	verb
+Koksen {n} [ugs.] [das Einnehmen von Kokain]	doing coke [coll.]	noun
+Kollege {m}	associate [colleague, co-worker]	noun
+Kollege {m}	cohort [Am.] [coll.] [colleague]	noun
+Kollege {m}	colleague	noun
+Kollege {m}	confrère	noun
+Kollege {m}	fellow [colleague]	noun
+Kollege {m} [österr.] [Kommilitone]	fellow student	noun
+Kollege {m} [Arbeitskollege]	co-worker	noun
+Kollege {m} [Arbeitskollege]	fellow worker	noun
+Kollege {m} [Arbeitskollege]	workmate	noun
+Kollege {m} [Gegenüber, Gegenspieler]	opposite number	noun
+Kollege {m} [Gewerkschaft]	brother [in trade unions]	noun
+Kollege {m} [in Organisationen]	fellow member	noun
+Kollege {m} [nicht beschränkt auf Arbeitskollegenkreis]	buddy [Am.] [coll.] [male]
+siebenmal	septuply	adv
+siebenmal	seven times	adv
+siebenmal so groß wie ...	seven times as big as ...	
+siebenmal so viel	seven times as much	adv
+Karibische See {f}	Caribbean Sea	noun
+karibisches Englisch {n}	Caribbean English	noun
+Karibisches Meer {n}	Caribbean Sea	noun
+karieren	to checker [Am.]	verb
+karieren	to chequer [Br.]	verb
+Kartoffelchips {pl}	crisps [Br.]	noun
+Kartoffelchips {pl}	potato chips [Am.]	noun
+Kartoffelchips {pl}	potato crisps [Br.]	noun
+Kartoffelchip {m}	potato crisp [Br.]
+Kartoffelroder {m}	potato digger	noun
+Kartoffelroder {m}	potato harvester	noun
+Kartoffelroder {m}	potato spinner	noun
+Kartoffelrose {f}	Japanese rose [Rosa rugosa]	noun
+Kartoffelsäcke {pl}	potato sacks	noun
+Kartoffelsack {m}	hessian sack [esp. Br.]	noun
+Kartoffelsack {m}	potato bag	noun
+Kartoffelsack {m}	potato sack	noun
+Kartoffelsaft {m}	potato juice	noun
+Kartoffelsalat {m}	potato salad	noun
+Zinnober {m}	cinnabarite	noun
+Zinnober {m}	red mercuric sulfide [Am.]	noun
+Zinnober {m}	vermilion	noun
+Zinnober {m} [pej.] [ugs.] [dummes Zeug]	nonsense	noun
+Zinnober {m} [Quecksilbererz]	cinnabar	noun
+Zinnober {m} [ugs.]	fuss	noun
+Zinnober {m} [ugs.]	rubbish [coll.]	noun
+Zinnober {m} [ugs.] [pej.] [wertloses Zeug]	junk	noun
+Zinnober {n} [offiziell, aber seltener {m}] [Farbe]	cinnabar [colour]	noun
+Zinne {f}	battlement	noun
+Zinne {f}	crenel	noun
+Zinne {f}	merlon	noun
+Zinne {f} [Dachvorsprung]	parapet	noun
+Zinne {f} [Felsnadel]	pinnacle	noun
+Zimmer {n} <Zi.>	room (number) [rm (no.)]	noun
+Zimmer {n}	apartment	noun
+Zimmer {n}	cabinet	noun
+Zimmer {n}	chamber	noun
+Zimmer {n}	chimmer [room, frequent in Thomas Hardy novels]	noun
+Zimmer {n} für sich allein	room to oneself	noun
+Zimmer {n} mit (eigenem) Bad	ensuite room	noun
+Zimmer {n} mit (eigenem) Bad	en suite room	noun
+Zimmer {n} mit Ausblick	room with a view	noun
+Zimmer {n} mit Blick auf die Dorfwiese	room looking out on the (village) green	noun
+Zimmer {n} mit eigenem Bad	room with (an) ensuite bathroom	noun
+Zimmer {n} mit eigenem Bad	room with (an) en suite bathroom	noun
+Zimmer {n} mit einem Doppelbett	double room	noun
+Zimmer {n} mit Frühstück	bed and breakfast	noun
+Zimmer {n} mit Seeblick	room with a view of the sea	noun
+Zimmer {n}	room	noun
+Zimmer {n} zum Hof	room facing the yard	noun
+Zimmer {pl}	rooms	noun

@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.learny.persistence.entity.vocabulary.AbstractWord;
+import com.learny.persistence.entity.vocabulary.AbstractDefaultWord;
 import com.learny.persistence.entity.vocabulary.DeExample;
 import com.learny.persistence.entity.vocabulary.DeWord;
 import com.learny.persistence.entity.vocabulary.EnExample;
@@ -176,7 +176,7 @@ public class VocabularyFileImporter {
         return null;
     }
 
-    private static void updateWord(AbstractWord abstractWord, String firstPart, Type type) {
+    private static void updateWord(AbstractDefaultWord abstractWord, String firstPart, Type type) {
 
         if (firstPart.contains("(sich)")) {
             firstPart = firstPart.replaceAll("[()]", "");
@@ -215,7 +215,7 @@ public class VocabularyFileImporter {
 
     }
 
-    private static void updateDescription(AbstractWord abstractWord) {
+    private static void updateDescription(AbstractDefaultWord abstractWord) {
         String word = abstractWord.getValue();
         String squareBracketLeft = "[";
         String squareBracketRight = "]";
@@ -228,7 +228,7 @@ public class VocabularyFileImporter {
         }
     }
 
-    private static void updateAbbreviation(AbstractWord abstractWord) {
+    private static void updateAbbreviation(AbstractDefaultWord abstractWord) {
         String word = abstractWord.getValue();
         String squareBracketLeft = "<";
         String squareBracketRight = ">";

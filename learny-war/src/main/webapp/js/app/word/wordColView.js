@@ -13,6 +13,12 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', '
                 initialize : function() {
                     var self = this;
                     this.rendered = $.Deferred();
+                    _.forEach(this.options.data, function(model) {
+                        _.forEach(model.translations, function(translation) {
+                            translation.genderLocalized = $.i18n.prop(translation.gender);
+                            translation.typeLocalized = $.i18n.prop(translation.type);
+                        });
+                    });
                     this.model = new WordCol(this.options.data, {
                         recordUuid : self.options.recordUuid
                     });

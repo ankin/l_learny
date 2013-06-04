@@ -49,7 +49,7 @@ public class AbstractDao<T> implements Dao<T> {
     }
 
     @Override
-    public final T findByUuid(final String uuid) {
+    public final T findByUuid(String uuid) {
         try {
             final String query = "select o from " + getPersistentClass().getSimpleName() + " o where o.uuid=:uuid";
             final T result = (T) getEntityManager().createQuery(query).setParameter("uuid", uuid).getSingleResult();

@@ -46,11 +46,11 @@ public class MockDataInitializer {
         User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT, Language.RUS);
         User user3 = createUser("jsummer@gmail.com", "009", "John", "Summer", Role.NONE, Language.ENG);
 
-        Record record = createRecord(user1, "das Auto", "gehen", "das Haus", "das Wasser", "die Zeit", "schreiben");
+        Record record = createRecord(user1, "abgreifen", "gehen", "Zimmer", "Geldautomat", "Abschnitt", "abgeschwächt");
         createRecordComment(record, user2, "Very interesting!");
         createRecordComment(record, user3, "What #2 means?");
 
-        record = createRecord(user1, "laufen", "die Schwester", "rauchen", "die Umgebung");
+        record = createRecord(user1, "Kokosnüsse", "Kokosmatte", "Kollege", "siebenmal");
         createRecordComment(record, user2, "Could you please explain the rule #1?");
         createRecordComment(record, user3, "No! =)");
         Calendar calendar = Calendar.getInstance();
@@ -60,7 +60,7 @@ public class MockDataInitializer {
         record.setDateCreated(calendar.getTime());
         recordDao.saveOrUpdate(record);
 
-        record = createRecord(user1, "schlagen", "essen", "die Bedienung");
+        record = createRecord(user1, "gemütlich", "Knopf", "Geldautomat");
         createRecordComment(record, user2, "Nice word list! So many of them!");
         calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2013);
@@ -69,7 +69,7 @@ public class MockDataInitializer {
         record.setDateCreated(calendar.getTime());
         recordDao.saveOrUpdate(record);
 
-        record = createRecord(user1, "verhindern", "abwenden", "der Zugriff", "trennen", "brauchen");
+        record = createRecord(user1, "Zinne", "abgreifen", "gehen", "Kokosmatte", "knospen");
         createRecordComment(record, user3, "Does anybody can write ane example with word 'abwenden'?");
         calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2012);
@@ -114,7 +114,11 @@ public class MockDataInitializer {
     }
 
     private Word createWord(String original) {
-        Word word = new Word();
+        Word word = wordDao.findByOriginal(original);
+        if (word != null) {
+            return word;
+        }
+        word = new Word();
         word.setOriginal(original);
         return wordDao.saveOrUpdate(word);
     }

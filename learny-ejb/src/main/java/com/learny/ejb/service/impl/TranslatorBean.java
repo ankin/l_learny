@@ -32,14 +32,17 @@ public class TranslatorBean implements TranslatorLocal {
     public void translate(Word word, Language language) {
         switch (language) {
         case ENG:
-            DeWord deWord = deWordDao.findByValue(word.getOriginal());
-            if (deWord == null) {
-                Translation translation = new Translation("No translation", null);
+            List<DeWord> deWords = deWordDao.findByValue(word.getOriginal());
+            if (deWords == null && deWords.isEmpty()) {
+                Translation translation = new Translation("No translation found", null, null, null);
                 word.addTranslation(translation);
             } else {
-                for (EnWord enWord : deWord.getEnWords()) {
-                    Translation translation = new Translation(enWord.getValue(), enWord.getDescription());
-                    word.addTranslation(translation);
+                for (DeWord deWord : deWords) {
+                    for (EnWord enWord : deWord.getEnWords()) {
+                        Translation translation = new Translation(enWord.getValue(), enWord.getDescription(),
+                                deWord.getGender(), deWord.getType());
+                        word.addTranslation(translation);
+                    }
                 }
             }
             break;

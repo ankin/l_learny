@@ -10,15 +10,17 @@ import javax.persistence.UniqueConstraint;
 import com.learny.persistence.entity.core.IdEntity;
 
 @MappedSuperclass
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "VALUE", "TYPE" }))
-public class AbstractWord extends IdEntity {
+public class AbstractDefaultWord extends IdEntity {
 
     private static final long serialVersionUID = 4357259868217746912L;
 
-    @Column(name = "VALUE", nullable = false)
+    public static final String VALUE_COLUMN = "VALUE";
+    public static final String DESC_COLUMN = "DESCRIPTION";
+
+    @Column(name = VALUE_COLUMN, nullable = false)
     private String value;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = DESC_COLUMN)
     private String description;
 
     @Column(name = "ABBREVIATION")
@@ -65,7 +67,7 @@ public class AbstractWord extends IdEntity {
         if (obj == null) {
             return false;
         }
-        AbstractWord abstractWord = (AbstractWord) obj;
+        AbstractDefaultWord abstractWord = (AbstractDefaultWord) obj;
         if (this.getValue() == null || abstractWord.getValue() == null || this.getType() == null
                 || abstractWord.getType() == null) {
             return false;

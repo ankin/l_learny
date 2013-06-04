@@ -2,21 +2,38 @@
 	<b><%- word.original %></b>
 </td>
 <td>
+	<ul class="inline">
+	<% var gender; 
+	   var type;%>
 	<% _.forEach(word.translations, function(translation, index) { %>
-
-
-<ul class="unstyled">
-  <li><%- translation.value %>
-  <% if (translation.extended) { %>
-  	<em>(<%- translation.extended %>)</em>
-  <% } %>
-  </li>
-</ul>
+	    
+	       <% if (translation.type && type != translation.type) { %> 
+	        	<% if (index != 0) { %> <br> <% } %> 
+		  		<li> <abbr title="<%= translation.typeLocalized %>" class="initialism-lowercase"><em><%-translation.type %></em></abbr></li>
+		  		<% if (!translation.gender || gender == translation.gender) { %> <br> <% } %> 
+		   <% } %>
+		   
+		  <% if (translation.gender && gender != translation.gender) { %>
+		  		<% if (index != 0 && (!translation.type || type == translation.type)) { %> <br> <% } %>  
+		  		<li> <abbr title="<%= translation.genderLocalized %>" class="initialism-lowercase"><em><%-translation.gender %></em></abbr></li><br> 
+		  		
+		   <% } %> 
+		   
+		    
+		
+		<li>
+			 <%-translation.value %> 
+			 <% if (translation.extended) { %> <em>(<%-translation.extended %>)</em> <% } %>
+		</li>
+	
+	<% gender = translation.gender;
+	   type = translation.type; %>
 	<% }); %>
+	</ul>
 </td>
 
 
-<td>
+<td style="width: 30px;">
 	<a href="#" id="remove-word" class="icon-ctrl-link"
 		title="<%= $.i18n.prop('Remove') %>">
 		<i class="icon-remove"></i>

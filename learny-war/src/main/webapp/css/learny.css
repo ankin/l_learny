@@ -106,3 +106,8 @@ a.icon-ctrl-link:hover {
 .tabs-left>.nav-tabs.margin-right-0 {
 	margin-right: 0px;
 }
+
+abbr.initialism-lowercase {
+    font-size: 90%;
+    text-transform: lowercase;
+}
