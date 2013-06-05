@@ -55,7 +55,7 @@ public class AuthenticationService extends AbstractService {
 
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.login(token);
-        currentUser.getSession(true).setAttribute(EMAIL_ATTR_KEY, username);
+        currentUser.getSession(true).setAttribute(EMAIL_ATTR_KEY, currentUser.getPrincipal());
         try {
             String url = httpRequest.getContextPath();
             redirect(url);

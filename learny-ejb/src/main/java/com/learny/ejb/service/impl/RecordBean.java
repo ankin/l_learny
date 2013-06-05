@@ -120,4 +120,5 @@ public class RecordBean implements RecordLocal {
         }
         return word;
     }
+
 }

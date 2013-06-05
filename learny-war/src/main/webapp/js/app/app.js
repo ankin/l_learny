@@ -7,6 +7,7 @@ requirejs.config({
         jqueryDateFormat : '../lib/jquery.dateFormat-1.0',
         jqueryForm : '../lib/jquery.form-3.25.0',
         jqueryi18n : '../lib/jquery.i18n.properties-min-1.0.9',
+        typeahead : '../lib/typeahead-0.9.2',
         text : '../lib/text-2.0.6',
 
         // learny
@@ -17,6 +18,7 @@ requirejs.config({
         'jqueryDateFormat' : [ 'jquery' ],
         'jqueryForm' : [ 'jquery' ],
         'jqueryi18n' : [ 'jquery' ],
+        'typeahead' : ['jquery'],
         'backbone' : {
             deps : [ 'lodash', 'jquery' ],
             exports : 'Backbone'
@@ -32,7 +34,7 @@ requirejs([ 'jquery', 'backbone', 'util', 'menu/menuRouter' ], function($, Backb
             $('#spinner-container').css('display', '');
 
             $('#disabler-container').addClass('disable');
-            
+
         }
     });
     $('#spinner-container').on('hideSpinner', function() {

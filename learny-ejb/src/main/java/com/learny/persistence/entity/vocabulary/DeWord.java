@@ -9,17 +9,24 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = DeWord.TABLE_NAME, uniqueConstraints = @UniqueConstraint(columnNames = { AbstractDefaultWord.VALUE_COLUMN,
-        AbstractDefaultWord.DESC_COLUMN, AbstractGenderWord.GENDER_COLUMN }))
+@Table(name = DeWord.TABLE_NAME, uniqueConstraints = @UniqueConstraint(columnNames = {
+        AbstractDefaultWord.VALUE_COLUMN, AbstractDefaultWord.DESC_COLUMN, AbstractGenderWord.GENDER_COLUMN }))
+@NamedQueries(@NamedQuery(name = DeWord.QUERY_SEARCH_BY_VALUE, query = "select o from DeWord o where lower(o.value) like :"
+        + DeWord.PARAM_SEARCH_VALUE + " order by o.value"))
 public class DeWord extends AbstractGenderWord {
 
     private static final long serialVersionUID = -4817501817595969432L;
 
     public final static String TABLE_NAME = "DE_WORD";
+
+    public final static String QUERY_SEARCH_BY_VALUE = "DeWord.querySearchByValue";
+    public final static String PARAM_SEARCH_VALUE = "paramSearchValue";
 
     @ManyToMany(targetEntity = EnWord.class, fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_NAME + UNDERSCORE + EnWord.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME

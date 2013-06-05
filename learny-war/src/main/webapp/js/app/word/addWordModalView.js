@@ -1,4 +1,5 @@
-define([ 'jquery', 'common/modalView', 'text!word/add_word.html' ], function($, ModalView, addWordTpl) {
+define([ 'jquery', 'common/modalView', 'text!word/add_word.html', 'typeahead' ], function($, ModalView, addWordTpl,
+        typeahead) {
 
     var ModalInputView = Backbone.View.extend({
 
@@ -22,6 +23,22 @@ define([ 'jquery', 'common/modalView', 'text!word/add_word.html' ], function($, 
             self.$el.append(self._template({
                 word : self.model.toJSON()
             }));
+
+            self.$el.find('#newWord').typeahead([ {
+                name : 'words',
+                remote : {
+                    url : 'services/search?query=%QUERY',
+                    filter : function(response) {
+                        var datums = [];
+                        _.forEach(response, function(word) {
+                            datums.push({
+                                value : word.original
+                            });
+                        });
+                        return datums;
+                    }
+                }
+            } ]);
             return this;
         },
 

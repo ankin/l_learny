@@ -26,6 +26,15 @@ public class Word extends UuidEntity {
     public final static String QUERY_BY_ORIGINAL = "Word.queryByOriginal";
     public final static String PARAM_ORIGINAL = "original";
 
+    public Word() {
+        super();
+    }
+
+    public Word(String original) {
+        super();
+        this.original = original;
+    }
+
     @Column(name = "ORGINAL", nullable = false, unique = true)
     private String original;
 

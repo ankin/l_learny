@@ -44,7 +44,7 @@ public class CommentService extends AbstractService {
     @Produces(MediaType.APPLICATION_JSON)
     public void createComment(@PathParam("recordUuid") String recordUuid, @FormParam("commentText") String commentText) {
         logger.info("createComment() was called with params recordUuid: " + recordUuid + ", commentText:" + commentText);
-        commentBean.createRecordComment(getCurrentUserEmail(), recordUuid, commentText);
+        commentBean.createRecordComment(getCurrentUser().getEmail(), recordUuid, commentText);
     }
 
 }

@@ -42,7 +42,7 @@ public class RecordService extends AbstractService {
     @Produces(MediaType.APPLICATION_JSON)
     public Record getCurrentRecord() {
         logger.info("getCurrentRecord() method invocked");
-        return recordBean.findCurrentRecordByUserEmail(getCurrentUserEmail());
+        return recordBean.findCurrentRecordByUserEmail(getCurrentUser().getEmail());
     }
 
     @GET
@@ -58,7 +58,7 @@ public class RecordService extends AbstractService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<RecordHistory> findCurrentRecordHistories() {
         logger.info("findCurrentRecordHistories() method invocked");
-        return recordBean.findRecordHistoriesByUserEmail(getCurrentUserEmail());
+        return recordBean.findRecordHistoriesByUserEmail(getCurrentUser().getEmail());
     }
 
     @PUT
