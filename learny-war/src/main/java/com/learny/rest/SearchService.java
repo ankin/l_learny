@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.learny.ejb.service.local.SearchLocal;
-import com.learny.persistence.entity.Word;
+import com.learny.persistence.entity.vocabulary.DeWord;
 import com.learny.rest.core.AbstractService;
 
 @Path(SearchService.PATH)
@@ -30,7 +30,7 @@ public class SearchService extends AbstractService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Word> search(@QueryParam("query") String searchQuery) {
+    public List<DeWord> search(@QueryParam("query") String searchQuery) {
         logger.info("search() method invocked");
         return searchBean.search(searchQuery, getCurrentUser().getLanguage());
         

@@ -14,10 +14,8 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', '
                     var self = this;
                     this.rendered = $.Deferred();
                     _.forEach(this.options.data, function(model) {
-                        _.forEach(model.translations, function(translation) {
-                            translation.genderLocalized = $.i18n.prop(translation.gender);
-                            translation.typeLocalized = $.i18n.prop(translation.type);
-                        });
+                        model.genderLocalized = $.i18n.prop(model.gender);
+                        model.typeLocalized = $.i18n.prop(model.type);
                     });
                     this.model = new WordCol(this.options.data, {
                         recordUuid : self.options.recordUuid
@@ -50,15 +48,19 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', '
                     var self = this;
 
                     var newWordModel = new WordModel(null, {
-                        url : 'services/record/' + self.model.recordUuid + '/word/'
+                        urlRoot : 'services/record/' + self.model.recordUuid + '/word/'
                     });
                     self.model.add(newWordModel);
-                    newWordModel.on('sync', function() {
+                    newWordModel.once('sync', function() {
                         var wordView = new WordView({
                             model : newWordModel
                         });
                         this.$el.find("tbody").prepend(wordView.render().el);
                     }, this);
+                    newWordModel.on('destroy', function() {
+                        self.model.remove(newWordModel);
+                        self.render();
+                    }, self);
 
                     self.modal = new AddWordModalView({
                         model : newWordModel

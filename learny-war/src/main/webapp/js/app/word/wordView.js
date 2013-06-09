@@ -7,8 +7,7 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'word/wordModel', 
         model : WordModel,
 
         events : {
-            'click a#remove-word' : 'removeWord',
-            'click a#edit-word' : 'editWord'
+            'click a#remove-word' : 'removeWord'
         },
 
         initialize : function() {
@@ -39,18 +38,7 @@ define([ 'jquery', 'backbone', 'util', 'text!word/word.html', 'word/wordModel', 
             });
 
             return false;
-        },
-
-        editWord : function() {
-            var self = this;
-            self.modal = new AddWordModalView({
-                model : self.model
-            });
-            self.modal.show();
-
-            return false;
         }
-
     });
     return wordView;
 });

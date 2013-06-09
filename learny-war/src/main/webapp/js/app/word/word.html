@@ -1,26 +1,19 @@
 <td class="id_original" style="width: 100px;">
-	<b><%- word.original %></b>
+	<b><%- word.value %></b>
 </td>
 <td>
 	<ul class="inline">
-	<% var gender; 
-	   var type;%>
+	
+		<% if (word.type) { %>  
+			<li> <abbr title="<%= word.typeLocalized %>" class="initialism-lowercase"><em><%-word.type %></em></abbr></li> 
+		<% } %>
+		   
+		<% if (word.gender) { %>  
+			<li> <abbr title="<%= word.genderLocalized %>" class="initialism-lowercase"><em><%-word.gender %></em></abbr></li><br>
+		<% } %> 
+	
 	<% _.forEach(word.translations, function(translation, index) { %>
-	    
-	       <% if (translation.type && type != translation.type) { %> 
-	        	<% if (index != 0) { %> <br> <% } %> 
-		  		<li> <abbr title="<%= translation.typeLocalized %>" class="initialism-lowercase"><em><%-translation.type %></em></abbr></li>
-		  		<% if (!translation.gender || gender == translation.gender) { %> <br> <% } %> 
-		   <% } %>
-		   
-		  <% if (translation.gender && gender != translation.gender) { %>
-		  		<% if (index != 0 && (!translation.type || type == translation.type)) { %> <br> <% } %>  
-		  		<li> <abbr title="<%= translation.genderLocalized %>" class="initialism-lowercase"><em><%-translation.gender %></em></abbr></li><br> 
-		  		
-		   <% } %> 
-		   
-		    
-		
+
 		<li>
 			 <%-translation.value %> 
 			 <% if (translation.extended) { %> <em>(<%-translation.extended %>)</em> <% } %>
@@ -33,14 +26,10 @@
 </td>
 
 
-<td style="width: 30px;">
+<td style="width: 10px;">
 	<a href="#" id="remove-word" class="icon-ctrl-link"
 		title="<%= $.i18n.prop('Remove') %>">
 		<i class="icon-remove"></i>
-	</a>
-	<a href="#" id="edit-word" class="icon-ctrl-link"
-		title="<%= $.i18n.prop('Edit') %>">
-		<i class="icon-edit "></i>
 	</a>
 </td>
 

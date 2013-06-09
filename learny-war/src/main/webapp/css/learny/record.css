@@ -96,5 +96,29 @@ aside.record-calendar>div>.table tbody tr td.another-month {
 	background-color: #DFF0D8;
 }
 */
+p .word-type {
+	float: right;
+	font-style: italic;
+}
+
+p .word-type {
+	float: right;
+	font-style: italic;
+}
+
+p.word-type {
+	float: right;
+	font-style: italic;
+	text-transform: lowercase;
+}
+
+p.word-value {
+	font-weight: bold;
+}
+
+p.word-description {
+	font-size: small;
+	font-weight: italic;
+}
 
 /*! End of calendar widget styles*/

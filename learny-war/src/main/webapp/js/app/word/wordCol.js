@@ -11,7 +11,7 @@ define([ 'backbone', 'common/baseCol', 'util', 'word/wordModel' ], function(Back
 
         model : function(attrs, options) {
             return new WordModel(attrs, {
-                url : 'services/record/' + options.recordUuid + '/word/' + attrs.uuid
+                urlRoot : 'services/record/' + options.recordUuid + '/word/'
             });
 
         }

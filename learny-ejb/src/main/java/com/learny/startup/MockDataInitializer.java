@@ -1,6 +1,10 @@
 package com.learny.startup;
 
+import java.io.InputStream;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -8,17 +12,20 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import com.learny.ejb.dao.local.CommentDaoLocal;
+import com.learny.ejb.dao.local.DeWordDaoLocal;
+import com.learny.ejb.dao.local.EnWordDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
 import com.learny.ejb.dao.local.RuleDaoLocal;
 import com.learny.ejb.dao.local.UserDaoLocal;
-import com.learny.ejb.dao.local.WordDaoLocal;
+import com.learny.parser.VocabularyFileImporter;
 import com.learny.persistence.entity.Language;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.RecordComment;
 import com.learny.persistence.entity.Role;
 import com.learny.persistence.entity.Rule;
 import com.learny.persistence.entity.User;
-import com.learny.persistence.entity.Word;
+import com.learny.persistence.entity.vocabulary.DeWord;
+import com.learny.persistence.entity.vocabulary.EnWord;
 
 @Singleton
 @Startup
@@ -34,13 +41,17 @@ public class MockDataInitializer {
     private CommentDaoLocal commentDao;
 
     @Inject
-    private WordDaoLocal wordDao;
+    private DeWordDaoLocal deWordDao;
+
+    @Inject
+    private EnWordDaoLocal enWordDao;
 
     @Inject
     private RuleDaoLocal ruleDao;
 
     @PostConstruct
     public void init() {
+        initVocabulary();
         User user1 = createUser("james.bond@gmail.com", "007", "James", "Bond", Role.STUDENT, Language.ENG);
 
         User user2 = createUser("ivan.bolvan@gmail.com", "008", "Ivan", "Bolvan", Role.STUDENT, Language.RUS);
@@ -96,7 +107,7 @@ public class MockDataInitializer {
         Record record = new Record();
         record.setUser(user);
         for (String word : words) {
-            record.addWord(createWord(word));
+            record.addWord(deWordDao.findByValue(word).get(0));
         }
 
         record.addRule(createRule("Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris"
@@ -113,19 +124,29 @@ public class MockDataInitializer {
         commentDao.saveOrUpdate(comment);
     }
 
-    private Word createWord(String original) {
-        Word word = wordDao.findByOriginal(original);
-        if (word != null) {
-            return word;
-        }
-        word = new Word();
-        word.setOriginal(original);
-        return wordDao.saveOrUpdate(word);
-    }
-
     private Rule createRule(String text) {
         Rule rule = new Rule();
         rule.setText(text);
         return ruleDao.saveOrUpdate(rule);
+    }
+
+    private void initVocabulary() {
+        InputStream inputStream = this.getClass().getResourceAsStream("/test_data/de-en_test.txt");
+        List<DeWord> deWords = VocabularyFileImporter.parse(inputStream);
+
+        for (DeWord deWord : deWords) {
+            Set<EnWord> persistedEnWords = new HashSet<>();
+            for (EnWord enWord : deWord.getEnWords()) {
+                EnWord persistedEnWord = enWordDao.findByValue(enWord.getValue());
+                if (persistedEnWord == null) {
+                    persistedEnWord = enWordDao.saveOrUpdate(enWord);
+                }
+                persistedEnWords.add(persistedEnWord);
+            }
+            deWord.getEnWords().clear();
+            deWord.setEnWords(persistedEnWords);
+            deWordDao.saveOrUpdate(deWord);
+        }
+
     }
 }

@@ -6,16 +6,12 @@ import javax.ejb.Local;
 
 import com.learny.dto.RecordHistory;
 import com.learny.persistence.entity.Record;
-import com.learny.persistence.entity.Word;
+import com.learny.persistence.entity.vocabulary.DeWord;
 
 @Local
 public interface RecordLocal {
 
     Record saveOrUpdate(Record record);
-
-    List<Word> saveWords(String recordUuid, List<Word> words);
-
-    List<Word> updateWords(String recordUuid, List<Word> words);
 
     Record findRecordByUuidFullyInitialized(String uuid);
 
@@ -23,7 +19,7 @@ public interface RecordLocal {
 
     List<RecordHistory> findRecordHistoriesByUserEmail(String userEmail);
 
-    Word saveOrUpdateWord(String recordUuid, Word word);
+    DeWord saveOrUpdateWord(String recordUuid, DeWord word);
 
     void removeWordFromRecord(String recordUuid, String wordUuid);
 

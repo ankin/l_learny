@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.learny.persistence.entity.core.ModificationDateEntity;
+import com.learny.persistence.entity.vocabulary.DeWord;
 
 @Entity
 @Table(name = Record.TABLE_NAME)
@@ -50,11 +51,11 @@ public class Record extends ModificationDateEntity {
     @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)
     private User user;
 
-    @ManyToMany(targetEntity = Word.class, fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = DeWord.class, fetch = FetchType.LAZY)
     @OrderColumn(name = "ORDER_INDEX", nullable = false)
-    @JoinTable(name = TABLE_NAME + UNDERSCORE + Word.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
-            + UNDERSCORE + ID) }, inverseJoinColumns = { @JoinColumn(name = Word.TABLE_NAME + UNDERSCORE + ID) })
-    private List<Word> words = new ArrayList<>();
+    @JoinTable(name = TABLE_NAME + UNDERSCORE + DeWord.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
+            + UNDERSCORE + ID) }, inverseJoinColumns = { @JoinColumn(name = DeWord.TABLE_NAME + UNDERSCORE + ID) })
+    private List<DeWord> words = new ArrayList<>();
 
     @ManyToMany(targetEntity = Rule.class, fetch = FetchType.LAZY)
     @JoinTable(name = TABLE_NAME + UNDERSCORE + Rule.TABLE_NAME, joinColumns = { @JoinColumn(name = TABLE_NAME
@@ -73,26 +74,27 @@ public class Record extends ModificationDateEntity {
         this.user = user;
     }
 
-    public List<Word> getWords() {
+    public List<DeWord> getWords() {
         return words;
     }
 
-    public void addWord(Word word) {
-        assert !words.contains(word) : "Word [UUID=" + word.getUuid() + "] already exists in Record [UUID=" + getUuid()
+    public void addWord(DeWord word) {
+        assert !words.contains(word) : "Word [UUID=" + word.getValue() + "] already exists in Record [UUID="
+                + getUuid()
                 + "]";
         if (!words.contains(word)) {
             words.add(word);
         }
     }
 
-    public void addWords(Collection<Word> words) {
-        for (Word word : words) {
+    public void addWords(Collection<DeWord> words) {
+        for (DeWord word : words) {
             addWord(word);
         }
     }
 
-    public void removeWord(Word word) {
-        assert words.contains(word) : "Word [UUID=" + word.getUuid() + "] doesn't exists in Record [UUID=" + getUuid()
+    public void removeWord(DeWord word) {
+        assert words.contains(word) : "Word [UUID=" + word.getValue() + "] doesn't exists in Record [UUID=" + getUuid()
                 + "]";
         if (words.contains(word)) {
             words.remove(word);

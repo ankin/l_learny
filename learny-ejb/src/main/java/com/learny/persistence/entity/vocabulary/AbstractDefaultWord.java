@@ -1,16 +1,19 @@
 package com.learny.persistence.entity.vocabulary;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.Transient;
 
-import com.learny.persistence.entity.core.IdEntity;
+import com.learny.dto.Translation;
+import com.learny.persistence.entity.core.UuidEntity;
 
 @MappedSuperclass
-public class AbstractDefaultWord extends IdEntity {
+public class AbstractDefaultWord extends UuidEntity {
 
     private static final long serialVersionUID = 4357259868217746912L;
 
@@ -29,6 +32,9 @@ public class AbstractDefaultWord extends IdEntity {
     @Column(name = "TYPE", nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;
+
+    @Transient
+    private List<Translation> translations = new ArrayList<>();
 
     public String getValue() {
         return value;
@@ -62,6 +68,18 @@ public class AbstractDefaultWord extends IdEntity {
         this.type = type;
     }
 
+    public List<Translation> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    }
+
+    public void addTranslation(Translation translation) {
+        this.translations.add(translation);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -72,8 +90,6 @@ public class AbstractDefaultWord extends IdEntity {
                 || abstractWord.getType() == null) {
             return false;
         }
-
         return this.getValue().equals(abstractWord.getValue()) && this.getType().equals(abstractWord.getType());
-
     }
 }

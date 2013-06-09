@@ -26,7 +26,7 @@ public class UuidEntity extends IdEntity {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }

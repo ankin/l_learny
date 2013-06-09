@@ -5,15 +5,15 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.learny.persistence.entity.Language;
-import com.learny.persistence.entity.Word;
+import com.learny.persistence.entity.vocabulary.DeWord;
 
 @Local
 public interface TranslatorLocal {
 
 
 
-    void translate(List<Word> words, Language language);
+    void translate(List<DeWord> words, Language language);
 
-    void translate(Word word, Language language);
+    void translate(DeWord word, Language language);
 
 }
