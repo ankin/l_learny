@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -47,6 +48,9 @@ public class Record extends ModificationDateEntity {
     public final static String PARAM_USER_EMAIL = "paramUserEmail";
     public final static String PARAM_UUID = "paramUuid";
 
+    @Column(name = "NAME", nullable = true)
+    private String name;
+
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = User.TABLE_NAME + UNDERSCORE + ID, nullable = false)
     private User user;
@@ -66,6 +70,14 @@ public class Record extends ModificationDateEntity {
     @OneToMany(targetEntity = RecordComment.class, mappedBy = "record", fetch = FetchType.LAZY)
     private Set<RecordComment> comments;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public User getUser() {
         return user;
     }
@@ -80,8 +92,7 @@ public class Record extends ModificationDateEntity {
 
     public void addWord(DeWord word) {
         assert !words.contains(word) : "Word [UUID=" + word.getValue() + "] already exists in Record [UUID="
-                + getUuid()
-                + "]";
+                + getUuid() + "]";
         if (!words.contains(word)) {
             words.add(word);
         }

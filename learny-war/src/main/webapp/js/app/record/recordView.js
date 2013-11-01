@@ -13,10 +13,14 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
 
         initialize : function() {
             this.rendered = $.Deferred();
+            this.recordUuid = this.options.recordUuid;
         },
 
         render : function() {
             var self = this;
+            if (self.recordUuid) {
+                self.model.recordUuid = self.recordUuid;
+            }
             self.model.fetch({
                 success : function() {
                     var recordJson = self.model.toJSON();
@@ -80,12 +84,12 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
             }
         },
 
-        handleDateClick : function(recordUuid){
+        handleDateClick : function(recordUuid) {
             var self = this;
             self.hideCalendar();
             util.showGlobalSpinner();
             self.model = new RecordModel();
-            self.model.recordUuid = recordUuid;
+            self.recordUuid = recordUuid;
             self.render();
             $.when(this.rendered).done(function() {
                 util.hideGlobalSpinner();

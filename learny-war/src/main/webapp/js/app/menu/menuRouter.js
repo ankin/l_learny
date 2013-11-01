@@ -1,10 +1,11 @@
-define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'util' ], function($, Backbone, MenuView,
-        RecordView, util) {
+define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'history/historyView', 'util' ], function($,
+        Backbone, MenuView, RecordView, HistoryView, util) {
 
     var menuRouter = Backbone.Router.extend({
 
         routes : {
             'record' : 'loadRecord',
+            'record/:uuid' : 'loadRecord',
             'about' : 'loadAbout',
             'news' : 'loadNews',
             'settings' : 'loadSettings',
@@ -20,17 +21,19 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'util' ], f
             this.header = $('#mainMenu').prepend(new MenuView().render().el);
         },
 
-        loadRecord : function() {
+        loadRecord : function(uuid) {
             this.removeActiveSelection();
             this.changeSelection('.id_record');
-            this.changeView(RecordView);
+            this.changeView(new RecordView({
+                recordUuid : uuid
+            }));
 
         },
 
         loadAbout : function() {
             this.removeActiveSelection();
             this.changeSelection('.id_about');
-            $('#ajax-content').html('About page content...<div style="height:300px;"></div>');
+            this.changeView(new HistoryView());
         },
 
         loadNews : function() {
@@ -65,9 +68,8 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'util' ], f
             }
         },
 
-        changeView : function(View) {
+        changeView : function(view) {
             util.showGlobalSpinner();
-            var view = new View();
             $.when(view.rendered).done(function() {
                 $('#ajax-content').html(view.el);
                 util.hideGlobalSpinner();
