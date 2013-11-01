@@ -25,3 +25,6 @@ learny-pom/.settings/org.eclipse.m2e.core.prefs
 learny-pom/.settings/org.eclipse.core.resources.prefs
 
 learny-pom/.project
+
+.DS_Store
+RemoteSystemsTempFiles/
