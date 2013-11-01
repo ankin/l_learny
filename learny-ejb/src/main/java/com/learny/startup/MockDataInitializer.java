@@ -63,7 +63,7 @@ public class MockDataInitializer {
 
         record = createRecord(user1, "Kokosnüsse", "Kokosmatte", "Kollege", "siebenmal");
         createRecordComment(record, user2, "Could you please explain the rule #1?");
-        createRecordComment(record, user3, "No! =)");
+        createRecordComment(record, user3, "No!! =)");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2013);
         calendar.set(Calendar.MONTH, 2);
