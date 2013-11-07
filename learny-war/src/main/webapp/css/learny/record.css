@@ -2,7 +2,7 @@
 .record {
 	padding-right: 10px;
 	padding-top: 5px;
-	border-right: 1px solid #DDDDDD;
+	/*!	border-right: 1px solid #DDDDDD; */
 }
 
 .record-component {
@@ -96,6 +96,11 @@ aside.record-calendar>div>.table tbody tr td.another-month {
 	background-color: #DFF0D8;
 }
 */
+a.words-initial-add {
+	text-decoration: underline;
+	font-size: 20px;
+}
+
 p .word-type {
 	float: right;
 	font-style: italic;

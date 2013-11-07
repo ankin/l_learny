@@ -1,13 +1,13 @@
 define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', 'word/wordModel', 'word/wordView',
-        'word/addWordModalView' ],
-        function($, Backbone, util, wordsTpl, WordCol, WordModel, WordView, AddWordModalView) {
+        'word/addWordModalView' , 'text!word/empty_words.html'],
+        function($, Backbone, util, wordsTpl, WordCol, WordModel, WordView, AddWordModalView, emptyWordsTpl) {
 
             var wordColView = Backbone.View.extend({
                 className : 'record-component',
-                _template : _.template(wordsTpl),
 
                 events : {
-                    'click #add-word' : 'triggerAdd'
+                    'click #add-word' : 'triggerAdd',
+                    'click #initial-add' : 'triggerInitialAdd'
                 },
 
                 initialize : function() {
@@ -26,19 +26,22 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', '
                 render : function() {
                     var self = this;
 
-                    self.$el.html(self._template());
+                    if (self.model.isEmpty()) {
+                        self.$el.html(_.template(emptyWordsTpl));
+                    } else {
+                        self.$el.html(_.template(wordsTpl));
 
-                    self.model.each(function(wordModel) {
-                        var wordView = new WordView({
-                            model : wordModel
+                        self.model.each(function(wordModel) {
+                            var wordView = new WordView({
+                                model : wordModel
+                            });
+                            wordModel.on('destroy', function() {
+                                self.model.remove(wordModel);
+                                self.render();
+                            }, self);
+                            self.$el.find("tbody").prepend(wordView.render().el);
                         });
-                        wordModel.on('destroy', function() {
-                            self.model.remove(wordModel);
-                            self.render();
-                        }, self);
-                        self.$el.find("tbody").prepend(wordView.render().el);
-                    });
-
+                    }
                     self.rendered.resolve('rendered');
 
                     return this;
@@ -55,6 +58,34 @@ define([ 'jquery', 'backbone', 'util', 'text!word/words.html', 'word/wordCol', '
                         var wordView = new WordView({
                             model : newWordModel
                         });
+                        this.$el.find("tbody").prepend(wordView.render().el);
+                    }, this);
+                    newWordModel.on('destroy', function() {
+                        self.model.remove(newWordModel);
+                        self.render();
+                    }, self);
+
+                    self.modal = new AddWordModalView({
+                        model : newWordModel
+                    });
+
+                    self.modal.show();
+
+                    return false;
+                },
+                
+                triggerInitialAdd : function() {
+                    var self = this;
+
+                    var newWordModel = new WordModel(null, {
+                        urlRoot : 'services/record/' + self.model.recordUuid + '/word/'
+                    });
+                    self.model.add(newWordModel);
+                    newWordModel.once('sync', function() {
+                        var wordView = new WordView({
+                            model : newWordModel
+                        });
+                        self.$el.html(_.template(wordsTpl));
                         this.$el.find("tbody").prepend(wordView.render().el);
                     }, this);
                     newWordModel.on('destroy', function() {

@@ -70,6 +70,9 @@ public class Record extends ModificationDateEntity {
     @OneToMany(targetEntity = RecordComment.class, mappedBy = "record", fetch = FetchType.LAZY)
     private Set<RecordComment> comments;
 
+    public Record() {
+    }
+
     public String getName() {
         return name;
     }

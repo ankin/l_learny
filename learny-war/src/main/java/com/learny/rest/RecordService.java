@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.learny.dto.RecordHistory;
-import com.learny.ejb.service.local.CommentLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.persistence.entity.Record;
 import com.learny.persistence.entity.vocabulary.DeWord;
@@ -34,8 +33,13 @@ public class RecordService extends AbstractService {
     @Inject
     private RecordLocal recordBean;
 
-    @Inject
-    private CommentLocal commentBean;
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Record createRecord(Record record) {
+        record.setUser(getCurrentUser());
+        return recordBean.saveOrUpdate(record);
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +63,6 @@ public class RecordService extends AbstractService {
         logger.info("findCurrentRecordHistories() method invocked");
         return recordBean.findRecordHistoriesByUserEmail(getCurrentUser().getEmail());
     }
-
 
     @POST
     @Path("{recordUuid}/word/{wordUuid}")

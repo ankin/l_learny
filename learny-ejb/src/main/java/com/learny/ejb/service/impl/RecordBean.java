@@ -8,10 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.learny.dto.RecordHistory;
-import com.learny.ejb.dao.local.CommentDaoLocal;
 import com.learny.ejb.dao.local.DeWordDaoLocal;
 import com.learny.ejb.dao.local.RecordDaoLocal;
-import com.learny.ejb.dao.local.UserDaoLocal;
 import com.learny.ejb.service.local.RecordLocal;
 import com.learny.ejb.service.local.TranslatorLocal;
 import com.learny.persistence.entity.Record;
@@ -26,12 +24,6 @@ public class RecordBean implements RecordLocal {
 
     @Inject
     private DeWordDaoLocal deWordDao;
-
-    @Inject
-    private CommentDaoLocal commentDao;
-
-    @Inject
-    private UserDaoLocal userDao;
 
     @Inject
     private TranslatorLocal translatorBean;

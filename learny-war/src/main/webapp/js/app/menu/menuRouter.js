@@ -6,10 +6,8 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'history/hi
         routes : {
             'record' : 'loadRecord',
             'record/:uuid' : 'loadRecord',
-            'about' : 'loadAbout',
-            'news' : 'loadNews',
-            'settings' : 'loadSettings',
-            'contact' : 'loadContact'
+            'popular' : 'loadPopular',
+            'history' : 'loadHistory'
 
         },
 
@@ -19,6 +17,9 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'history/hi
 
         loadMenu : function() {
             this.header = $('#mainMenu').prepend(new MenuView().render().el);
+            if (!window.location.hash) {
+                this.loadRecord();
+            }
         },
 
         loadRecord : function(uuid) {
@@ -30,28 +31,16 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'history/hi
 
         },
 
-        loadAbout : function() {
+        loadHistory : function() {
             this.removeActiveSelection();
-            this.changeSelection('.id_about');
+            this.changeSelection('.id_history');
             this.changeView(new HistoryView());
         },
 
-        loadNews : function() {
+        loadPopular : function() {
             this.removeActiveSelection();
-            this.changeSelection('.id_news');
-            $('#ajax-content').html('News page content...<div style="height:300px;"></div>');
-        },
-
-        loadSettings : function() {
-            this.removeActiveSelection();
-            this.changeSelection('.id_settings');
-            $('#ajax-content').html('Settings page content...<div style="height:300px;"></div>');
-        },
-
-        loadContact : function() {
-            this.removeActiveSelection();
-            this.changeSelection('.id_contact');
-            $('#ajax-content').html('Contact page content...<div style="height:300px;"></div>');
+            this.changeSelection('.id_popular');
+            $('#ajax-content').html('Popular page content...<div style="height:300px;"></div>');
         },
 
         removeActiveSelection : function() {

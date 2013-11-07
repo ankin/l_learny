@@ -1,12 +1,15 @@
 define([ 'jquery', 'backbone', 'util', 'text!history/history.html', 'record/recordHistoryCol',
-        'history/historyItemView' ], function($, Backbone, util, historyTpl, RecordHistoryCol, HistoryItemView) {
+        'history/historyItemView', 'history/addRecordModalView' ], function($, Backbone, util, historyTpl,
+        RecordHistoryCol, HistoryItemView, AddRecordModalView) {
 
     var historyView = Backbone.View.extend({
+        className : 'span12',
         _template : _.template(historyTpl),
         collection : new RecordHistoryCol(),
 
         events : {
-            'click a#remove-word' : 'removeWord'
+            'click a#remove-history' : 'removeHistory',
+            'click a#add-record' : 'addRecord'
         },
 
         initialize : function() {
@@ -28,6 +31,11 @@ define([ 'jquery', 'backbone', 'util', 'text!history/history.html', 'record/reco
             });
 
             return this;
+        },
+
+        addRecord : function() {
+            self.modal = new AddRecordModalView();
+            self.modal.show();
         }
     });
     return historyView;
