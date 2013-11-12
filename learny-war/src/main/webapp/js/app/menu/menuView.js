@@ -2,7 +2,7 @@ define([ 'jquery', 'backbone', 'text!menu/menu.html' ], function($, Backbone, me
 
     var menuView = Backbone.View.extend({
         tagName : 'ul',
-        className : 'nav nav-tabs margin-right-0 span2',
+        className : 'nav nav-pills margin-right-0 span2',
       
         _template : _.template(menuTpl),
 

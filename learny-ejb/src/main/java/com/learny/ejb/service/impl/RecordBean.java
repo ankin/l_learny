@@ -52,7 +52,7 @@ public class RecordBean implements RecordLocal {
         List<Record> records = recordDao.findRecordsByUserEmail(userEmail);
         List<RecordHistory> recordHistories = new ArrayList<>();
         for (Record record : records) {
-            recordHistories.add(new RecordHistory(record.getUuid(), record.getDateCreated()));
+            recordHistories.add(new RecordHistory(record));
         }
         return recordHistories;
     }

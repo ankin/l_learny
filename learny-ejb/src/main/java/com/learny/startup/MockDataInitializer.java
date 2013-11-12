@@ -1,7 +1,9 @@
 package com.learny.startup;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +62,7 @@ public class MockDataInitializer {
         Record record = createRecord(user1, "abgreifen", "gehen", "Zimmer", "Geldautomat", "Abschnitt", "abgeschwächt");
         createRecordComment(record, user2, "Very interesting!");
         createRecordComment(record, user3, "What #2 means?");
+        setName(record, new Date());
 
         record = createRecord(user1, "Kokosnüsse", "Kokosmatte", "Kollege", "siebenmal");
         createRecordComment(record, user2, "Could you please explain the rule #1?");
@@ -69,6 +72,7 @@ public class MockDataInitializer {
         calendar.set(Calendar.MONTH, 2);
         calendar.set(Calendar.DATE, 13);
         record.setDateCreated(calendar.getTime());
+        setName(record, calendar.getTime());
         recordDao.saveOrUpdate(record);
 
         record = createRecord(user1, "gemütlich", "Knopf", "Geldautomat");
@@ -78,6 +82,7 @@ public class MockDataInitializer {
         calendar.set(Calendar.MONTH, 1);
         calendar.set(Calendar.DATE, 4);
         record.setDateCreated(calendar.getTime());
+        setName(record, calendar.getTime());
         recordDao.saveOrUpdate(record);
 
         record = createRecord(user1, "Zinne", "abgreifen", "gehen", "Kokosmatte", "knospen");
@@ -87,8 +92,13 @@ public class MockDataInitializer {
         calendar.set(Calendar.MONTH, 11);
         calendar.set(Calendar.DATE, 16);
         record.setDateCreated(calendar.getTime());
+        setName(record, calendar.getTime());
         recordDao.saveOrUpdate(record);
 
+    }
+
+    private void setName(Record record, Date date) {
+        record.setName("Мой список слов на " + new SimpleDateFormat("EEE, MMM d, ''yy").format(date));
     }
 
     private User createUser(String email, String password, String firstName, String lastName, Role role,

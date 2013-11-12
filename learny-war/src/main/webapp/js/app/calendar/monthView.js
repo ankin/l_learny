@@ -9,7 +9,7 @@ define([ 'jquery', 'backbone', 'calendar/weekView' ], function($, Backbone, Week
         },
 
         render : function() {
-            var self = this;
+            var self = this; 
 
             var currentDate = new Date(this.options.date.getTime());
             var currentMonth = this.options.date.getMonth();

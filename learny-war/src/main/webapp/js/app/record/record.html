@@ -7,11 +7,13 @@
 
 	<div id="words-table"></div>
 
+	<% if (record.rules && record.rules.lenght > 0) { %>
 	<div class="record-component sepatator-top">
 		<h4><%= $.i18n.prop('Rules') %></h4>
 		<% _.forEach(record.rules, function(rule, index) { %>
 		<div><%= rule.text %></div>
 		<% }); %>
 	</div>
+	<% }%>
 	<div id="record-comments"></div>
 </section>

@@ -102,12 +102,63 @@ a.icon-ctrl-link:hover {
 	transition: all .3s ease-in-out;
 }
 
-/*! Overriding Bootstrap classes*/
+table.history-table > tbody > tr > td:hover {
+	cursor: pointer;
+}
+
+.history-date {
+    font-size: 12px;
+}
+
+.history-word {
+    background: none repeat scroll 0 0 #999999;
+    border-radius: 3px;
+    color: #FFFFFF;
+    font-size: 12px;
+    margin: 3px;
+    padding: 2px;
+}
+
+/*! Overriding Bootstrap classes */
+
+/*! TODO remove?*/
 .tabs-left>.nav-tabs.margin-right-0 {
 	margin-right: 0px;
+}
+
+body {
+    color: #555555;
+}
+
+a:hover{
+	color: #333333;
+}
+
+.nav>li>a {
+	width: 90px;
+	text-transform: lowercase;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: #999999;
+    color: #FFFFFF;
+}
+
+a {
+    color: #999999;
+}
+.nav-pills > li > a {
+    border-radius: 0px;
 }
 
 abbr.initialism-lowercase {
     font-size: 90%;
     text-transform: lowercase;
+}
+
+/*! Overriding typeahead classes */
+
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #999999;
+    background-image: linear-gradient(to bottom, #333333, #999999);
 }
