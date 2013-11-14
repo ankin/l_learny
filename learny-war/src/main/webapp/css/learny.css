@@ -147,6 +147,11 @@ a:hover{
 a {
     color: #999999;
 }
+
+.breadcrumb > .active {
+    color: #AFAFAF;
+}
+
 .nav-pills > li > a {
     border-radius: 0px;
 }

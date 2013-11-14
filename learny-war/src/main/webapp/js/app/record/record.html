@@ -1,7 +1,11 @@
 <section class="record-section">
 
-	<a id="calendar-open-link" class="open-link pull-right"><%=
+<ul class="breadcrumb">
+  <li><a href="#history">All</a> <span class="divider">/</span></li>
+  <li class="active"><%= record.name %></li>
+  <a id="calendar-open-link" class="open-link pull-right"><%=
 		record.dateCreatedFormatted %></a>
+</ul>
 
 	<aside class='record-calendar' id="record-calendar"></aside>
 

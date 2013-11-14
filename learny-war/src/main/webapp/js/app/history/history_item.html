@@ -1,3 +1,10 @@
 <td><%= name %></td>
-<td><span class="history-word">Geldautomat</span><span class="history-word">gehen</span><span class="history-word">Buch</span></td>
+<td>
+	<% if (!_.isEmpty(topWords)) { %>
+		<% _.forEach(topWords, function(word, index) { %>
+		<span class="history-word"><%= word %></span>
+		<% }); %>
+		<span class="history-word">...</span>
+	<% } %>
+</td>
 <td><span class="history-date" ><%= dateCreatedFormatted %></span></td>

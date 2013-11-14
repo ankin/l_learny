@@ -23,8 +23,10 @@ define([ 'jquery', 'backbone', 'menu/menuView', 'record/recordView', 'history/hi
         },
 
         loadRecord : function(uuid) {
-            this.removeActiveSelection();
-            this.changeSelection('.id_record');
+            if (uuid == 'undefined' || uuid == null) {
+                this.removeActiveSelection();
+                this.changeSelection('.id_record');
+            }
             this.changeView(new RecordView({
                 recordUuid : uuid
             }));

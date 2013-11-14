@@ -18,9 +18,7 @@ define([ 'jquery', 'backbone', 'util', 'text!record/record.html', 'record/record
 
         render : function() {
             var self = this;
-            if (self.recordUuid) {
-                self.model.recordUuid = self.recordUuid;
-            }
+            self.model.recordUuid = self.recordUuid;
             self.model.fetch({
                 success : function() {
                     var recordJson = self.model.toJSON();
