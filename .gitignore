@@ -28,3 +28,5 @@ learny-pom/.project
 
 .DS_Store
 RemoteSystemsTempFiles/
+
+.recommenders/
